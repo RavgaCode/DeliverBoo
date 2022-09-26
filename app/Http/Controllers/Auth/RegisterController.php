@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Restaurant;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -64,6 +66,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+    
+        $new_restaurant = Restaurant::create([
+            'name' => $data['restaurant_name'],
+            'slug' =>Str::slug($data['restaurant_name']),
+            'piva' => $data['restaurant_vat'],
+            'address' => $data['restaurant_address'],
+            'cover' => $data['restaurant_cover'],
+        ]);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
