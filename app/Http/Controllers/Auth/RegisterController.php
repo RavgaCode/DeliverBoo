@@ -83,6 +83,7 @@ class RegisterController extends Controller
             'restaurant_cover' => $data['restaurant_cover'],
         ]);
         $user->category()->sync($data['categories']);
+        return $user;
     }
 
     protected function showRegistrationForm()
