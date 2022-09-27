@@ -12,6 +12,7 @@ use App\Category;
 use Illuminate\Support\Str;
 use Symfony\Component\VarDumper\Cloner\Data;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -71,7 +72,7 @@ class RegisterController extends Controller
     {
         $categories = Category::all();
         
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -81,7 +82,7 @@ class RegisterController extends Controller
             'restaurant_address' => $data['restaurant_address'],
             'restaurant_cover' => $data['restaurant_cover'],
         ]);
-        
+        $user->category()->sync($data['categories']);
     }
 
     protected function showRegistrationForm()
