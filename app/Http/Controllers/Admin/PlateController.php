@@ -18,8 +18,7 @@ class PlateController extends Controller
     public function index()
     {
         $current_user_id = Auth::user()->getId();
-        $plate = Plate::where('restaurant_id', '=', $current_user_id)->get();
-        
+        $plate = Plate::where('user_id', '=', $current_user_id)->get();
         
         $data = [
             'plates' => $plate
@@ -52,7 +51,23 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate($this->validationRules());  
+        $current_user_id = Auth::user()->getId();
+        $form_data = $request->all();
+
+        if(isset($form_data['image'])) {
+            $img_path = Storage::put('plates-cover', $form_data['image']);
+            $form_data['cover'] = $img_path;
+        };
+
+        $new_plate = new Plate();
+        $new_plate->fill($form_data);
+        $new_plate->user_id = $current_user_id;
+        $new_plate->save();
+
+        return redirect()->route('admin.plates.index');
+        // return redirect()->route('admin.posts.show', ['plate' => $new_plate->id]);
+
     }
 
     /**
@@ -98,5 +113,14 @@ class PlateController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validationRules() {
+        return [
+            'name' => 'required|max:50',
+            'decription' => 'required|max:60000',
+            'user_id' => 'nullable|exists:users,id',
+            'cover' => 'image|max:1024|nullable'
+        ];
     }
 }

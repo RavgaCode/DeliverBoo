@@ -14,9 +14,9 @@ class AddRestaurantIdToPlates extends Migration
     public function up()
     {
         Schema::table('plates', function (Blueprint $table) {
-            $table->unsignedBigInteger('restaurant_id')->nullable()->after('cover');
+            $table->unsignedBigInteger('user_id')->nullable()->after('cover');
 
-            $table->foreign('restaurant_id')
+            $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
                   ->onDelete('set null');

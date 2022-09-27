@@ -10,7 +10,11 @@ class Plate extends Model
         'name',
         'description',
         'price',
-        'restaurant_id',
+        'user_id',
         'cover'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

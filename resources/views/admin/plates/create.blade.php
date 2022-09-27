@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 
 @section('content')
     <h1>Create a new post</h1>
@@ -12,22 +12,12 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.plates.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="title" class="form-control" id="title" name="title" >
-        </div>
-
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Category:</label>
-            <select name="category_id" id="category_id" class="form-select">
-                <option value="">Nothing</option>
-                @foreach ($categories as $category)
-                    <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
-                @endforeach
-            </select>
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" name="name" >
         </div>
 
         {{-- <h5>Tags</h5>
@@ -43,13 +33,18 @@
         </div> --}}
 
         <div class="mb-3">
-            <label for="content" class="form-label">Content</label>
-            <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="5"></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="image" class="form-label">Default file input example</label>
-            <input class="form-control" type="file" id="image" name="image">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" name="price">
+        </div>
+
+        <div class="mb-3">
+            <label for="cover" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" id="cover" name="cover">
         </div>
 
         <input type="submit" value="Save" class="btn btn-primary">
