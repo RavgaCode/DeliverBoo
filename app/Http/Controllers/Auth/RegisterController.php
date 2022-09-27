@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Restaurant;
+use App\Category;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
@@ -68,7 +68,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+        $categories = Category::all();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -79,6 +80,7 @@ class RegisterController extends Controller
             'restaurant_address' => $data['restaurant_address'],
             'restaurant_cover' => $data['restaurant_cover'],
         ]);
+        
     }
 
 }

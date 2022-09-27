@@ -23,7 +23,8 @@ class User extends Authenticatable
         'restaurant_vat',
         'restaurant_address',
         'restaurant_cover',
-        'slug'
+        'slug',
+        'category_id',
     ];
 
     /**
