@@ -111,7 +111,7 @@
                             <label for="restaurant_cover" class="col-md-4 col-form-label text-md-right">Immagine di copertina</label>
 
                             <div class="col-md-6">
-                                <input id="restaurant_cover" type="text" class="form-control @error('restaurant_cover') is-invalid @enderror" name="restaurant_cover" value="{{ old('restaurant_cover') }}" required autocomplete="restaurant_cover" autofocus>
+                                <input id="restaurant_cover" type="file" class="form-control @error('restaurant_cover') is-invalid @enderror" name="restaurant_cover" value="{{ old('restaurant_cover') }}" required autocomplete="restaurant_cover" autofocus>
 
                                 @error('restaurant_cover')
                                     <span class="invalid-feedback" role="alert">

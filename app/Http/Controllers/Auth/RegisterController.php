@@ -54,7 +54,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'restaurant_name' => ['required', 'string', 'max:255'],
+            'restaurant_vat' => ['required', 'integer', 'digits:11'],
         ]);
     }
 
@@ -66,18 +68,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    
-        $new_restaurant = Restaurant::create([
-            'name' => $data['restaurant_name'],
-            'slug' =>Str::slug($data['restaurant_name']),
-            'piva' => $data['restaurant_vat'],
-            'address' => $data['restaurant_address'],
-            'cover' => $data['restaurant_cover'],
-        ]);
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'restaurant_name' => $data['restaurant_name'],
+            'slug' =>Str::slug($data['restaurant_name']),
+            'restaurant_vat' => $data['restaurant_vat'],
+            'restaurant_address' => $data['restaurant_address'],
+            'restaurant_cover' => $data['restaurant_cover'],
         ]);
     }
+
 }
+
+
