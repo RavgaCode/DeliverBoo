@@ -60,5 +60,9 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "classmap": [
+        "database/seeds",
+        "database/factories"
+    ]
 }

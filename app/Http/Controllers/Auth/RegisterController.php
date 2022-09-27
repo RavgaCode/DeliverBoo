@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Category;
 use Illuminate\Support\Str;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class RegisterController extends Controller
 {
@@ -69,7 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $categories = Category::all();
-
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -81,6 +82,17 @@ class RegisterController extends Controller
             'restaurant_cover' => $data['restaurant_cover'],
         ]);
         
+    }
+
+    protected function showRegistrationForm()
+    {
+
+        $categories = Category::all();
+        $data = [
+            'categories' => $categories
+        ];
+        
+        return view('auth.register', $data);
     }
 
 }
