@@ -49,4 +49,12 @@ class User extends Authenticatable
     public function category(){
         return $this->belongsToMany('App\Category');
     }
+
+    public function plates(){
+        return $this->belongsToMany('App\Plate');
+    }
+
+    public function getId(){
+        return $this->id;
+    }
 }

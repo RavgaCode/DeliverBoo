@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Homepage admin section laravel</h1>
+    <h5><a href="{{route('admin.plates.index')}}">Guarda i tuoi piatti</a></h5>
+    h5><a href="{{route('admin.plates.create')}}">Aggiungi un piatto</a></h5>
 @endsection
