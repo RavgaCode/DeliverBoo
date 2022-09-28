@@ -157,7 +157,15 @@ class PlateController extends Controller
      */
     public function destroy($id)
     {
-        
+        $plate_delete = Plate::findOrFail($id);
+
+        if($plate_delete->cover) {
+            Storage::delete($plate_delete->cover);
+        };
+
+        $plate_delete->delete();
+
+        return redirect()->route('admin.plates.index');
     }
 
     protected function validationRules() {
