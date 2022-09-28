@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Plate;
 use App\Category;
@@ -51,12 +52,12 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate($this->validationRules());  
+        $request->validate($this->validationRules());  
         $current_user_id = Auth::user()->getId();
         $form_data = $request->all();
 
-        if(isset($form_data['image'])) {
-            $img_path = Storage::put('plates-cover', $form_data['image']);
+        if(isset($form_data['cover'])) {
+            $img_path = Storage::put('cover', $form_data['cover']);
             $form_data['cover'] = $img_path;
         };
 
@@ -118,9 +119,8 @@ class PlateController extends Controller
     protected function validationRules() {
         return [
             'name' => 'required|max:50',
-            'decription' => 'required|max:60000',
             'user_id' => 'nullable|exists:users,id',
-            'cover' => 'image|max:1024|nullable'
+            'cover' => 'file|mimes:jpeg,png,jpg,gif,svg|size:256000|nullable'
         ];
     }
 }

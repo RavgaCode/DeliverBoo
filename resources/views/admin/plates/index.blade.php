@@ -8,7 +8,7 @@
         {{-- Single Card --}}
             <div class="col">
                 <div class="card mt-2" style="width: 18rem;">
-                    <img src="{{$plate->cover}}" class="card-img-top" alt="...">
+                    <img src="{{asset('/storage/' . $plate->cover)}}" class="card-img-top" alt="...">
                     <div class="card-body">
                     <h5 class="card-title">{{$plate->name}}</h5>
                     {{-- <a href="{{ route('admin.posts.show', ['post' => $post->id])}}" class="btn btn-primary">Check Post</a> --}}
