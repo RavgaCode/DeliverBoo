@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backoffice')
 
 @section('content')
 
@@ -30,7 +30,7 @@
         @endforeach
     </div>
    @else
-       <h2>Aggiungi Piatto</h2>
+       <h2>Non hai ancora aggiunto un piatto al tuo menù!</h2>
    @endif     
   
    

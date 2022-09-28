@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backoffice')
 
 @section('content')
     <h1>Modifica piatto</h1>
