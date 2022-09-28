@@ -7,16 +7,16 @@
 
     @if ($plate->cover)
         <div class="img">
-            <img src="{{asset('/storage/' . $plate->cover)}}" alt="">
+            <img src="{{asset('storage/' . $plate->cover)}}" alt="{{$plate->name}}">
         </div>
     @endif
 
     <ul class="list-unstyled">
         <li>
-            <b>Created at:</b> {{$plate->created_at->toFormattedDateString()}}
+            <b>Creato il:</b> {{$plate->created_at->toFormattedDateString()}}
         </li>
         <li>
-            <b>Updated at:</b> {{$plate->updated_at->toFormattedDateString()}}
+            <b>Modificato il:</b> {{$plate->updated_at->toFormattedDateString()}}
         </li>
 
         {{-- <li>

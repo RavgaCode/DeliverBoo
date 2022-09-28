@@ -18,6 +18,7 @@ class PlateController extends Controller
      */
     public function index()
     {
+        // Leggo l'id dell'utente attualmente loggato e prendo solamente i plates corrispondenti al suo id
         $current_user_id = Auth::user()->getId();
         $plate = Plate::where('user_id', '=', $current_user_id)->get();
         
@@ -52,15 +53,18 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
+        // Richiamo la funzione con i parametri di validazione
         $request->validate($this->validationRules());  
         $current_user_id = Auth::user()->getId();
         $form_data = $request->all();
 
+        // Se c'è un immagine la salvo nella cartella cover
         if(isset($form_data['cover'])) {
             $img_path = Storage::put('cover', $form_data['cover']);
             $form_data['cover'] = $img_path;
         };
-
+        
+        // Creo un nuovo piatto e lo collego automaticamente all'user_id dell'utente loggato
         $new_plate = new Plate();
         $new_plate->fill($form_data);
         $new_plate->user_id = $current_user_id;
@@ -115,11 +119,13 @@ class PlateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Richiamo la funzione di validazione
         $request->validate($this->validationRules()); 
 
         $form_data = $request->all();
         $plate_to_update = Plate::findOrFail($id);
 
+        // Se c'è una nuova immagine, cancello la vecchia ed inserisco la nuova
         if(isset($form_data['cover'])) {
             if($plate_to_update->cover) {
                 Storage::delete($plate_to_update->cover);
@@ -159,6 +165,7 @@ class PlateController extends Controller
     {
         $plate_delete = Plate::findOrFail($id);
 
+        // Prima di cancellare il piatto, cancello eventuali immagini ad esso legate
         if($plate_delete->cover) {
             Storage::delete($plate_delete->cover);
         };
@@ -172,6 +179,8 @@ class PlateController extends Controller
         return [
             'name' => 'required|max:50',
             'user_id' => 'nullable|exists:users,id',
+            'description' => 'required | max: 60000',
+            'price' => 'required|numeric|between: 0.01, 10000',
             'cover' => 'file|mimes:jpeg,png,jpg,gif,svg|max:256000|nullable'
         ];
     }

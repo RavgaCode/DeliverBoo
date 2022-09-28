@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create a new post</h1>
+    <h1>Aggiungi un nuovo piatto</h1>
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -16,7 +16,7 @@
         @csrf
 
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">Nome</label>
             <input type="name" class="form-control" id="name" name="name" >
         </div>
 
@@ -33,20 +33,20 @@
         </div> --}}
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Descrizione</label>
             <textarea class="form-control" id="description" name="description" rows="5"></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
+            <label for="price" class="form-label">Prezzo</label>
             <input type="number" id="price" name="price">
         </div>
 
         <div class="mb-3">
-            <label for="cover" class="form-label">Default file input example</label>
+            <label for="cover" class="form-label">Immagine di presentazione</label>
             <input class="form-control" type="file" id="cover" name="cover">
         </div>
 
-        <input type="submit" value="Save" class="btn btn-primary">
+        <input type="submit" value="Salva" class="btn btn-primary">
     </form>
 @endsection

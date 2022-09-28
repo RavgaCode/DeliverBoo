@@ -70,8 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $categories = Category::all();
-        
+        // Creo un nuovo User
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -82,10 +81,12 @@ class RegisterController extends Controller
             'restaurant_address' => $data['restaurant_address'],
             'restaurant_cover' => $data['restaurant_cover'],
         ]);
+        // Appendo le categorie al nuovo User creato
         $user->category()->sync($data['categories']);
         return $user;
     }
 
+    // Importo le categorie nel form di registrazione
     protected function showRegistrationForm()
     {
 
