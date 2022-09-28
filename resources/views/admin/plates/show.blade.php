@@ -7,7 +7,7 @@
 
     @if ($plate->cover)
         <div class="img">
-            <img src="{{asset('storage/' . $plate->cover)}}" alt="{{$plate->name}}">
+            <img src="{{asset('storage/' . $plate->cover)}}" alt="{{$plate->name}}"  class="w-50">
         </div>
     @endif
 
