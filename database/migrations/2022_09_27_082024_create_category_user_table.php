@@ -18,7 +18,7 @@ class CreateCategoryUserTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
 
-        //    Rendo le due colonno foreign key (FK)
+        //    Rendo le due colonne foreign key (FK)
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
         });
