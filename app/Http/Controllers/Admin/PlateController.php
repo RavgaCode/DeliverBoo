@@ -83,8 +83,18 @@ class PlateController extends Controller
      */
     public function show($id)
     {
-        
-        $plate = Plate::findOrFail($id);
+        // leggo l'id corrente
+        $current_user_id = Auth::user()->getId();
+        $current_plate = Plate::findOrFail($id);
+
+        // se l'user_id di plate corrisponde a current_user_id, la show mostra
+        // il piatto desiderato
+        if($current_plate->user_id === $current_user_id) {
+            $plate = Plate::findOrFail($id); 
+        } 
+        else {
+            return view('admin.home');
+        }
 
         $data = [
             'plate' => $plate
@@ -101,7 +111,17 @@ class PlateController extends Controller
      */
     public function edit($id)
     {   
-        $plate = Plate::find($id);
+        
+        // leggo l'id corrente
+        $current_user_id = Auth::user()->getId();
+        $plates = Plate::findOrFail($id);
+        // se l'user_id di plate corrisponde a current_user_id, la show mostra
+        // il piatto desiderato
+        if($plates->user_id === $current_user_id) {
+            $plate = Plate::findOrFail($id); 
+        } else {
+            return view('admin.home');
+        }
 
         $data = [
             'plate' => $plate,
@@ -123,7 +143,8 @@ class PlateController extends Controller
         $request->validate($this->validationRules()); 
 
         $form_data = $request->all();
-        $plate_to_update = Plate::findOrFail($id);
+        $plate_to_update = Plate::findOrFail($id); 
+        
 
         // Se c'è una nuova immagine, cancello la vecchia ed inserisco la nuova
         if(isset($form_data['cover'])) {
