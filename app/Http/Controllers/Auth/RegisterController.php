@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Category;
 use Illuminate\Support\Str;
 use Symfony\Component\VarDumper\Cloner\Data;
+use Illuminate\Support\Facades\Storage;
 
 
 class RegisterController extends Controller
@@ -70,6 +71,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Se c'è un immagine la salvo nella cartella cover
+        if(isset($data['restaurant_cover'])) {
+            $img_path = Storage::put('cover', $data['restaurant_cover']);
+            $data['restaurant_cover'] = $img_path;
+        };
         // Creo un nuovo User
         $user = User::create([
             'name' => $data['name'],
@@ -97,6 +103,8 @@ class RegisterController extends Controller
         
         return view('auth.register', $data);
     }
+
+    
 
 }
 

@@ -91,9 +91,6 @@ class PlateController extends Controller
         // il piatto desiderato
         if($current_plate->user_id === $current_user_id) {
             $plate = Plate::findOrFail($id); 
-        } 
-        else {
-            return view('admin.home');
         }
 
         $data = [
@@ -119,8 +116,6 @@ class PlateController extends Controller
         // il piatto desiderato
         if($plates->user_id === $current_user_id) {
             $plate = Plate::findOrFail($id); 
-        } else {
-            return view('admin.home');
         }
 
         $data = [
@@ -156,22 +151,7 @@ class PlateController extends Controller
             $form_data['cover'] = $img_path;
         }
 
-
-
-        // if($form_data['title'] !== $post_to_update->title) {
-        //     $post_to_update->slug = $this->uniqueSlug($post_to_update->title);
-        // } else {
-        //     $post_to_update->slug = $form_data['title'];
-        // }
-
         $plate_to_update->update($form_data);
-
-        // if(isset($form_data['tags'])) {
-        //     $post_to_update->tags()->sync($form_data['tags']);
-        // } else {
-        //     $post_to_update->tags()->sync([]);
-        // }
-
 
         return redirect()->route('admin.plates.show', ['plate' => $plate_to_update->id]);
     }

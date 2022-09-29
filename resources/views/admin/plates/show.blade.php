@@ -30,19 +30,24 @@
             @endif
         </li> --}}
     </ul>
+
     <div class="mt-2">
-        <p>{{$plate->description}}</p>
+        <b>Prezzo:</b><p>{{$plate->price}}€</p>
     </div>
 
-    {{-- <div class="d-flex align-items-center">
-        <a href="{{ route('admin.posts.edit', ['post' => $post->id])}}" class="btn btn-primary mr-2">Edit</a>
-        Delete
-        <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="post">
-            @csrf
-            @method('DELETE')
+    <div class="mt-2">
+        <b>Descrizione Prodotto</b>
+        <p>{{$plate->description}}.</p>
+    </div>
 
-            <input type="submit" value="Delete" onClick="return confirm('Do you want to delete this post?');" class="btn btn-danger">
-        </form>
-    </div> --}}
+    <a href="{{ route('admin.plates.edit', ['plate' => $plate->id])}}" class="btn btn-primary">Modifica</a>
+
+    {{-- Delete --}}
+    <form action="{{ route('admin.plates.destroy', ['plate' => $plate->id]) }}" method="post">
+        @csrf
+        @method('DELETE')
+    
+        <input type="submit" value="Cancella" onClick="return confirm('Sei sicuro di voler cancellare questo piatto?');" class="btn btn-danger mt-2">
+    </form>
     
 @endsection
