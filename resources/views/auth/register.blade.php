@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}*</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}*</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}*</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -63,7 +63,7 @@
 
                         {{-- Restaurant Name--}}
                         <div class="form-group row">
-                            <label for="restaurant_name" class="col-md-4 col-form-label text-md-right">Nome Ristorante</label>
+                            <label for="restaurant_name" class="col-md-4 col-form-label text-md-right">Nome Ristorante*</label>
 
                             <div class="col-md-6">
                                 <input id="restaurant_name" type="text" class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name" value="{{ old('restaurant_name') }}" required autocomplete="restaurant_name" autofocus>
@@ -78,7 +78,7 @@
 
                         {{-- Restaurant Address--}}
                         <div class="form-group row">
-                            <label for="restaurant_address" class="col-md-4 col-form-label text-md-right">Indirizzo Ristorante</label>
+                            <label for="restaurant_address" class="col-md-4 col-form-label text-md-right">Indirizzo Ristorante*</label>
 
                             <div class="col-md-6">
                                 <input id="restaurant_address" type="text" class="form-control @error('restaurant_address') is-invalid @enderror" name="restaurant_address" value="{{ old('restaurant_address') }}" required autocomplete="restaurant_address" autofocus>
@@ -93,7 +93,7 @@
 
                         {{-- Restaurant VAT--}}
                         <div class="form-group row">
-                            <label for="restaurant_vat" class="col-md-4 col-form-label text-md-right">Partita Iva</label>
+                            <label for="restaurant_vat" class="col-md-4 col-form-label text-md-right">Partita Iva*</label>
 
                             <div class="col-md-6">
                                 <input id="restaurant_vat" type="text" class="form-control @error('name') is-invalid @enderror" name="restaurant_vat" value="{{ old('restaurant_vat') }}" required autocomplete="restaurant_vat" autofocus>
@@ -108,7 +108,7 @@
 
                         {{-- Restaurant Cover Img--}}
                         <div class="form-group row">
-                            <label for="restaurant_cover" class="col-md-4 col-form-label text-md-right">Immagine di copertina</label>
+                            <label for="restaurant_cover" class="col-md-4 col-form-label text-md-right">Immagine di copertina*</label>
 
                             <div class="col-md-6">
                                 <input id="restaurant_cover" type="file" class="form-control @error('restaurant_cover') is-invalid @enderror" name="restaurant_cover" value="{{ old('restaurant_cover') }}" required autocomplete="restaurant_cover" autofocus>
@@ -131,7 +131,7 @@
 
                         {{-- Category Check-Box --}}
                         <div class="mb-3">
-                            <h5>Categories:</h5>
+                            <h5>Categories:*</h5>
                             @foreach ($categories as $category)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"

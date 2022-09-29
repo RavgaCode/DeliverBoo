@@ -21,6 +21,12 @@
             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $plate->name) }}">
         </div>
 
+        <div class="mb-3b form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="visibility" id="visibility" @if($plate->visibility === 1) checked @endif >
+            <label class="form-check-label" for="visibility">
+                Visibile?
+            </label>
+        </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>

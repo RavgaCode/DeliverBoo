@@ -11,7 +11,8 @@ class Plate extends Model
         'description',
         'price',
         'user_id',
-        'cover'
+        'cover',
+        'plate_visibility'
     ];
 
     public function user() {

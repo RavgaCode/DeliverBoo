@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Plate;
 use App\Category;
+use App\Http\Controllers\Admin\Input;
+use Mockery\Undefined;
 
 class PlateController extends Controller
 {
@@ -37,6 +39,7 @@ class PlateController extends Controller
     public function create()
     {
         $category = Category::all();
+        
 
         $data = [
             'categories' => $category,
@@ -112,6 +115,7 @@ class PlateController extends Controller
         // leggo l'id corrente
         $current_user_id = Auth::user()->getId();
         $plates = Plate::findOrFail($id);
+        
         // se l'user_id di plate corrisponde a current_user_id, la show mostra
         // il piatto desiderato
         if($plates->user_id === $current_user_id) {
@@ -139,7 +143,16 @@ class PlateController extends Controller
 
         $form_data = $request->all();
         $plate_to_update = Plate::findOrFail($id); 
-        
+      
+        if(isset($form_data['visibility'])) {
+            $form_data['visibility'] = 1;
+            $value_to_insert = $form_data['visibility'];
+        } else {
+            $value_to_insert = 0;
+        }
+       
+        $plate_to_update['visibility'] = $value_to_insert;
+
 
         // Se c'è una nuova immagine, cancello la vecchia ed inserisco la nuova
         if(isset($form_data['cover'])) {

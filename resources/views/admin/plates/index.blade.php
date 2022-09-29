@@ -7,7 +7,7 @@
         @foreach ($plates as $plate)
         {{-- Single Card --}}
             <div class="col">
-                <div class="card mt-2">
+                <div class="card mt-2 mh-100">
                     <img src="{{asset('storage/' . $plate->cover)}}" class="card-img-top" alt="{{$plate->name}}"  class="w-50">
                         <div class="card-body">
                                 <h5 class="card-title">{{$plate->name}}</h5>
