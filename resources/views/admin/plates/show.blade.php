@@ -40,6 +40,14 @@
         <p>{{$plate->description}}.</p>
     </div>
 
+    <div class="mt-2">
+        @if($plate->visibility === 1)
+        <b>Piatto visibile al cliente</b>
+        @else
+        <b>Piatto non visibile al cliente</b>
+        @endif
+    </div>
+
     <a href="{{ route('admin.plates.edit', ['plate' => $plate->id])}}" class="btn btn-primary">Modifica</a>
 
     {{-- Delete --}}

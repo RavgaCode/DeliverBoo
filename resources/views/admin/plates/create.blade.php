@@ -16,8 +16,8 @@
         @csrf
 
         <div class="mb-3">
-            <label for="name" class="form-label">Nome</label>
-            <input type="name" class="form-control" id="name" name="name" >
+            <label for="name" class="form-label">Nome *</label>
+            <input type="name" class="form-control" id="name" name="name" required >
         </div>
 
         {{-- <h5>Tags</h5>
@@ -33,18 +33,25 @@
         </div> --}}
 
         <div class="mb-3">
-            <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+            <label for="description" class="form-label">Descrizione *</label>
+            <textarea class="form-control" id="description" name="description" rows="5"  required></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="price" class="form-label">Prezzo</label>
-            <input type="number" id="price" name="price">
+            <label for="price" class="form-label">Prezzo *</label>
+            <input type="number" id="price" name="price"  required>
         </div>
 
+        <div class="mb-3b form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="visibility" id="visibility">
+            <label class="form-check-label" for="visibility">
+                Visibile?
+            </label>
+        </div>
+        
         <div class="mb-3">
-            <label for="cover" class="form-label">Immagine di presentazione</label>
-            <input class="form-control" type="file" id="cover" name="cover">
+            <label for="cover" class="form-label">Immagine di presentazione *</label>
+            <input class="form-control" type="file" id="cover" name="cover"  required>
         </div>
 
         <input type="submit" value="Salva" class="btn btn-primary">

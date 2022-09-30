@@ -66,11 +66,21 @@ class PlateController extends Controller
             $img_path = Storage::put('cover', $form_data['cover']);
             $form_data['cover'] = $img_path;
         };
+
+        // Verifico se la checkbox della visibility esiste, ed inserisco il dato corrispondente in new_plate
+        if(isset($form_data['visibility'])) {
+            $form_data['visibility'] = 1;
+            $value_to_insert = $form_data['visibility'];
+        } else {
+            $value_to_insert = 0;
+        }
+
         
         // Creo un nuovo piatto e lo collego automaticamente all'user_id dell'utente loggato
         $new_plate = new Plate();
         $new_plate->fill($form_data);
         $new_plate->user_id = $current_user_id;
+        $new_plate['visibility'] = $value_to_insert;
         $new_plate->save();
 
         // return redirect()->route('admin.plates.index');
@@ -143,7 +153,8 @@ class PlateController extends Controller
 
         $form_data = $request->all();
         $plate_to_update = Plate::findOrFail($id); 
-      
+
+      // Verifico se la checkbox della visibility esiste, ed inserisco il dato corrispondente in plate_to_update
         if(isset($form_data['visibility'])) {
             $form_data['visibility'] = 1;
             $value_to_insert = $form_data['visibility'];
