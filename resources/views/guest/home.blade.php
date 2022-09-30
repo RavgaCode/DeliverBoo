@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DeliverBoo</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <a href="{{route('login')}}">login here</a>
-    <h1>Test HomePage Guest</h1>
+    <div id="root">
+        
+    </div>
+
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
