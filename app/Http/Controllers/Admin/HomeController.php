@@ -17,4 +17,18 @@ class HomeController extends Controller
         ];
         return view('admin.home', $data);
     }
+    public function edit($id)
+    {   
+        
+        // leggo l'id corrente
+        $current_user_id = Auth::user()->getId();
+        $user = User::findOrFail($id);
+    
+        $data = [
+            'user' => $user,
+        ];
+
+        return view('admin.users.edit', $data);
+    }
+
 }
