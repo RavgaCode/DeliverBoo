@@ -33,7 +33,7 @@
 
         <div class="mb-3">
             <label for="restaurant_vat" class="form-label">Partita Iva *</label>
-            <input type="number" class="form-control" id="restaurant_vat" name="restaurant_vat" value="{{ old('restaurant_vat', $user->restaurant_vat) }}"  required>
+            <input type="number" class="form-control" id="restaurant_vat" name="restaurant_vat" value="{{ old('restaurant_vat', $user->restaurant_vat) }}" minlength='11' required>
         </div>
 
         <div class="mb-3">
