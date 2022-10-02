@@ -16,6 +16,11 @@ class UserController extends Controller
         $current_user_id = Auth::user()->getId();
         $user = User::findOrFail($current_user_id);
 
+        // Impedisco tentativi di hackeraggio tramite url
+        if($user->id != $current_user_id){
+            abort(403);
+        }
+
         $data = [
             'user' => $user,
         ];
@@ -27,6 +32,11 @@ class UserController extends Controller
 
         $current_user_id = Auth::user()->getId();
         $user_to_update = User::findOrFail($current_user_id); 
+
+        // Impedisco tentativi di hackeraggio tramite url
+        if($user_to_update->id != $current_user_id){
+            abort(403);
+        }
 
 
         // Se c'è una nuova immagine, cancello la vecchia ed inserisco la nuova
