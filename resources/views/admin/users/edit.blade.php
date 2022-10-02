@@ -48,6 +48,42 @@
             <img src="{{asset('storage/' . $user->restaurant_cover)}}" alt="{{$user->restaurant_cover}}" class="w-50">
         </div>
 
+        <div class="mb-3">
+            <h5>Categories:</h5>    
+            @foreach($categories as $category)
+                @if ($errors->any())
+                {{-- Se ci sono errori di validazione valuto la old() per capire dove mettere il check --}}
+                <div class="form-check">
+                    <input class="form-check-input"
+                    type="checkbox" 
+                    value="{{$category->id}}" 
+                    id="category-{{$category->id}}" 
+                    name='categories[]'
+                    {{in_array($category->id, old('categories', [])) ? 'checked' : ''}}
+                    >
+                    <label class="form-check-label" for="category-{{$category->id}}">
+                    {{$category->name}}
+                    </label>
+                </div>
+    
+                @else
+                {{-- Altrimenti, se non ci sono errori di validazione, sto caricando la pagina per la prima volta quindi valuto la collection delle categories --}}
+                <div class="form-check">
+                    <input class="form-check-input"
+                    type="checkbox" 
+                    value="{{$category->id}}" 
+                    id="category-{{$category->id}}" 
+                    name='categories[]'
+                    {{$user->category->contains($category) ? 'checked' : ''}}
+                    >
+                    <label class="form-check-label" for="category-{{$category->id}}">
+                    {{$category->name}}
+                    </label>
+                </div>
+                @endif
+            @endforeach
+        </div>
+
         <input type="submit" value="Save" class="btn btn-primary">
     </form>
 @endsection

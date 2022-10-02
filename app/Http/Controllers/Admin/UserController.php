@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\Input;
+use App\Category;
 use App\User;
+
 
 class UserController extends Controller
 {
@@ -20,9 +22,11 @@ class UserController extends Controller
         if($user->id != $current_user_id){
             abort(403);
         }
+        $categories = Category::all();
 
         $data = [
             'user' => $user,
+            'categories'=> $categories,
         ];
 
         return view('admin.users.edit', $data);
@@ -38,7 +42,6 @@ class UserController extends Controller
             abort(403);
         }
 
-
         // Se c'è una nuova immagine, cancello la vecchia ed inserisco la nuova
         if(isset($form_data['restaurant_cover'])) {
             if($user_to_update->cover) {
@@ -47,6 +50,13 @@ class UserController extends Controller
 
             $img_path = Storage::put('restaurant_cover', $form_data['restaurant_cover']);
             $form_data['restaurant_cover'] = $img_path;
+        }
+
+        // Una volta aggiornato il nuovo piatto, devo attaccare le nuove categorie, SOLO se ci sono
+        if(isset($form_data['categories'])){
+            $user_to_update->category()->sync($form_data['categories']);
+        } else{
+            $user_to_update->category()->sync([]);
         }
 
         $user_to_update->update($form_data);
