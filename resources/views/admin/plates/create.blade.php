@@ -39,7 +39,7 @@
 
         <div class="mb-3">
             <label for="price" class="form-label">Prezzo *</label>
-            <input type="number" id="price" name="price"  required>
+            <input type="number" id="price" name="price" step='.01' required>
         </div>
 
         <div class="mb-3b form-check form-switch">
