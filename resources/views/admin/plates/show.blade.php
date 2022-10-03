@@ -58,4 +58,15 @@
         <input type="submit" value="Cancella" onClick="return confirm('Sei sicuro di voler cancellare questo piatto?');" class="btn btn-danger mt-2">
     </form>
     
+    <div class="green-pop d-none" id="pop">
+        <div class="modal-dialog rounded-3">
+            <div class="modal-content bg-success">
+                <div class="modal-body text-center" style="color: white">
+                    <p class="mb-0">Modal body text goes here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 @endsection

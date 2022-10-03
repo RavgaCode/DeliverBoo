@@ -209,4 +209,6 @@ class PlateController extends Controller
             'cover' => 'file|mimes:jpeg,png,jpg,gif,svg|max:256000|nullable'
         ];
     }
+
+    
 }

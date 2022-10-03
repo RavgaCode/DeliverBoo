@@ -54,6 +54,8 @@
             <input class="form-control" type="file" id="cover" name="cover"  required>
         </div>
 
-        <input type="submit" value="Salva" class="btn btn-primary">
+        <input type="submit" value="Salva" class="btn btn-primary" onclick="setPop()">
     </form>
+
+    <script src="{{ asset('js/showmodal.js') }}" defer></script>
 @endsection

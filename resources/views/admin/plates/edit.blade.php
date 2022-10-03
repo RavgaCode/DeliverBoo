@@ -41,11 +41,12 @@
 
         <div class="mb-3">
             <label for="cover" class="form-label">Anteprima immagine esistente *</label>
-            <input class="form-control" type="file" id="cover" name="cover"  required>
+            <input class="form-control" type="file" id="cover" name="cover">
 
             <img src="{{asset('storage/' . $plate->cover)}}" alt="{{$plate->name}}" class="w-50">
         </div>
 
-        <input type="submit" value="Save" class="btn btn-primary">
+        <input type="submit" value="Save" class="btn btn-primary" onclick="setPop()" >
     </form>
+
 @endsection

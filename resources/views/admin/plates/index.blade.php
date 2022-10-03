@@ -3,6 +3,7 @@
 @section('content')
 
    @if (!$plates->isEmpty())
+   
     <div class="row row-cols-4">
         @foreach ($plates as $plate)
         {{-- Single Card --}}
@@ -15,23 +16,32 @@
                                 {{-- Operation buttons list --}}
                                 <a href="{{ route('admin.plates.show', ['plate' => $plate->id])}}" class="btn btn-primary">Dettagli</a>
                                 <a href="{{ route('admin.plates.edit', ['plate' => $plate->id])}}" class="btn btn-primary">Modifica</a>
-
-                            {{-- Delete --}}
-                            <form action="{{ route('admin.plates.destroy', ['plate' => $plate->id]) }}" method="post">
-                                @csrf
-                                @method('DELETE')
                             
-                                <input type="submit" value="Cancella" onClick="return confirm('Sei sicuro di voler cancellare questo piatto?');" class="btn btn-danger mt-2">
-                            </form>
+                                
+                                
+                                <!-- Button trigger modal -->
+                                
+                                @section('delete')
+                                    <form action="{{route('admin.plates.destroy', ['plate' => $plate->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                    
+                                        <input type="submit" value="Cancella" class="btn btn-danger" onclick="closeModal()">
+                                    </form>
+                                @endsection
+                                <div class="btn btn-danger" onclick="showModal()">Cancella</div>
                         </div>
                 </div> 
             </div>
         {{-- End card --}}
         @endforeach
+        
     </div>
    @else
        <h2>Non hai ancora aggiunto un piatto al tuo menù!</h2>
    @endif     
+
+   <script src="{{ asset('js/showmodal.js') }}" defer></script>
   
    
 @endsection

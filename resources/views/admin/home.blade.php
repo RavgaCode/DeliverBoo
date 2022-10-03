@@ -5,4 +5,5 @@
 
     <h2>Il tuo ristorante: {{$user->restaurant_name}}</h2>  
     
+    
 @endsection
