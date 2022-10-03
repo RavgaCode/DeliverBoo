@@ -1,0 +1,56 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+import HomePage from "./pages/HomePage.vue";
+import AboutPage from "./pages/AboutPage.vue";
+import MenuPage from "./pages/MenuPage.vue";
+import ErrorNotFound from "./pages/ErrorNotFound.vue";
+// import SinglePost from "./pages/SinglePost.vue";
+import ContactPage from "./pages/ContactPage.vue";
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            component: HomePage,
+            name: 'home'
+
+        },
+        {
+            path: '/about',
+            component: AboutPage,
+            name: 'about'
+
+        },
+        {
+            path: '/plates',
+            component: MenuPage,
+            name: 'plates'
+
+        },
+        // {
+        //     path: '/blog/:slug',
+        //     component: SinglePost,
+        //     name: 'single-post'
+
+        // },
+        {
+            path: '/contact',
+            component: ContactPage,
+            name: 'contact'
+
+        },
+        {
+            path: '/*',
+            component: ErrorNotFound,
+            name: 'error'
+
+        },
+
+    ]
+  })
+
+  export default router;

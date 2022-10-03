@@ -13,6 +13,7 @@ use Mockery\Undefined;
 
 class PlateController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      *
@@ -99,6 +100,10 @@ class PlateController extends Controller
         // leggo l'id corrente
         $current_user_id = Auth::user()->getId();
         $current_plate = Plate::findOrFail($id);
+        // Impedisco tentativi di hackeraggio tramite url
+        if($current_plate->user_id != $current_user_id){
+            abort(403);
+        }
 
         // se l'user_id di plate corrisponde a current_user_id, la show mostra
         // il piatto desiderato
@@ -124,16 +129,16 @@ class PlateController extends Controller
         
         // leggo l'id corrente
         $current_user_id = Auth::user()->getId();
-        $plates = Plate::findOrFail($id);
-        
-        // se l'user_id di plate corrisponde a current_user_id, la show mostra
-        // il piatto desiderato
-        if($plates->user_id === $current_user_id) {
-            $plate = Plate::findOrFail($id); 
+        $plate_to_edit = Plate::findOrFail($id);
+
+        // Impedisco tentativi di hackeraggio tramite url
+        if($plate_to_edit->user_id != $current_user_id){
+            abort(403);
         }
+        
 
         $data = [
-            'plate' => $plate,
+            'plate' => $plate_to_edit,
         ];
 
         return view('admin.plates.edit', $data);
@@ -153,6 +158,13 @@ class PlateController extends Controller
 
         $form_data = $request->all();
         $plate_to_update = Plate::findOrFail($id); 
+
+        // leggo l'id corrente
+        $current_user_id = Auth::user()->getId();
+        // Impedisco tentativi di hackeraggio tramite url
+        if($plate_to_update->user_id != $current_user_id){
+            abort(403);
+        }
 
       // Verifico se la checkbox della visibility esiste, ed inserisco il dato corrispondente in plate_to_update
         if(isset($form_data['visibility'])) {
@@ -189,6 +201,13 @@ class PlateController extends Controller
     public function destroy($id)
     {
         $plate_delete = Plate::findOrFail($id);
+
+        // leggo l'id corrente
+        $current_user_id = Auth::user()->getId();
+        // Impedisco tentativi di hackeraggio tramite url
+        if($plate_delete->user_id != $current_user_id){
+            abort(403);
+        }
 
         // Prima di cancellare il piatto, cancello eventuali immagini ad esso legate
         if($plate_delete->cover) {

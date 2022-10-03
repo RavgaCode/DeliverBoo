@@ -23,6 +23,9 @@ Route::middleware('auth')
 ->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('plates', 'PlateController');
+    Route::get('user', [ 'as' => 'users.edit', 'uses' => 'UserController@edit']);
+    Route::put('user', [ 'as' => 'users.update', 'uses' => 'UserController@update']);
+
 });
 
 Route::get('{any?}', function () {

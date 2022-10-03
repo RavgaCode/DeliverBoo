@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" minlength="4" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -96,7 +96,7 @@
                             <label for="restaurant_vat" class="col-md-4 col-form-label text-md-right">Partita Iva*</label>
 
                             <div class="col-md-6">
-                                <input id="restaurant_vat" type="text" class="form-control @error('name') is-invalid @enderror" name="restaurant_vat" value="{{ old('restaurant_vat') }}" required autocomplete="restaurant_vat" autofocus>
+                                <input id="restaurant_vat" type="text" class="form-control @error('name') is-invalid @enderror" name="restaurant_vat" value="{{ old('restaurant_vat') }}" pattern="(0-9).{11}" title="VAT Number must be of 11 numbers" required autocomplete="restaurant_vat" autofocus>
 
                                 @error('restaurant_vat')
                                     <span class="invalid-feedback" role="alert">
