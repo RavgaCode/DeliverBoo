@@ -19,14 +19,18 @@ class PlateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+
+        $request_info = $request->all();
+        $show_deleted_message = isset($request_info['deleted']) ? $request_info['deleted'] : null;
         // Leggo l'id dell'utente attualmente loggato e prendo solamente i plates corrispondenti al suo id
         $current_user_id = Auth::user()->getId();
         $plate = Plate::where('user_id', '=', $current_user_id)->get();
         
         $data = [
-            'plates' => $plate
+            'plates' => $plate,
+            'show_deleted_message' => $show_deleted_message
         ];
        
         return view('admin.plates.index', $data);
@@ -95,8 +99,11 @@ class PlateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $request_info = $request->all();
+        $show_updated_message = isset($request_info['updated']) ? $request_info['updated'] : null;
+        
         // leggo l'id corrente
         $current_user_id = Auth::user()->getId();
         $current_plate = Plate::findOrFail($id);
@@ -112,7 +119,8 @@ class PlateController extends Controller
         }
 
         $data = [
-            'plate' => $plate
+            'plate' => $plate,
+            'show_updated_message' => $show_updated_message
         ];
 
         return view('admin.plates.show', $data);
@@ -189,7 +197,7 @@ class PlateController extends Controller
 
         $plate_to_update->update($form_data);
 
-        return redirect()->route('admin.plates.show', ['plate' => $plate_to_update->id]);
+        return redirect()->route('admin.plates.show', ['plate' => $plate_to_update->id, 'updated' => 'yes']);
     }
 
     /**
@@ -216,7 +224,7 @@ class PlateController extends Controller
 
         $plate_delete->delete();
 
-        return redirect()->route('admin.plates.index');
+        return redirect()->route('admin.plates.index', ['deleted' => 'yes']);
     }
 
     protected function validationRules() {

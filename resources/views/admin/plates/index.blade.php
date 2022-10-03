@@ -4,6 +4,12 @@
 
    @if (!$plates->isEmpty())
    
+   @if($show_deleted_message === 'yes')
+        <div class="alert alert-danger" role='alert'>
+            Piatto cancellato correttamente
+        </div>
+    @endif
+
     <div class="row row-cols-4">
         @foreach ($plates as $plate)
         {{-- Single Card --}}

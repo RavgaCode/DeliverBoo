@@ -96,7 +96,7 @@
                             <label for="restaurant_vat" class="col-md-4 col-form-label text-md-right">Partita Iva*</label>
 
                             <div class="col-md-6">
-                                <input id="restaurant_vat" type="text" class="form-control @error('name') is-invalid @enderror" name="restaurant_vat" value="{{ old('restaurant_vat') }}" pattern="(0-9).{11}" title="VAT Number must be of 11 numbers" required autocomplete="restaurant_vat" autofocus>
+                                <input id="restaurant_vat" type="text" class="form-control @error('name') is-invalid @enderror" name="restaurant_vat" value="{{ old('restaurant_vat') }}" minlength="11" title="VAT Number must be of 11 numbers" required autocomplete="restaurant_vat" autofocus>
 
                                 @error('restaurant_vat')
                                     <span class="invalid-feedback" role="alert">
@@ -154,4 +154,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{asset('js/passwordconfirm.js')}}"></script>
 @endsection
