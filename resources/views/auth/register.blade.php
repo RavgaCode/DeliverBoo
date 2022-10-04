@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus  required>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" minlength="4" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" minlength="4" required>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}*</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@
                             <label for="restaurant_name" class="col-md-4 col-form-label text-md-right">Nome Ristorante*</label>
 
                             <div class="col-md-6">
-                                <input id="restaurant_name" type="text" class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name" value="{{ old('restaurant_name') }}" required autocomplete="restaurant_name" autofocus>
+                                <input id="restaurant_name" type="text" class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name" value="{{ old('restaurant_name') }}" required>
 
                                 @error('restaurant_name')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                             <label for="restaurant_address" class="col-md-4 col-form-label text-md-right">Indirizzo Ristorante*</label>
 
                             <div class="col-md-6">
-                                <input id="restaurant_address" type="text" class="form-control @error('restaurant_address') is-invalid @enderror" name="restaurant_address" value="{{ old('restaurant_address') }}" required autocomplete="restaurant_address" autofocus>
+                                <input id="restaurant_address" type="text" class="form-control @error('restaurant_address') is-invalid @enderror" name="restaurant_address" value="{{ old('restaurant_address') }}" required>
 
                                 @error('restaurant_address')
                                     <span class="invalid-feedback" role="alert">
@@ -121,31 +121,38 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-
                         {{-- Category Check-Box --}}
                         <div class="mb-3">
                             <h5>Categories:*</h5>
-                            @foreach ($categories as $category)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox"
+                            <div class="form-group row">
+                                @foreach ($categories as $category)
+                                <div class="form-check mx-3">
+                                    <input class="form-check-input @error('category-1') is-invalid @enderror" type="checkbox"
                                     value="{{ $category->id }}"
                                     id="category-{{ $category->id }}"
                                     name="categories[]"
                                     {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}
                                     >
-                                    <label class="form-check-label" for="category-{{ $category->id }}">
+                                    <label class="form-check-label " for="category-{{ $category->id }}">
                                     {{$category->name}}
                                     </label>
+
+                                    @error('category-1')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                            @endforeach
-                
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary" onclick='return validateCheckboxes()'>
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
                         </div>
 
                     </form>
@@ -155,5 +162,5 @@
     </div>
 </div>
 
-<script src="{{asset('js/passwordconfirm.js')}}"></script>
+<script src="{{asset('js/registervalidations.js')}}"></script>
 @endsection

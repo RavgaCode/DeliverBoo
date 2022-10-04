@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'restaurant_name' => $data['restaurant_name'],
-            'slug' =>Str::slug($data['restaurant_name']),
+            'slug' =>Str::slug($data['restaurant_name'], '-'),
             'restaurant_vat' => $data['restaurant_vat'],
             'restaurant_address' => $data['restaurant_address'],
             'restaurant_cover' => $data['restaurant_cover'],

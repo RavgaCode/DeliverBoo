@@ -19,48 +19,62 @@ class UsersTableSeeder extends Seeder
         
         $collection = collect([
             [ 
-                'restaurant_name' => 'McDonald',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/zaxbr04ccp1w6pasvexg',
+                'restaurant_name' => 'Hamerica',
+                'email'=> 'hamerica@email.it',
+                'categories'=> [3,7], //fast food e dolci
             ],
             [ 
 
                 'restaurant_name' => 'Pinseria',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/wcwop3y3ohgdqiuywuud',
-
+                'email'=> 'pinseria@email.it',
+                'categories'=> [3,5], //fast food e vegetariano
             ],
             [ 
-                'restaurant_name' => 'Pizzeria 2.0',
-                'restaurant_cover' => '"https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/p8stype2bxmhuocnpfx3',
-
+                'restaurant_name' => 'Pizzeria Napoli',
+                'email'=> 'pizzerianapoli@email.it',
+                'categories'=> [1,6,7], //pizzeria,italiano e dolci
             ],
             [ 
 
-                'restaurant_name' => 'Penelope',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/wcwop3y3ohgdqiuywuud',
- 
+                'restaurant_name' => 'Il Vegetariano',
+                'email'=> 'ilvegetariano@email.it',
+                'categories'=> [5,6], //vegetariano ed italiano
             ],
             [ 
 
                 'restaurant_name' => 'Ai-Sushi',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/diygfswlavabrspv0kyv',
-
+                'email'=> 'aisushi@email.it',
+                'categories'=> [2,4,5], //sushi,asian e vegetariano
             ],
             [ 
 
-                'restaurant_name' => '3 punto 0 Exclusive Restaurant',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/x6egbarpwkbluk305lh9',
-
+                'restaurant_name' => 'Dolce Peccato',
+                'email'=> 'dolcepeccato@email.it',
+                'categories'=> [7],  //dolci
             ],
             [ 
 
-                'restaurant_name' => 'Ristorante Cinese Giapponese La Primavera',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/wcwop3y3ohgdqiuywuud',
-
+                'restaurant_name' => 'Sushi e Noodles',
+                'email'=> 'sushienoodles@email.it',
+                'categories'=> [2,4], //sushi ed asian
             ],
             [ 
 
                 'restaurant_name' => 'FrittFood',
-                'restaurant_cover' => 'https://res.cloudinary.com/glovoapp/w_450,h_250,c_fill,f_auto,q_30/Stores/rqoqu2qgn8tlj1rgsdcz',
+                'email'=> 'frittfood@email.it',
+                'categories'=> [3,6], //fastfood ed italiano
+            ],
+            [ 
+
+                'restaurant_name' => 'Alce Nero',
+                'email'=> 'alcenero@email.it',
+                'categories'=> [5,6,7], //vegetariano, italiano e dolci
+            ],
+            [ 
+
+                'restaurant_name' => 'Yogurt Lab',
+                'email'=> 'yogurtlab@email.it',
+                'categories'=> [3,7], //fastfood e dolci
             ],
             
         ]);
@@ -68,15 +82,18 @@ class UsersTableSeeder extends Seeder
         foreach ($collection as $user) {
             $new_user = new User;
             $new_user->name = $faker->name();;
-            $new_user->email = $faker->email();
+            $new_user->email = $user['email'];
             $new_user->password = Hash::make('1234');
             $new_user->restaurant_name = $user['restaurant_name'];
-            $new_user->slug = $user['restaurant_name'];
-            $new_user->restaurant_vat = '12345678910';
+            $new_user->slug = Str::slug($new_user->restaurant_name, '-');
+            $new_user->restaurant_vat = '123456789101';
             $new_user->restaurant_address = $faker->address();
-            $new_user->restaurant_cover = $user['restaurant_cover'];
+            $new_user->restaurant_cover = $faker->image('public/storage/restaurant_cover', 400, 300);
 
+            $new_user->category()->sync($new_user['categories']);
             $new_user->save();
+
+            
         }
     }
 }

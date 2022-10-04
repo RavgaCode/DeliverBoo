@@ -19,6 +19,7 @@ class CategoriesTableSeeder extends Seeder
             'Asian',
             'Vegetariano',
             'Italiano',
+            'Dolci',
         ];
         // Per ogni elemento dell'array creo una nuova riga nel db
         foreach($categories as $category_name){
