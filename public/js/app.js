@@ -1996,7 +1996,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       categories: [],
-      filteredCategories: []
+      restaurants: [],
+      categoryId: [1, 2, 3, 4, 5, 6, 7],
+      selectedCategories: []
     };
   },
   methods: {
@@ -2006,10 +2008,18 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/categories/").then(function (response) {
         _this.categories = response.data.results;
       });
+    },
+    getRestaurants: function getRestaurants() {
+      var _this2 = this;
+
+      axios.get("/api/restaurants/").then(function (response) {
+        _this2.restaurants = response.data.results;
+      });
     }
   },
   mounted: function mounted() {
     this.getCategories();
+    this.getRestaurants();
   }
 });
 
@@ -2325,16 +2335,58 @@ var render = function render() {
         "for": category.id
       }
     }, [_vm._v(_vm._s(category.name))]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.selectedCategories,
+        expression: "selectedCategories"
+      }],
       attrs: {
         type: "checkbox",
         id: category.id,
         name: category.id
       },
       domProps: {
-        value: category.id
+        value: category.id,
+        checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
+      },
+      on: {
+        change: function change($event) {
+          var $$a = _vm.selectedCategories,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false;
+
+          if (Array.isArray($$a)) {
+            var $$v = category.id,
+                $$i = _vm._i($$a, $$v);
+
+            if ($$el.checked) {
+              $$i < 0 && (_vm.selectedCategories = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.selectedCategories = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.selectedCategories = $$c;
+          }
+        }
       }
     })]);
-  }), 0), _vm._v(" "), _vm._m(1)])]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "restaurant-wrapper d-flex justify-content-start flex-wrap"
+  }, [_vm._l(_vm.restaurants, function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "restaurant-card col-4"
+    }, [_c("img", {
+      staticClass: "w-50",
+      attrs: {
+        src: restaurant.restaurant_cover,
+        alt: restaurant.restaurant_name
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "restaurant-info"
+    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))])])]);
+  }), _vm._v(" "), _vm._m(1)], 2)])]);
 };
 
 var staticRenderFns = [function () {
@@ -2360,17 +2412,6 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "restaurant-wrapper d-flex justify-content-start flex-wrap"
-  }, [_c("div", {
-    staticClass: "restaurant-card col-4"
-  }, [_c("img", {
-    attrs: {
-      src: "https://via.placeholder.com/150\n\nC/O https://placeholder.com/",
-      alt: ""
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "restaurant-info"
-  }, [_c("h5", [_vm._v("Pizzeria Napoli")])])]), _vm._v(" "), _c("div", {
     staticClass: "restaurant-card"
   }, [_c("img", {
     attrs: {
@@ -2379,7 +2420,7 @@ var staticRenderFns = [function () {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "restaurant-info"
-  }, [_c("h5", [_vm._v("Ai-Sushi")])])])]);
+  }, [_c("h5", [_vm._v("Ai-Sushi")])])]);
 }];
 render._withStripped = true;
 
@@ -54811,7 +54852,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Can't find stylesheet to import.\n   ╷\n11 │ @import \"~@fortawesome/fontawesome-free/scss/fontawesome\";\r\n   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   ╵\n  C:\\Boolean_projects\\htdocs\\DeliverBoo\\resources\\sass\\app.scss 11:9  root stylesheet\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass-loader\\dist\\index.js:73:7\n    at Function.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:101257:16)\n    at render_closure1.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:86329:12)\n    at _RootZone.runBinary$3$3 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28383:12)\n    at Object._asyncRethrow (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3713:17)\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:20081:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3738:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28402:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28396:25)\n    at _RootZone.runBinary$3$3 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28383:12)\n    at Object._asyncRethrow (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3713:17)\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:15495:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3738:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28402:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28396:25)\n    at _RootZone.runBinary$3$3 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28383:12)\n    at Object._asyncRethrow (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3713:17)\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:15530:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3738:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28402:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28396:25)\n    at _RootZone.runBinary$3$3 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28383:12)\n    at Object._asyncRethrow (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3713:17)\n    at C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:73958:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3738:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Boolean_projects\\htdocs\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28402:12)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
