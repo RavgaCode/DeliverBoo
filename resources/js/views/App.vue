@@ -12,6 +12,7 @@
 
 <script>
 import Header from "../components/Header.vue";
+
 export default {
     name: "App",
     components: {
@@ -19,3 +20,9 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped>
+    main {
+        background-color: rgb(255, 204, 0);
+    }
+</style>
