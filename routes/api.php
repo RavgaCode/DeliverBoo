@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/plates', 'Api\PlateController@index');
+Route::get('/plates', 'Api\PlateController@show');
 Route::get('/categories', 'Api\CategoryController@index');

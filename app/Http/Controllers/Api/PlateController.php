@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Plate;
+use App\User;
 
 class PlateController extends Controller
 {
@@ -15,7 +16,7 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates = Plate::paginate(6);
+        $plates = Plate::all();
 
         foreach($plates as $plate){
             $plate->cover = asset('storage/' . $plate->cover);
@@ -58,9 +59,29 @@ class PlateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $user = User::where('slug', '=', $slug)->first();
+
+        if($user->cover) {
+            $user->cover = asset('storage/' . $user->cover);
+        }
+
+        if($user){
+            $data = [
+                'success' => true,
+                'results' => $user,
+            ];
+
+        }else{
+            $data = [
+                'success' => false,
+                
+            ];
+
+        }
+
+        return response()->json($data);
     }
 
     /**

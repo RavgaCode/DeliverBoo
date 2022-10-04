@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage.vue";
 import AboutPage from "./pages/AboutPage.vue";
 import MenuPage from "./pages/MenuPage.vue";
 import ErrorNotFound from "./pages/ErrorNotFound.vue";
-// import SinglePost from "./pages/SinglePost.vue";
+import RestaurantPage from "./pages/RestaurantPage.vue";
 import ContactPage from "./pages/ContactPage.vue";
 
 const router = new VueRouter({
@@ -31,18 +31,24 @@ const router = new VueRouter({
             name: 'plates'
 
         },
-        // {
-        //     path: '/blog/:slug',
-        //     component: SinglePost,
-        //     name: 'single-post'
+        {
+            path: '/restaurants/:slug',
+            component: RestaurantPage,
+            name: 'restaurant'
 
-        // },
+        },
         {
             path: '/contact',
             component: ContactPage,
             name: 'contact'
 
         },
+        // {
+        //     path: '/restaurants',
+        //     component: RestaurantPage,
+        //     name: 'restaurant'
+
+        // },
         {
             path: '/*',
             component: ErrorNotFound,
