@@ -3021,6 +3021,8 @@ var staticRenderFns = [function () {
       inputmode: "numeric",
       pattern: "[0-9\\s]{13,16}",
       autocomplete: "cc-number",
+      autocorrect: "off",
+      autocapitalize: "none",
       maxlength: "16",
       placeholder: "•••• •••• •••• ••••"
     }
@@ -3036,6 +3038,9 @@ var staticRenderFns = [function () {
       id: "expiration-date",
       name: "credit-card-number",
       maxlength: "9",
+      autocomplete: "cc-number",
+      autocorrect: "off",
+      autocapitalize: "none",
       placeholder: "MM/YY"
     }
   })])])]), _vm._v(" "), _c("div", {
@@ -56309,8 +56314,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

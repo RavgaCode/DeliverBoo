@@ -61,12 +61,12 @@
                     <!-- Credit-card-number -->
                     <div class="credit-card-number">
                         <label for="credit-card-number">Card number</label>
-                        <input type="tel" id="credit-card-number" name="credit-card-number" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number" maxlength="16" placeholder="•••• •••• •••• ••••">
+                        <input type="tel" id="credit-card-number" name="credit-card-number" inputmode="numeric" pattern="[0-9\s]{13,16}" autocomplete="cc-number" autocorrect="off" autocapitalize="none" maxlength="16" placeholder="•••• •••• •••• ••••">
                     </div>
                     <!-- Expiration-date -->
                     <div class="Expiration">
                         <label for="expiration-date">Expiration date</label>
-                        <input type="tel" id="expiration-date" name="credit-card-number" maxlength="9" placeholder="MM/YY">
+                        <input type="tel" id="expiration-date" name="credit-card-number" maxlength="9" autocomplete="cc-number" autocorrect="off" autocapitalize="none" placeholder="MM/YY">
                     </div>
 
                 </div>
