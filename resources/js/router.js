@@ -9,6 +9,7 @@ import MenuPage from "./pages/MenuPage.vue";
 import ErrorNotFound from "./pages/ErrorNotFound.vue";
 import RestaurantPage from "./pages/RestaurantPage.vue";
 import ContactPage from "./pages/ContactPage.vue";
+import PaymentPage from "./pages/PaymentPage.vue";
 
 const router = new VueRouter({
     mode: 'history',
@@ -43,12 +44,12 @@ const router = new VueRouter({
             name: 'contact'
 
         },
-        // {
-        //     path: '/restaurants',
-        //     component: RestaurantPage,
-        //     name: 'restaurant'
+        {
+            path: '/payment',
+            component: PaymentPage,
+            name: 'payment'
 
-        // },
+        },
         {
             path: '/*',
             component: ErrorNotFound,
