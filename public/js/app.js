@@ -2035,7 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.restaurants.filter(function (item) {
-        return item.category.id.includes(_this3.selectedCategories);
+        return item.category.includes(_this3.selectedCategories);
       });
     }
   },
@@ -2149,10 +2149,68 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      plates: []
+      plates: [],
+      cart: [],
+      totalSum: null
     };
   },
   methods: {
+    newItem: function newItem(singlePlate) {
+      var item = {
+        id: singlePlate.id,
+        name: singlePlate.name,
+        price: singlePlate.price,
+        user_id: singlePlate.user_id,
+        quantity: 1
+      }; //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
+
+      var checkItemId = this.cart.find(function (product) {
+        return product.id == item.id;
+      }); //controllo se è già presente un item nel carrello con lo stesso id di quello appena creato, in caso affermativo ne aumento la quantità, sennò aggiungo il nuovo item al cart
+
+      if (checkItemId) {
+        checkItemId.quantity++;
+      } else {
+        this.cart.push(item);
+      }
+
+      this.updateTotalSum();
+    },
+    deleteItem: function deleteItem(item) {
+      // Trovo l'id dell'item e ne riduco la quantità. In caso la quantità sia ZERO, elimino l'item dall'array del cart
+      var checkItemId = this.cart.find(function (product) {
+        return product.id == item.id;
+      });
+
+      if (checkItemId) {
+        checkItemId.quantity--;
+
+        if (checkItemId.quantity == 0) {
+          var itemIndex = this.cart.findIndex(function (element) {
+            return element.id == item.id;
+          });
+          this.cart.splice(itemIndex, 1);
+        }
+
+        this.updateTotalSum();
+      }
+    },
+    removeItemTotally: function removeItemTotally(item) {
+      var itemIndex = this.cart.findIndex(function (element) {
+        return element.id == item.id;
+      });
+      this.cart.splice(itemIndex, 1);
+      this.updateTotalSum();
+    },
+    discardCart: function discardCart() {
+      this.cart = [];
+      this.updateTotalSum();
+    },
+    updateTotalSum: function updateTotalSum() {
+      this.totalSum = this.cart.reduce(function (previousValor, object) {
+        return parseFloat((previousValor + object.price * object.quantity).toFixed(2));
+      }, 0);
+    },
     getPlates: function getPlates() {
       var _this = this;
 
@@ -2451,7 +2509,7 @@ var render = function render() {
       staticClass: "filter-box"
     }, [_c("label", {
       attrs: {
-        "for": category.id
+        "for": category.name
       }
     }, [_vm._v(_vm._s(category.name))]), _vm._v(" "), _c("input", {
       directives: [{
@@ -2462,12 +2520,12 @@ var render = function render() {
       }],
       attrs: {
         type: "checkbox",
-        id: category.id,
-        name: category.id
+        id: category.name,
+        name: category.name
       },
       domProps: {
-        value: category.id,
-        checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
+        value: category.name,
+        checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.name) > -1 : _vm.selectedCategories
       },
       on: {
         click: function click($event) {
@@ -2479,7 +2537,7 @@ var render = function render() {
               $$c = $$el.checked ? true : false;
 
           if (Array.isArray($$a)) {
-            var $$v = category.id,
+            var $$v = category.name,
                 $$i = _vm._i($$a, $$v);
 
             if ($$el.checked) {
@@ -2717,47 +2775,99 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "page-bottom"
-  }, [_vm._m(1), _vm._v(" "), _c("div", [_c("div", {
-    staticClass: "row row-cols-4"
+  return _c("section", {
+    staticClass: "menu-section"
+  }, [_c("div", {
+    staticClass: "page-top"
+  }, [_c("div", {
+    staticClass: "left-col"
+  }, [_c("div", {
+    staticClass: "cart w-200"
+  }, [_c("div", {
+    staticClass: "cart-container d-flex flex-column align-items-center"
+  }, [_c("h2", [_vm._v("Il tuo Carrello")]), _vm._v(" "), _c("div", {
+    staticClass: "top-cart w-100"
+  }, _vm._l(_vm.cart, function (item, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "item-wrapper w-100 py-2"
+    }, [_c("div", {
+      staticClass: "product-row d-flex justify-content-between"
+    }, [_c("div", {
+      staticClass: "product-quantity"
+    }, [_vm._v("\n                                    X" + _vm._s(item.quantity) + "\n                                ")]), _vm._v(" "), _c("div", {
+      staticClass: "product-name"
+    }, [_vm._v("\n                                    " + _vm._s(item.name) + "\n                                ")]), _vm._v(" "), _c("div", {
+      staticClass: "product-price"
+    }, [_vm._v("\n                                    " + _vm._s(item.price) + "€\n                                ")])]), _vm._v(" "), _c("div", {
+      staticClass: "product-buttons-row d-flex justify-content-between w-100"
+    }, [_c("button", {
+      staticClass: "minus-button btn-primary rounded-pill p-2",
+      on: {
+        click: function click($event) {
+          return _vm.deleteItem(item);
+        }
+      }
+    }, [_vm._v("\n                                    -\n                                ")]), _vm._v(" "), _c("button", {
+      staticClass: "remove-button btn-primary btn-danger rounded-pill",
+      on: {
+        click: function click($event) {
+          return _vm.removeItemTotally(item);
+        }
+      }
+    }, [_vm._v("\n                                    remove\n                                ")]), _vm._v(" "), _c("button", {
+      staticClass: "plus-button btn-primary rounded-pill p-2",
+      on: {
+        click: function click($event) {
+          return _vm.newItem(item);
+        }
+      }
+    }, [_vm._v("\n                                    +\n                                ")])])]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "bottom-cart"
+  }, [_c("h5", {
+    staticClass: "total-price"
+  }, [_vm._v("\n                            Totale: " + _vm._s(_vm.totalSum) + "€\n                        ")]), _vm._v(" "), _c("button", {
+    staticClass: "pay-button btn-primary btn-success"
+  }, [_vm._v("\n                            Pay\n                        ")]), _vm._v(" "), _c("button", {
+    staticClass: "discard-cart-button btn-primary btn-danger",
+    on: {
+      click: function click($event) {
+        return _vm.discardCart();
+      }
+    }
+  }, [_vm._v("\n                            Cancel\n                        ")])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "right-col"
+  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "page_bottom"
+  }, [_c("div", {
+    staticClass: "plate-slider"
+  }, [_c("div", {
+    staticClass: "plate-columns"
   }, _vm._l(_vm.plates, function (singlePlate) {
     return _c("div", {
       key: singlePlate.id,
-      staticClass: "col mt-3"
-    }, [singlePlate.visibility === 1 ? _c("div", [_c("img", {
+      staticClass: "plate-col"
+    }, [singlePlate.visibility === 1 ? _c("div", {
+      staticClass: "plate-card"
+    }, [_c("img", {
       staticClass: "card-img-top",
       attrs: {
         src: singlePlate.cover,
         alt: singlePlate.name
       }
-    }), _vm._v(" "), _c("h5", [_vm._v(_vm._s(singlePlate.name))])]) : _vm._e()]);
+    }), _vm._v(" "), _c("h5", [_vm._v(_vm._s(singlePlate.name))]), _vm._v(" "), _c("h4", [_vm._v(_vm._s(singlePlate.price))]), _vm._v(" "), _c("button", {
+      staticClass: "btn-primary rounded-circle btn-success",
+      on: {
+        click: function click($event) {
+          return _vm.newItem(singlePlate);
+        }
+      }
+    }, [_vm._v("\n                            +\n                        ")])]) : _vm._e()]);
   }), 0)])])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "page-top"
-  }, [_c("div", {
-    staticClass: "left-col"
-  }, [_vm._v("img")]), _vm._v(" "), _c("div", {
-    staticClass: "right-col"
-  }, [_c("h2", [_vm._v("titolo")]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")])])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "d-flex"
-  }, [_c("div", {
-    staticClass: "plates-cart"
-  }, [_vm._v("carrello")]), _vm._v(" "), _c("div", {
-    staticClass: "plate-description"
-  }, [_vm._v("descrizione")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -7165,7 +7275,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(/resources/sass/app.scss);", ""]);
 
 // module
-exports.push([module.i, "nav[data-v-1f42fb90] {\n  padding: 7px 20px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: black;\n  position: relative;\n}\nnav .links[data-v-1f42fb90] {\n  justify-content: center;\n  margin: 0;\n}\nnav .logo img[data-v-1f42fb90] {\n  width: 35%;\n}\nnav a[data-v-1f42fb90] {\n  color: white;\n}\nnav .buttons a[data-v-1f42fb90] {\n  margin: 0 10px;\n  letter-spacing: 3px;\n}\nnav .buttons .login[data-v-1f42fb90] {\n  border: 1.5px solid rgb(255, 204, 0);\n  border-radius: 20px;\n  color: white;\n}\nnav .buttons .signup[data-v-1f42fb90] {\n  border-radius: 20px;\n  background-color: rgb(226, 181, 0);\n}\nnav .burger .white[data-v-1f42fb90] {\n  color: white;\n}\nnav .burger .dropdown-menu[data-v-1f42fb90] {\n  background-color: black;\n  position: absolute;\n  top: 60px;\n  left: -2px;\n  right: -1px;\n}", ""]);
+exports.push([module.i, "nav[data-v-1f42fb90] {\n  height: 80px;\n  padding: 7px 20px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: black;\n  position: relative;\n}\nnav .links[data-v-1f42fb90] {\n  justify-content: center;\n  margin: 0;\n}\nnav .logo img[data-v-1f42fb90] {\n  width: 35%;\n}\nnav a[data-v-1f42fb90] {\n  color: white;\n}\nnav .buttons a[data-v-1f42fb90] {\n  margin: 0 10px;\n  letter-spacing: 3px;\n}\nnav .buttons .login[data-v-1f42fb90] {\n  border: 1.5px solid rgb(255, 204, 0);\n  border-radius: 20px;\n  color: white;\n}\nnav .buttons .signup[data-v-1f42fb90] {\n  border-radius: 20px;\n  background-color: rgb(226, 181, 0);\n}\nnav .burger .white[data-v-1f42fb90] {\n  color: white;\n}\nnav .burger .dropdown-menu[data-v-1f42fb90] {\n  background-color: black;\n  position: absolute;\n  top: 60px;\n  left: -2px;\n  right: -1px;\n}", ""]);
 
 // exports
 
@@ -7223,7 +7333,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".page-top[data-v-6b773735] {\n  display: flex;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-bottom .plates-cart[data-v-6b773735] {\n  width: 30%;\n}\n.page-bottom .plate-descrption[data-v-6b773735] {\n  width: 70%;\n}\n.page-bottom img[data-v-6b773735] {\n  width: 200px;\n}", ""]);
+exports.push([module.i, ".menu-section[data-v-6b773735] {\n  height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-color: lightgray;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n}\n.page_bottom .plate-slider[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns .plate-col[data-v-6b773735] {\n  width: 33.3333333333%;\n}\n.page_bottom .plates-cart[data-v-6b773735] {\n  width: 30%;\n}\n.page_bottom .plate-descrption[data-v-6b773735] {\n  width: 70%;\n}\n.page_bottom img[data-v-6b773735] {\n  width: 200px;\n}", ""]);
 
 // exports
 

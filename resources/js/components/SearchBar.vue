@@ -18,14 +18,14 @@
                     v-for="category in categories"
                     :key="category.id"
                 >
-                    <label :for="category.id">{{ category.name }}</label>
+                    <label :for="category.name">{{ category.name }}</label>
                     <input
                         @click="changeRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
-                        :id="category.id"
-                        :name="category.id"
-                        :value="category.id"
+                        :id="category.name"
+                        :name="category.name"
+                        :value="category.name"
                     />
                 </div>
             </div>
@@ -95,7 +95,7 @@ export default {
         },
         changeRestaurants() {
             this.restaurants.filter((item) =>
-                item.category.id.includes(this.selectedCategories)
+                item.category.includes(this.selectedCategories)
             );
         },
     },
