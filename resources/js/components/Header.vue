@@ -134,7 +134,8 @@ export default {
             color: white;
             }
             .dropdown-menu {
-                background-color: black;
+                background-color: rgba(0, 0, 0, 0.9);
+                filter: drop-shadow(2px);
                 position: absolute;
                 top: 60px;
                 left: -2px;
