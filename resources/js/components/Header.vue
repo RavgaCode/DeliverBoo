@@ -93,6 +93,10 @@ export default {
                     routeName: "/contact",
                     labelName: "Contact us",
                 },
+                {
+                    routeName: "/payment",
+                    labelName: "Payment",
+                },
             ],
             isActive: false,
         };

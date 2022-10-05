@@ -1939,6 +1939,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         routeName: "/contact",
         labelName: "Contact us"
+      }, {
+        routeName: "/payment",
+        labelName: "Payment"
       }],
       isActive: false
     };
@@ -2181,7 +2184,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PaymentPage'
+  name: "PaymentPage",
+  component: {},
+  data: function data() {
+    return {
+      order: null,
+      finalCart: null,
+      totalCost: null
+    };
+  },
+  methods: {
+    getOrder: function getOrder() {
+      if (typeof Storage !== "undefined") {
+        console.log("ordine carico");
+        var getCart = localStorage.getItem("cart");
+        var cart = JSON.parse(getCart);
+        this.order = cart;
+        this.finalCart = JSON.stringify(this.order);
+        var getTotal = localStorage.getItem("totalSum");
+        var total = JSON.parse(getTotal);
+        this.totalCost = total;
+      }
+    }
+  },
+  created: function created() {
+    this.getOrder();
+  }
 });
 
 /***/ }),
@@ -2195,6 +2223,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RestaurantPage",
   components: {},
@@ -2272,6 +2302,21 @@ __webpack_require__.r(__webpack_exports__);
         //     this.$router.push({name: 'error'});
         // };
       });
+    },
+    payment: function payment() {
+      if ((typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) !== undefined) {
+        var cart = JSON.stringify(this.cart); //rendo JSON il contenuto del cart
+
+        localStorage.setItem("cart", cart); //lo inserisco in una variabile localStorage di nome 'cart'
+
+        var totalSum = JSON.stringify(this.totalSum); //rendo JSON il totale
+
+        localStorage.setItem("totalSum", totalSum); //lo inserisco in una variabile localStorage di nome 'totalSum'
+
+        console.log("pagamento eseguito");
+      } else {
+        alert("Il browser non supporta web storage"); //mostro all'utente un messaggio di errore
+      }
     }
   },
   mounted: function mounted() {
@@ -2918,7 +2963,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "orders"
+  }, [_c("h2", [_vm._v("Riepilogo ordine")]), _vm._v(" "), _c("h3", [_vm._v("Nome :")]), _vm._v(" "), _vm._l(_vm.order, function (item, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "card-item"
+    }, [_c("span", [_vm._v("Quantità:" + _vm._s(item.quantity))]), _c("span", [_vm._v("Articolo:" + _vm._s(item.name))]), _c("span", [_vm._v("Prezzo unitario:" + _vm._s(item.price) + "€")])]);
+  }), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_vm._v("TOTALE:" + _vm._s(_vm.totalCost) + "€")])], 2), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)]);
 };
 
 var staticRenderFns = [function () {
@@ -2926,12 +2980,6 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "orders"
-  }, [_c("h2", [_vm._v("Riepilogo ordine")]), _vm._v(" "), _c("ul", {
-    staticClass: "order-list"
-  }, [_c("li", [_vm._v("\n                item\n            ")])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", [_vm._v("TOTALE:")])]), _vm._v(" "), _c("div", {
     staticClass: "user-info"
   }, [_c("h2", [_vm._v("Inserisci i tuoi dati per concludere l'ordine")]), _vm._v(" "), _c("div", [_c("label", {
     attrs: {
@@ -2977,13 +3025,18 @@ var staticRenderFns = [function () {
       name: "email",
       placeholder: "Inserisci la tua email"
     }
-  })])]), _vm._v(" "), _c("div", {
+  })])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
     staticClass: "payment"
   }, [_c("div", {
     staticClass: "wrapper"
   }, [_c("div", {
     staticClass: "user-payment d-flex justify-content-between p-2 align-items-center"
-  }, [_c("div", [_vm._v("\n                    Pay with card\n                ")]), _vm._v(" "), _c("div", {
+  }, [_c("div", [_vm._v("Pay with card")]), _vm._v(" "), _c("div", {
     staticClass: "avaible-card"
   }, [_c("img", {
     attrs: {
@@ -3040,7 +3093,7 @@ var staticRenderFns = [function () {
     }
   })])])]), _vm._v(" "), _c("div", {
     staticClass: "pay-btn"
-  }, [_c("button", [_vm._v("\n                Paga\n            ")])])])]);
+  }, [_c("button", [_vm._v("Paga")])])]);
 }];
 render._withStripped = true;
 
@@ -3115,7 +3168,12 @@ var render = function render() {
   }, [_c("h5", {
     staticClass: "total-price"
   }, [_vm._v("\n                            Totale: " + _vm._s(_vm.totalSum) + "€\n                        ")]), _vm._v(" "), _c("button", {
-    staticClass: "pay-button btn-primary btn-success"
+    staticClass: "pay-button btn-primary btn-success",
+    on: {
+      click: function click($event) {
+        return _vm.payment();
+      }
+    }
   }, [_vm._v("\n                            Pay\n                        ")]), _vm._v(" "), _c("button", {
     staticClass: "discard-cart-button btn-primary btn-danger",
     on: {

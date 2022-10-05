@@ -61,7 +61,10 @@
                             <h5 class="total-price">
                                 Totale: {{ totalSum }}&euro;
                             </h5>
-                            <button class="pay-button btn-primary btn-success">
+                            <button
+                                @click="payment()"
+                                class="pay-button btn-primary btn-success"
+                            >
                                 Pay
                             </button>
                             <button
@@ -208,6 +211,18 @@ export default {
                     //     this.$router.push({name: 'error'});
                     // };
                 });
+        },
+        payment() {
+            if (typeof Storage !== undefined) {
+                let cart = JSON.stringify(this.cart); //rendo JSON il contenuto del cart
+                localStorage.setItem("cart", cart); //lo inserisco in una variabile localStorage di nome 'cart'
+
+                let totalSum = JSON.stringify(this.totalSum); //rendo JSON il totale
+                localStorage.setItem("totalSum", totalSum); //lo inserisco in una variabile localStorage di nome 'totalSum'
+                console.log("pagamento eseguito");
+            } else {
+                alert("Il browser non supporta web storage"); //mostro all'utente un messaggio di errore
+            }
         },
     },
     mounted() {
