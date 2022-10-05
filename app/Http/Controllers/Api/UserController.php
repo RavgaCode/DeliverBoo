@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\Input;
 use App\Category;
 use App\User;
+use App\Plate;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $restaurants = User::all();
+        $restaurants = User::with('category')->get();
 
         foreach($restaurants as $restaurant){
             $restaurant->restaurant_cover = asset('storage/' . $restaurant->restaurant_cover);
@@ -34,9 +35,8 @@ class UserController extends Controller
         return response()->json($data);
     }
 
-    public function filteredByCategories($categories){
-
-    }
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -65,9 +65,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $user = User::where('slug','=', $slug)->first();
+
+        $plates = Plate::where('user_id','=',$user['id'])->with(['user'])->get();
+
+        foreach($plates as $plate){
+            $plate->cover = asset('storage/' . $plate->cover);
+        };
+
+        if($user){
+            $data = [
+                'success' => true,
+                'results' => $plates,
+            ];
+       } else { //tengo conto del caso di uno slug errato/non presente nel db
+            $data = [
+                'success' => false,
+            ];
+       };
+       return response()->json($data);
     }
 
     /**

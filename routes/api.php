@@ -22,3 +22,4 @@ Route::get('/plates', 'Api\PlateController@index');
 Route::get('/plates', 'Api\PlateController@show');
 Route::get('/categories', 'Api\CategoryController@index');
 Route::get('/restaurants', 'Api\UserController@index');
+Route::get('/restaurants/{slug}', 'Api\UserController@show');

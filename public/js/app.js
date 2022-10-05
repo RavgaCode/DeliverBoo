@@ -1909,21 +1909,21 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Header',
+  name: "Header",
   data: function data() {
     return {
       menuLinks: [{
-        routeName: '/',
-        labelName: 'Home'
+        routeName: "/",
+        labelName: "Home"
       }, {
-        routeName: '/about',
-        labelName: 'About'
+        routeName: "/about",
+        labelName: "About"
       }, {
-        routeName: '/plates',
-        labelName: 'Plates'
+        routeName: "/plates",
+        labelName: "Plates"
       }, {
-        routeName: '/contact',
-        labelName: 'Contact us'
+        routeName: "/contact",
+        labelName: "Contact us"
       }],
       isActive: false
     };
@@ -2029,6 +2029,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/restaurants/").then(function (response) {
         _this2.restaurants = response.data.results;
+      });
+    },
+    changeRestaurants: function changeRestaurants() {
+      var _this3 = this;
+
+      this.restaurants.filter(function (item) {
+        return item.category.id.includes(_this3.selectedCategories);
       });
     }
   },
@@ -2138,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'RestaurantPage',
+  name: "RestaurantPage",
   components: {},
   data: function data() {
     return {
@@ -2149,7 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
     getPlates: function getPlates() {
       var _this = this;
 
-      axios.get('/api/plates/' + this.$route.params.slug).then(function (response) {
+      axios.get("/api/restaurants/" + this.$route.params.slug).then(function (response) {
         _this.plates = response.data.results; // if (response.data.success) {
         //     this.plates = response.data.results;
         // }else{
@@ -2463,6 +2470,9 @@ var render = function render() {
         checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
       },
       on: {
+        click: function click($event) {
+          return _vm.changeRestaurants();
+        },
         change: function change($event) {
           var $$a = _vm.selectedCategories,
               $$el = $event.target,
@@ -2497,7 +2507,17 @@ var render = function render() {
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "restaurant-info"
-    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))])])]);
+    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))]), _vm._v(" "), _c("router-link", {
+      staticClass: "nav-link btn btn-success",
+      attrs: {
+        to: {
+          name: "restaurant",
+          params: {
+            slug: restaurant.slug
+          }
+        }
+      }
+    }, [_vm._v("Vedi piatti")])], 1)]);
   }), _vm._v(" "), _vm._m(1)], 2)])]);
 };
 
@@ -2711,7 +2731,7 @@ var render = function render() {
         src: singlePlate.cover,
         alt: singlePlate.name
       }
-    })]) : _vm._e()]);
+    }), _vm._v(" "), _c("h5", [_vm._v(_vm._s(singlePlate.name))])]) : _vm._e()]);
   }), 0)])])]);
 };
 
@@ -2723,9 +2743,9 @@ var staticRenderFns = [function () {
     staticClass: "page-top"
   }, [_c("div", {
     staticClass: "left-col"
-  }, [_vm._v("\n            img\n\n        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("img")]), _vm._v(" "), _c("div", {
     staticClass: "right-col"
-  }, [_c("h2", [_vm._v("titolo")]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ut quibusdam rem. Eligendi delectus in nulla molestias eius cumque consectetur libero, velit, eos architecto facilis obcaecati culpa ullam, laborum earum.\n            ")])])]);
+  }, [_c("h2", [_vm._v("titolo")]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -2734,9 +2754,9 @@ var staticRenderFns = [function () {
     staticClass: "d-flex"
   }, [_c("div", {
     staticClass: "plates-cart"
-  }, [_vm._v("\n                carrello\n\n            ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("carrello")]), _vm._v(" "), _c("div", {
     staticClass: "plate-description"
-  }, [_vm._v("\n                descrizione\n\n            ")])]);
+  }, [_vm._v("descrizione")])]);
 }];
 render._withStripped = true;
 
@@ -55428,8 +55448,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

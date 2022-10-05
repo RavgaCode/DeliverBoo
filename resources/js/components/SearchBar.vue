@@ -20,6 +20,7 @@
                 >
                     <label :for="category.id">{{ category.name }}</label>
                     <input
+                        @click="changeRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
                         :id="category.id"
@@ -44,6 +45,14 @@
                     />
                     <div class="restaurant-info">
                         <h5>{{ restaurant.restaurant_name }}</h5>
+                        <router-link
+                            class="nav-link btn btn-success"
+                            :to="{
+                                name: 'restaurant',
+                                params: { slug: restaurant.slug },
+                            }"
+                            >Vedi piatti</router-link
+                        >
                     </div>
                 </div>
                 <div class="restaurant-card">
@@ -84,8 +93,12 @@ export default {
                 this.restaurants = response.data.results;
             });
         },
+        changeRestaurants() {
+            this.restaurants.filter((item) =>
+                item.category.id.includes(this.selectedCategories)
+            );
+        },
     },
-
     mounted() {
         this.getCategories();
         this.getRestaurants();
