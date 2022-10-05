@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Plate;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\Input;
+use App\Category;
 use App\User;
+use App\Plate;
 
-class PlateController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,21 +20,23 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates = Plate::all();
+        $restaurants = User::with('category')->get();
 
-        foreach($plates as $plate){
-            $plate->cover = asset('storage/' . $plate->cover);
+        foreach($restaurants as $restaurant){
+            $restaurant->restaurant_cover = asset('storage/' . $restaurant->restaurant_cover);
 
         };
 
         $data = [
             'success' => true,
-            'results' => $plates,
+            'results' => $restaurants,
         ];
 
         return response()->json($data);
-        
     }
+
+    
+    
 
     /**
      * Show the form for creating a new resource.
@@ -61,27 +67,25 @@ class PlateController extends Controller
      */
     public function show($slug)
     {
-        $user = User::where('slug', '=', $slug)->first();
+        $user = User::where('slug','=', $slug)->first();
 
-        if($user->cover) {
-            $user->cover = asset('storage/' . $user->cover);
-        }
+        $plates = Plate::where('user_id','=',$user['id'])->with(['user'])->get();
+
+        foreach($plates as $plate){
+            $plate->cover = asset('storage/' . $plate->cover);
+        };
 
         if($user){
             $data = [
                 'success' => true,
-                'results' => $user,
+                'results' => $plates,
             ];
-
-        }else{
+       } else { //tengo conto del caso di uno slug errato/non presente nel db
             $data = [
                 'success' => false,
-                
             ];
-
-        }
-
-        return response()->json($data);
+       };
+       return response()->json($data);
     }
 
     /**

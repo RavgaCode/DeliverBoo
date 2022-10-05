@@ -20,7 +20,9 @@
                 >
                     <label :for="category.id">{{ category.name }}</label>
                     <input
+                        @click="changeRestaurants()"
                         type="checkbox"
+                        v-model="selectedCategories"
                         :id="category.id"
                         :name="category.id"
                         :value="category.id"
@@ -31,15 +33,26 @@
             <div
                 class="restaurant-wrapper d-flex justify-content-start flex-wrap"
             >
-                <div class="restaurant-card col-4">
+                <div
+                    class="restaurant-card col-4"
+                    v-for="restaurant in restaurants"
+                    :key="restaurant.id"
+                >
                     <img
-                        src="https://via.placeholder.com/150
-
-C/O https://placeholder.com/"
-                        alt=""
+                        class="w-50"
+                        :src="restaurant.restaurant_cover"
+                        :alt="restaurant.restaurant_name"
                     />
                     <div class="restaurant-info">
-                        <h5>Pizzeria Napoli</h5>
+                        <h5>{{ restaurant.restaurant_name }}</h5>
+                        <router-link
+                            class="nav-link btn btn-success"
+                            :to="{
+                                name: 'restaurant',
+                                params: { slug: restaurant.slug },
+                            }"
+                            >Vedi piatti</router-link
+                        >
                     </div>
                 </div>
                 <div class="restaurant-card">
@@ -64,7 +77,9 @@ export default {
     data() {
         return {
             categories: [],
-            filteredCategories: [],
+            restaurants: [],
+            categoryId: [1, 2, 3, 4, 5, 6, 7],
+            selectedCategories: [],
         };
     },
     methods: {
@@ -73,10 +88,20 @@ export default {
                 this.categories = response.data.results;
             });
         },
+        getRestaurants() {
+            axios.get("/api/restaurants/").then((response) => {
+                this.restaurants = response.data.results;
+            });
+        },
+        changeRestaurants() {
+            this.restaurants.filter((item) =>
+                item.category.id.includes(this.selectedCategories)
+            );
+        },
     },
-
     mounted() {
         this.getCategories();
+        this.getRestaurants();
     },
 };
 </script>
