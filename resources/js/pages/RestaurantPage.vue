@@ -37,7 +37,7 @@
                                 >
                                     <button
                                         @click="deleteItem(item)"
-                                        class="minus-button btn-primary rounded-pill p-2"
+                                        class="minus-button btn-warning rounded-pill p-2"
                                     >
                                         -
                                     </button>
@@ -49,7 +49,7 @@
                                     </button>
                                     <button
                                         @click="newItem(item)"
-                                        class="plus-button btn-primary rounded-pill p-2"
+                                        class="plus-button btn-warning rounded-pill p-2"
                                     >
                                         +
                                     </button>
@@ -61,15 +61,18 @@
                             <h5 class="total-price">
                                 Totale: {{ totalSum }}&euro;
                             </h5>
-                            <button
+                            <a
+                                tag="button"
                                 @click="payment()"
-                                class="pay-button btn-primary btn-success"
+                                class="payment-button btn btn-success"
+                                role="button"
+                                href="/payment"
                             >
                                 Pay
-                            </button>
+                            </a>
                             <button
                                 @click="discardCart()"
-                                class="discard-cart-button btn-primary btn-danger"
+                                class="discard-cart-button btn btn-danger"
                             >
                                 Cancel
                             </button>
@@ -87,6 +90,7 @@
                     eius cumque consectetur libero, velit, eos architecto
                     facilis obcaecati culpa ullam, laborum earum.
                 </p>
+                <p>Indirizzo: {{ plates[0].user.restaurant_address }}</p>
             </div>
         </div>
 
@@ -110,7 +114,7 @@
                             <!-- Cover -->
                             <img
                                 :src="singlePlate.cover"
-                                class="card-img-top"
+                                class="plate-img"
                                 :alt="singlePlate.name"
                             />
                             <!-- PLATE NAME -->
@@ -239,9 +243,11 @@ export default {
 }
 .cart-container {
     width: 400px;
+    color: white;
     border: 2px solid white;
     border-radius: 15px;
-    background-color: lightgray;
+    background-image: url("http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg");
+    box-shadow: 3px 3px 3px 5px black;
 
     .top-cart {
         padding-inline: 10px;
@@ -253,6 +259,8 @@ export default {
 }
 .page-top {
     display: flex;
+    padding: 2rem;
+
     .left-col {
         width: 50%;
     }
@@ -267,6 +275,7 @@ export default {
     position: fixed;
     left: 0;
     bottom: 0;
+    border-top: 2px solid black;
 
     .plate-slider {
         display: flex;
@@ -282,19 +291,22 @@ export default {
 
             .plate-col {
                 width: calc(100% / 3);
+                flex-shrink: 0;
             }
         }
     }
-    .plates-cart {
+    .plates-card {
         width: 30%;
+        height: 20vh;
+        border: 1px solid grey;
     }
 
     .plate-descrption {
         width: 70%;
     }
 
-    img {
-        width: 200px;
+    .plate-img {
+        max-height: 30vh;
     }
 }
 </style>

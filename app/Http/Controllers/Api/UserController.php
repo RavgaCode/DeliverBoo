@@ -20,13 +20,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $restaurants = User::with('category')->get();
+         $restaurants = User::with('category')->get();
 
-        foreach($restaurants as $restaurant){
+         foreach($restaurants as $restaurant){
             $restaurant->restaurant_cover = asset('storage/' . $restaurant->restaurant_cover);
-
         };
-
+        
         $data = [
             'success' => true,
             'results' => $restaurants,
@@ -35,7 +34,17 @@ class UserController extends Controller
         return response()->json($data);
     }
 
-    
+    public function filter(){
+
+        $id = 2;
+        $restaurants = Category::with('users')->where('id',$id)->get();
+        $data = [
+            'success' => true,
+            'results' => $restaurants,
+        ];
+
+        return response()->json($data);
+    }
     
 
     /**

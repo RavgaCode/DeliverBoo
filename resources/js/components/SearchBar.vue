@@ -23,9 +23,9 @@
                         @click="changeRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
-                        :id="category.name"
+                        :id="category.id"
                         :name="category.name"
-                        :value="category.name"
+                        :value="category.id"
                     />
                 </div>
             </div>
@@ -47,6 +47,7 @@
                         <h5>{{ restaurant.restaurant_name }}</h5>
                         <router-link
                             class="nav-link btn btn-success"
+                            tag="button"
                             :to="{
                                 name: 'restaurant',
                                 params: { slug: restaurant.slug },
@@ -80,6 +81,7 @@ export default {
             restaurants: [],
             categoryId: [1, 2, 3, 4, 5, 6, 7],
             selectedCategories: [],
+            filteredRestaurants: [],
         };
     },
     methods: {
@@ -94,9 +96,14 @@ export default {
             });
         },
         changeRestaurants() {
-            this.restaurants.filter((item) =>
-                item.category.includes(this.selectedCategories)
-            );
+            axios
+                .get("/api/filter", {
+                    id: this.selectedCategories[0],
+                })
+                .then((response) => {
+                    this.filteredRestaurants = response.data.results;
+                });
+            console.log(this.filteredRestaurants);
         },
     },
     mounted() {
