@@ -17,7 +17,7 @@
                 </div>
                 <!-- Arrows -->
          
-                <div class="arrow-down">
+                <div class="arrow-down d-sm-none d-none d-md-block d-lg-block">
                     <div class="left"></div>
                     <div class="right"></div>
                 </div>
@@ -55,7 +55,7 @@ export default {
                 }
             }
             .content {
-                padding-top: 70px;
+                padding-top: 30px;
                 display: flex;
                 align-items: center;
             }
@@ -69,7 +69,7 @@ export default {
     position:absolute;
     left:25%;
     bottom:0px;
-    top: 95%;
+    top: 93%;
     -webkit-animation: arrow 0.5s 1s infinite ease-out alternate;
     
     }
