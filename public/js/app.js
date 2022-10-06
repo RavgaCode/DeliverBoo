@@ -2032,7 +2032,8 @@ __webpack_require__.r(__webpack_exports__);
       restaurants: [],
       categoryId: [1, 2, 3, 4, 5, 6, 7],
       selectedCategories: [],
-      filteredRestaurants: []
+      unchecked: true,
+      filteredRestaurant: []
     };
   },
   methods: {
@@ -2053,12 +2054,15 @@ __webpack_require__.r(__webpack_exports__);
     changeRestaurants: function changeRestaurants() {
       var _this3 = this;
 
-      axios.get("/api/filter", {
-        id: this.selectedCategories[0]
-      }).then(function (response) {
-        _this3.filteredRestaurants = response.data.results;
+      this.filteredRestaurant = this.restaurants.filter(function (el) {
+        return el.category[0].id === _this3.selectedCategories[0];
       });
-      console.log(this.filteredRestaurants);
+
+      if (this.selectedCategories.length > 0) {
+        this.unchecked = false;
+      } else {
+        this.unchecked = true;
+      }
     }
   },
   mounted: function mounted() {
@@ -2581,7 +2585,7 @@ var staticRenderFns = [function () {
       alt: "jumbo image"
     }
   })]), _vm._v(" "), _c("div", {
-    staticClass: "arrow-down"
+    staticClass: "arrow-down d-sm-none d-none d-md-block d-lg-block"
   }, [_c("div", {
     staticClass: "left"
   }), _vm._v(" "), _c("div", {
@@ -2665,7 +2669,7 @@ var render = function render() {
       staticClass: "filter-box"
     }, [_c("label", {
       attrs: {
-        "for": category.name
+        "for": category.id
       }
     }, [_vm._v(_vm._s(category.name))]), _vm._v(" "), _c("input", {
       directives: [{
@@ -2677,17 +2681,15 @@ var render = function render() {
       attrs: {
         type: "checkbox",
         id: category.id,
-        name: category.name
+        name: category.id,
+        checked: ""
       },
       domProps: {
         value: category.id,
         checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
       },
       on: {
-        click: function click($event) {
-          return _vm.changeRestaurants();
-        },
-        change: function change($event) {
+        change: [function ($event) {
           var $$a = _vm.selectedCategories,
               $$el = $event.target,
               $$c = $$el.checked ? true : false;
@@ -2704,17 +2706,21 @@ var render = function render() {
           } else {
             _vm.selectedCategories = $$c;
           }
-        }
+        }, function ($event) {
+          return _vm.changeRestaurants();
+        }]
       }
     })]);
   }), 0), _vm._v(" "), _c("div", {
-    staticClass: "restaurant-wrapper d-flex justify-content-start flex-wrap"
-  }, [_vm._l(_vm.restaurants, function (restaurant) {
+    staticClass: "cards"
+  }, [_vm.unchecked ? _c("div", {
+    staticClass: "restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
+  }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
-      staticClass: "restaurant-card col-4"
+      staticClass: "restaurant-card col-1 card"
     }, [_c("img", {
-      staticClass: "w-50",
+      staticClass: "cover",
       attrs: {
         src: restaurant.restaurant_cover,
         alt: restaurant.restaurant_name
@@ -2722,9 +2728,8 @@ var render = function render() {
     }), _vm._v(" "), _c("div", {
       staticClass: "restaurant-info"
     }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))]), _vm._v(" "), _c("router-link", {
-      staticClass: "nav-link btn btn-success",
+      staticClass: "nav-link btn",
       attrs: {
-        tag: "button",
         to: {
           name: "restaurant",
           params: {
@@ -2733,7 +2738,32 @@ var render = function render() {
         }
       }
     }, [_vm._v("Vedi piatti")])], 1)]);
-  }), _vm._v(" "), _vm._m(1)], 2)])]);
+  }), 0) : _c("div", {
+    staticClass: "restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
+  }, _vm._l(_vm.filteredRestaurant, function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "restaurant-card col-1 card"
+    }, [_c("img", {
+      staticClass: "cover",
+      attrs: {
+        src: restaurant.restaurant_cover,
+        alt: restaurant.restaurant_name
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "restaurant-info"
+    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))]), _vm._v(" "), _c("router-link", {
+      staticClass: "nav-link btn",
+      attrs: {
+        to: {
+          name: "restaurant",
+          params: {
+            slug: restaurant.slug
+          }
+        }
+      }
+    }, [_vm._v("Vedi piatti")])], 1)]);
+  }), 0)])])]);
 };
 
 var staticRenderFns = [function () {
@@ -2754,20 +2784,6 @@ var staticRenderFns = [function () {
       placeholder: "Cerca il tuo ristorante preferito"
     }
   })]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "restaurant-card"
-  }, [_c("img", {
-    attrs: {
-      src: "https://via.placeholder.com/150\n\nC/O https://placeholder.com/",
-      alt: ""
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "restaurant-info"
-  }, [_c("h5", [_vm._v("Ai-Sushi")])])]);
 }];
 render._withStripped = true;
 
@@ -7638,7 +7654,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".jumbo[data-v-0b8439d1] {\n  width: 100%;\n  height: 100vh;\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.jumbo .wrap[data-v-0b8439d1] {\n  width: 90%;\n  margin: 0 auto;\n}\n.jumbo .wrap .slogan[data-v-0b8439d1] {\n  /* margin: 100px 0; */\n  color: white;\n}\n.jumbo .wrap .slogan h1[data-v-0b8439d1] {\n  font-size: 65px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 5px;\n  margin-bottom: 50px;\n}\n.jumbo .wrap .content[data-v-0b8439d1] {\n  padding-top: 70px;\n  display: flex;\n  align-items: center;\n}\n.arrow-down[data-v-0b8439d1] {\n  width: 60px;\n  height: 40px;\n  margin: 0 0 0 -30px;\n  position: absolute;\n  left: 25%;\n  bottom: 0px;\n  top: 95%;\n  -webkit-animation: arrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.arrow-down[data-v-0b8439d1]:hover {\n  -webkit-animation-play-state: paused;\n}\n.left[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(240deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: leftArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.right[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(-60deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: rightArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n@-webkit-keyframes arrow-0b8439d1 {\n0% {\n    bottom: 0px;\n}\n100% {\n    bottom: 40px;\n}\n}\n@-webkit-keyframes leftArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(225deg);\n}\n}\n@-webkit-keyframes rightArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(-45deg);\n}\n}", ""]);
+exports.push([module.i, ".jumbo[data-v-0b8439d1] {\n  width: 100%;\n  height: 100vh;\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.jumbo .wrap[data-v-0b8439d1] {\n  width: 90%;\n  margin: 0 auto;\n}\n.jumbo .wrap .slogan[data-v-0b8439d1] {\n  /* margin: 100px 0; */\n  color: white;\n}\n.jumbo .wrap .slogan h1[data-v-0b8439d1] {\n  font-size: 65px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 5px;\n  margin-bottom: 50px;\n}\n.jumbo .wrap .content[data-v-0b8439d1] {\n  padding-top: 30px;\n  display: flex;\n  align-items: center;\n}\n.arrow-down[data-v-0b8439d1] {\n  width: 60px;\n  height: 40px;\n  margin: 0 0 0 -30px;\n  position: absolute;\n  left: 25%;\n  bottom: 0px;\n  top: 93%;\n  -webkit-animation: arrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.arrow-down[data-v-0b8439d1]:hover {\n  -webkit-animation-play-state: paused;\n}\n.left[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(240deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: leftArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.right[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(-60deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: rightArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n@-webkit-keyframes arrow-0b8439d1 {\n0% {\n    bottom: 0px;\n}\n100% {\n    bottom: 40px;\n}\n}\n@-webkit-keyframes leftArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(225deg);\n}\n}\n@-webkit-keyframes rightArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(-45deg);\n}\n}", ""]);
 
 // exports
 
@@ -7657,7 +7673,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  background-color: lightcoral;\n  height: 800px;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  padding-top: 40px;\n  background-color: rgb(255, 204, 0);\n  height: 800px;\n  margin-bottom: 20px;\n  overflow-y: auto;\n}\n.search-bar .card[data-v-6849e9f0] {\n  background-color: transparent;\n  border: none;\n  padding: 20px;\n  width: 80%;\n  position: relative;\n}\n.search-bar .card h5[data-v-6849e9f0] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: white;\n  font-weight: 600;\n}\n.search-bar .cover[data-v-6849e9f0] {\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  margin-bottom: 20px;\n  -webkit-filter: brightness(40%);\n}\n.search-bar img[data-v-6849e9f0] {\n  transition: transform 1.5s, filter 1s ease-in;\n}\n.search-bar img[data-v-6849e9f0]:hover {\n  transform: scale(1.1);\n}\n.search-bar .btn[data-v-6849e9f0] {\n  background-color: black;\n  color: white;\n  border-bottom-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.filter-box input[data-v-6849e9f0] {\n  margin-top: 20px;\n  margin-right: 15px;\n}", ""]);
 
 // exports
 

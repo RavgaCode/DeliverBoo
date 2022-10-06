@@ -18,53 +18,75 @@
                     v-for="category in categories"
                     :key="category.id"
                 >
-                    <label :for="category.name">{{ category.name }}</label>
+                    <label :for="category.id">{{ category.name }}</label>
                     <input
-                        @click="changeRestaurants()"
+                        @change="changeRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
                         :id="category.id"
-                        :name="category.name"
+                        :name="category.id"
                         :value="category.id"
+                        checked
                     />
                 </div>
             </div>
-            <!-- Restaurants Card Wrapper -->
-            <div
-                class="restaurant-wrapper d-flex justify-content-start flex-wrap"
-            >
+            <div class="cards">
+                <!-- Restaurants Card Wrapper -->
                 <div
-                    class="restaurant-card col-4"
-                    v-for="restaurant in restaurants"
-                    :key="restaurant.id"
+                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
+                    v-if="unchecked"
                 >
-                    <img
-                        class="w-50"
-                        :src="restaurant.restaurant_cover"
-                        :alt="restaurant.restaurant_name"
-                    />
-                    <div class="restaurant-info">
-                        <h5>{{ restaurant.restaurant_name }}</h5>
-                        <router-link
-                            class="nav-link btn btn-success"
-                            tag="button"
-                            :to="{
-                                name: 'restaurant',
-                                params: { slug: restaurant.slug },
-                            }"
-                            >Vedi piatti</router-link
-                        >
+                    <!-- card -->
+                    <div
+                        class="restaurant-card col-1 card"
+                        v-for="restaurant in restaurants"
+                        :key="restaurant.id"
+                    >
+                        <img
+                            class="cover"
+                            :src="restaurant.restaurant_cover"
+                            :alt="restaurant.restaurant_name"
+                        />
+                        <div class="restaurant-info">
+                            <h5>{{ restaurant.restaurant_name }}</h5>
+                            <router-link
+                                class="nav-link btn"
+                                :to="{
+                                    name: 'restaurant',
+                                    params: { slug: restaurant.slug },
+                                }"
+                                >Vedi piatti</router-link
+                            >
+                        </div>
                     </div>
                 </div>
-                <div class="restaurant-card">
-                    <img
-                        src="https://via.placeholder.com/150
-
-C/O https://placeholder.com/"
-                        alt=""
-                    />
-                    <div class="restaurant-info">
-                        <h5>Ai-Sushi</h5>
+                <!-- else -->
+                <div
+                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
+                    v-else
+                >
+                    <!-- card -->
+                    <div
+                        class="restaurant-card col-1 card"
+                        v-for="restaurant in filteredRestaurant"
+                        :key="restaurant.id"
+                    >
+                        <img
+                            class="cover"
+                            :src="restaurant.restaurant_cover"
+                            :alt="restaurant.restaurant_name"
+                        />
+                        <div class="restaurant-info">
+                            <h5>{{ restaurant.restaurant_name }}</h5>
+                            <router-link
+                                class="nav-link btn"
+                                :to="{
+                                    name: 'restaurant',
+                                    params: { slug: restaurant.slug },
+                                }"
+                                >Vedi piatti</router-link
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,9 +103,11 @@ export default {
             restaurants: [],
             categoryId: [1, 2, 3, 4, 5, 6, 7],
             selectedCategories: [],
-            filteredRestaurants: [],
+            unchecked: true,
+            filteredRestaurant: [],
         };
     },
+
     methods: {
         getCategories() {
             axios.get("/api/categories/").then((response) => {
@@ -96,16 +120,18 @@ export default {
             });
         },
         changeRestaurants() {
-            axios
-                .get("/api/filter", {
-                    id: this.selectedCategories[0],
-                })
-                .then((response) => {
-                    this.filteredRestaurants = response.data.results;
-                });
-            console.log(this.filteredRestaurants);
+            this.filteredRestaurant = this.restaurants.filter((el) => {
+                return el.category[0].id === this.selectedCategories[0];
+            });
+
+            if (this.selectedCategories.length > 0) {
+                this.unchecked = false;
+            } else {
+                this.unchecked = true;
+            }
         },
     },
+
     mounted() {
         this.getCategories();
         this.getRestaurants();
@@ -115,7 +141,55 @@ export default {
 
 <style lang="scss" scoped>
 .search-bar {
-    background-color: lightcoral;
+    padding-top: 40px;
+    background-color: rgb(255, 204, 0);
     height: 800px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+
+    .card {
+        background-color: transparent;
+        border: none;
+        padding: 20px;
+        width: 80%;
+        position: relative;
+        h5 {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+        }
+    }
+
+    .cover {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        -webkit-filter: brightness(40%);
+    }
+
+    img {
+        transition: transform 1.5s, filter 1s ease-in;
+    }
+    img:hover {
+        transform: scale(1.1);
+    }
+
+    .btn {
+        background-color: black;
+        color: white;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+}
+
+.filter-box {
+    input {
+        margin-top: 20px;
+        margin-right: 15px;
+    }
 }
 </style>
