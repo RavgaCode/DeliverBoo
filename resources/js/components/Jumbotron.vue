@@ -104,9 +104,6 @@ export default {
     -webkit-animation: rightArrow 0.5s 1s infinite ease-out alternate;
     }
 
-
-
-
     @-webkit-keyframes arrow{
     0% {
         bottom:0px;
@@ -115,7 +112,6 @@ export default {
         bottom:40px;
     }
     }
-
 
     @-webkit-keyframes leftArrow{
     0% {

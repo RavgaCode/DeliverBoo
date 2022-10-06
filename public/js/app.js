@@ -2043,7 +2043,9 @@ __webpack_require__.r(__webpack_exports__);
       categories: [],
       restaurants: [],
       categoryId: [1, 2, 3, 4, 5, 6, 7],
-      selectedCategories: []
+      selectedCategories: [],
+      unchecked: true,
+      filteredRestaurant: []
     };
   },
   methods: {
@@ -2064,9 +2066,15 @@ __webpack_require__.r(__webpack_exports__);
     changeRestaurants: function changeRestaurants() {
       var _this3 = this;
 
-      this.restaurants.filter(function (item) {
-        return item.category.id.includes(_this3.selectedCategories);
+      this.filteredRestaurant = this.restaurants.filter(function (el) {
+        return el.category[0].id === _this3.selectedCategories[0];
       });
+
+      if (this.selectedCategories.length > 0) {
+        this.unchecked = false;
+      } else {
+        this.unchecked = true;
+      }
     }
   },
   mounted: function mounted() {
@@ -2239,9 +2247,20 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function render() {};
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
 
-var staticRenderFns = [];
+  return _vm._m(0);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", [_c("h1", [_vm._v("ciao")])]);
+}];
+render._withStripped = true;
 
 
 /***/ }),
@@ -2591,17 +2610,15 @@ var render = function render() {
       attrs: {
         type: "checkbox",
         id: category.id,
-        name: category.id
+        name: category.id,
+        checked: ""
       },
       domProps: {
         value: category.id,
         checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
       },
       on: {
-        click: function click($event) {
-          return _vm.changeRestaurants();
-        },
-        change: function change($event) {
+        change: [function ($event) {
           var $$a = _vm.selectedCategories,
               $$el = $event.target,
               $$c = $$el.checked ? true : false;
@@ -2618,10 +2635,12 @@ var render = function render() {
           } else {
             _vm.selectedCategories = $$c;
           }
-        }
+        }, function ($event) {
+          return _vm.changeRestaurants();
+        }]
       }
     })]);
-  }), 0), _vm._v(" "), _c("div", {
+  }), 0), _vm._v(" "), _vm.unchecked ? _c("div", {
     staticClass: "restaurant-wrapper d-flex justify-content-start flex-wrap"
   }, [_vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
@@ -2646,7 +2665,32 @@ var render = function render() {
         }
       }
     }, [_vm._v("Vedi piatti")])], 1)]);
-  }), _vm._v(" "), _vm._m(1)], 2)])]);
+  }), _vm._v(" "), _vm._m(1)], 2) : _c("div", {
+    staticClass: "restaurant-wrapper d-flex justify-content-start flex-wrap"
+  }, [_vm._l(_vm.filteredRestaurant, function (restaurant) {
+    return _c("div", {
+      key: restaurant.id,
+      staticClass: "restaurant-card col-4"
+    }, [_c("img", {
+      staticClass: "w-50",
+      attrs: {
+        src: restaurant.restaurant_cover,
+        alt: restaurant.restaurant_name
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "restaurant-info"
+    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))]), _vm._v(" "), _c("router-link", {
+      staticClass: "nav-link btn btn-success",
+      attrs: {
+        to: {
+          name: "restaurant",
+          params: {
+            slug: restaurant.slug
+          }
+        }
+      }
+    }, [_vm._v("Vedi piatti")])], 1)]);
+  }), _vm._v(" "), _vm._m(2)], 2)])]);
 };
 
 var staticRenderFns = [function () {
@@ -2675,7 +2719,21 @@ var staticRenderFns = [function () {
     staticClass: "restaurant-card"
   }, [_c("img", {
     attrs: {
-      src: "https://via.placeholder.com/150\n\nC/O https://placeholder.com/",
+      src: "https://via.placeholder.com/150C/O https://placeholder.com/",
+      alt: ""
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "restaurant-info"
+  }, [_c("h5", [_vm._v("Ai-Sushi")])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "restaurant-card"
+  }, [_c("img", {
+    attrs: {
+      src: "https://via.placeholder.com/150C/O https://placeholder.com/",
       alt: ""
     }
   }), _vm._v(" "), _c("div", {
