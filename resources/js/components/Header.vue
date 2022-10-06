@@ -93,6 +93,10 @@ export default {
                     routeName: "/contact",
                     labelName: "Contact us",
                 },
+                {
+                    routeName: "/payment",
+                    labelName: "Payment",
+                },
             ],
             isActive: false,
         };
@@ -120,6 +124,7 @@ export default {
 <style lang="scss" scoped>
 @import url("/resources/sass/app.scss");
 nav {
+    height: 80px;
     padding: 7px 20px;
     justify-content: space-between;
     align-items: center;

@@ -18,7 +18,7 @@
                     v-for="category in categories"
                     :key="category.id"
                 >
-                    <label :for="category.id">{{ category.name }}</label>
+                    <label :for="category.name">{{ category.name }}</label>
                     <input
                        @change="changeRestaurants()"
                         type="checkbox"
