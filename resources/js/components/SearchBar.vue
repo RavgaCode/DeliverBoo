@@ -8,6 +8,8 @@
                     type="text"
                     id="text-searchbar"
                     name="text-searchbar"
+                    v-model="searchValue"
+                    @keyup="search()"
                     placeholder="Cerca il tuo ristorante preferito"
                 />
             </div>
@@ -71,6 +73,7 @@ export default {
             categories: [],
             restaurants: [],
             selectedCategories: [],
+            searchValue: ''
         };
     },
     watch: {
@@ -117,6 +120,20 @@ export default {
                     });
             }
         },
+
+        search() {
+            
+            axios.get(`/api/restaurants/`).then((response) => {
+                    // this.restaurants = response.data.results;
+                    if(this.searchValue) {
+                        this.restaurants = response.data.results.filter(user => {
+                            return user.restaurant_name.toLowerCase().includes(this.searchValue.toLowerCase())
+                        })
+                    } else {
+                        this.restaurants = response.data.results;
+                    }
+                })
+        }
     },
 
     mounted() {

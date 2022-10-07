@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Input;
 use App\Category;
 use App\User;
 use App\Plate;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserController extends Controller
 {
@@ -84,6 +85,23 @@ class UserController extends Controller
         return response()->json($data);
     }
 
+
+
+    public function search($name)
+    {
+        $restaurants = User::where('restaurant_name', 'like', $name )->get();
+       
+        foreach($restaurants as $restaurant){
+           $restaurant->restaurant_cover = asset('storage/' . $restaurant->restaurant_cover);
+       };
+       
+       $data = [
+           'success' => true,
+           'results' => $restaurants,
+       ];
+
+       return response()->json($data);
+   }
     /**
      * Show the form for creating a new resource.
      *

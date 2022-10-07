@@ -2038,7 +2038,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       categories: [],
       restaurants: [],
-      selectedCategories: []
+      selectedCategories: [],
+      searchValue: ''
     };
   },
   watch: {
@@ -2099,6 +2100,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    search: function search() {
+      var _this3 = this;
+
+      axios.get("/api/restaurants/").then(function (response) {
+        // this.restaurants = response.data.results;
+        if (_this3.searchValue) {
+          _this3.restaurants = response.data.results.filter(function (user) {
+            return user.restaurant_name.toLowerCase().includes(_this3.searchValue.toLowerCase());
+          });
+        } else {
+          _this3.restaurants = response.data.results;
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -2697,7 +2712,38 @@ var render = function render() {
     staticClass: "search-bar"
   }, [_c("div", {
     staticClass: "container"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "text-searchbar-container"
+  }, [_c("label", {
+    attrs: {
+      "for": "text-searchbar"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.searchValue,
+      expression: "searchValue"
+    }],
+    attrs: {
+      type: "text",
+      id: "text-searchbar",
+      name: "text-searchbar",
+      placeholder: "Cerca il tuo ristorante preferito"
+    },
+    domProps: {
+      value: _vm.searchValue
+    },
+    on: {
+      keyup: function keyup($event) {
+        return _vm.search();
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.searchValue = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "filters-container d-flex"
   }, _vm._l(_vm.categories, function (category) {
     return _c("div", {
@@ -2776,25 +2822,7 @@ var render = function render() {
   }), 0)])])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "text-searchbar-container"
-  }, [_c("label", {
-    attrs: {
-      "for": "text-searchbar"
-    }
-  }), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "text",
-      id: "text-searchbar",
-      name: "text-searchbar",
-      placeholder: "Cerca il tuo ristorante preferito"
-    }
-  })]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -56258,8 +56286,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
