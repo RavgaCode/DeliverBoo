@@ -20,13 +20,12 @@
                 >
                     <label :for="category.id">{{ category.name }}</label>
                     <input
-                        @change="changeRestaurants()"
+                        @change="getRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
                         :id="category.id"
                         :name="category.id"
                         :value="category.id"
-                        checked
                     />
                 </div>
             </div>
@@ -34,41 +33,11 @@
                 <!-- Restaurants Card Wrapper -->
                 <div
                     class="restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
-                    v-if="unchecked"
                 >
                     <!-- card -->
                     <div
                         class="restaurant-card col-1 card"
                         v-for="restaurant in restaurants"
-                        :key="restaurant.id"
-                    >
-                        <img
-                            class="cover"
-                            :src="restaurant.restaurant_cover"
-                            :alt="restaurant.restaurant_name"
-                        />
-                        <div class="restaurant-info">
-                            <h5>{{ restaurant.restaurant_name }}</h5>
-                            <router-link
-                                class="nav-link btn"
-                                :to="{
-                                    name: 'restaurant',
-                                    params: { slug: restaurant.slug },
-                                }"
-                                >Vedi piatti</router-link
-                            >
-                        </div>
-                    </div>
-                </div>
-                <!-- else -->
-                <div
-                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
-                    v-else
-                >
-                    <!-- card -->
-                    <div
-                        class="restaurant-card col-1 card"
-                        v-for="restaurant in filteredRestaurant"
                         :key="restaurant.id"
                     >
                         <img
@@ -101,33 +70,51 @@ export default {
         return {
             categories: [],
             restaurants: [],
-            categoryId: [1, 2, 3, 4, 5, 6, 7],
             selectedCategories: [],
-            unchecked: true,
-            filteredRestaurant: [],
         };
     },
-
+    watch: {
+        url() {
+            this.filterTest();
+        },
+        params: {
+            handler() {
+                this.filterTest();
+            },
+            deep: true,
+        },
+    },
     methods: {
         getCategories() {
             axios.get("/api/categories/").then((response) => {
                 this.categories = response.data.results;
             });
         },
-        getRestaurants() {
-            axios.get("/api/restaurants/").then((response) => {
-                this.restaurants = response.data.results;
-            });
-        },
-        changeRestaurants() {
-            this.filteredRestaurant = this.restaurants.filter((el) => {
-                return el.category[0].id === this.selectedCategories[0];
-            });
-
+        async getRestaurants() {
+            this.isLoading = true;
             if (this.selectedCategories.length > 0) {
-                this.unchecked = false;
+                let finalQuery = "";
+                this.selectedCategories.forEach((el) => {
+                    finalQuery += el + ",";
+                });
+                axios
+                    .get(`/api/test/?category=${finalQuery}`)
+                    .then((response) => {
+                        this.restaurants = response.data.results;
+                        console.log(response.data.results);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             } else {
-                this.unchecked = true;
+                axios
+                    .get("/api/restaurants/")
+                    .then((response) => {
+                        this.restaurants = response.data.results;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             }
         },
     },

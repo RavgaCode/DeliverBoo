@@ -2,6 +2,7 @@
     <section class="menu-section">
         <!-- Page-top -->
         <div class="page-top">
+            <!-- ----------------------------------------------------- -->
             <!-- Left-col - CART -->
 
             <div class="left-col">
@@ -9,7 +10,7 @@
                     <div
                         class="cart-container d-flex flex-column align-items-center"
                     >
-                        <h2>Il tuo Carrello</h2>
+                        <h2 class="cart-title">Il tuo Carrello</h2>
                         <!-- TOP CART -->
                         <div class="top-cart w-100">
                             <div
@@ -35,47 +36,52 @@
                                 <div
                                     class="product-buttons-row d-flex justify-content-between w-100"
                                 >
-                                    <button
+                                    <div
                                         @click="deleteItem(item)"
-                                        class="minus-button btn-warning rounded-pill p-2"
+                                        class="minus-button quantity-btn"
                                     >
                                         -
-                                    </button>
+                                    </div>
                                     <button
                                         @click="removeItemTotally(item)"
                                         class="remove-button btn-primary btn-danger rounded-pill"
                                     >
                                         remove
                                     </button>
-                                    <button
+                                    <div
                                         @click="newItem(item)"
-                                        class="plus-button btn-warning rounded-pill p-2"
+                                        class="plus-button quantity-btn"
                                     >
                                         +
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- BOTTOM CART -->
                         <div class="bottom-cart">
-                            <h5 class="total-price">
+                            <h5
+                                class="total-price text-center"
+                                v-show="cart.length > 0"
+                            >
                                 Totale: {{ totalSum }}&euro;
                             </h5>
                             <a
                                 tag="button"
                                 @click="payment()"
-                                class="payment-button btn btn-success"
+                                class="payment-button"
                                 role="button"
                                 href="/payment"
+                                v-show="cart.length > 0"
                             >
                                 Pay
                             </a>
-                            <button
+                            <span
                                 @click="discardCart()"
-                                class="discard-cart-button btn btn-danger"
+                                class="discard-cart-button"
+                                v-show="cart.length > 0"
                             >
                                 Cancel
-                            </button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -93,8 +99,8 @@
                 <p>Indirizzo: {{ plates[0].user.restaurant_address }}</p>
             </div>
         </div>
-
-        <!-- Page-bottom -->
+        <!-- -------------------------------------------- -->
+        <!-- PAGE BOTTOM-->
         <div class="page_bottom">
             <!-- Plates -->
             <div class="plate-slider">
@@ -248,12 +254,61 @@ export default {
     border-radius: 15px;
     background-image: url("http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg");
     box-shadow: 3px 3px 3px 5px black;
+    .cart-title {
+        font-style: italic;
+        padding-block: 1rem;
+    }
 
     .top-cart {
+        height: 35vh;
+        overflow-y: auto;
         padding-inline: 10px;
 
         .product-row {
             width: 100%;
+        }
+        .quantity-btn {
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            background-color: none;
+
+            font-size: large;
+            font-weight: 800;
+
+            &:hover {
+                background-color: #ffcc00;
+                color: black;
+                cursor: pointer;
+                border: 2px solid black;
+            }
+        }
+        .minus-button {
+            padding: 2px 14px;
+        }
+        .plus-button {
+            padding: 3px 12px;
+        }
+    }
+    .bottom-cart {
+        padding-block: 0.3rem;
+        height: 10vh;
+
+        .payment-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #ffcc00;
+            color: black;
+            padding: 7px 18px;
+            border-radius: 5px;
+        }
+        .discard-cart-button {
+            display: inline-block;
+            cursor: pointer;
+            background-color: #cc5500;
+            color: black;
+            padding: 7px 18px;
+            border-radius: 5px;
         }
     }
 }
@@ -272,6 +327,7 @@ export default {
 
 .page_bottom {
     width: 100%;
+    height: 30vh;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -297,7 +353,6 @@ export default {
     }
     .plates-card {
         width: 30%;
-        height: 20vh;
         border: 1px solid grey;
     }
 
@@ -306,7 +361,7 @@ export default {
     }
 
     .plate-img {
-        max-height: 30vh;
+        max-height: 10vh;
     }
 }
 </style>
