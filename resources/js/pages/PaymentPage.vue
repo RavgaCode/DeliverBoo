@@ -99,7 +99,9 @@
 
             <!-- Btn -->
             <div class="pay-btn">
-                <button>Paga</button>
+                <button>
+                    <a style="color:white" href="/payment-successful">Paga</a>
+                </button>
             </div>
         </div>
     </div>

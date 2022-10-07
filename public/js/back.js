@@ -49670,11 +49670,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\back.js */"./resources/js/back.js");
-=======
-module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\back.js */"./resources/js/back.js");
->>>>>>> e255e69176c3ba83591967e44751126d2a6ed209
+module.exports = __webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })
