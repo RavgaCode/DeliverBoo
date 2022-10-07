@@ -53,8 +53,10 @@ class UserController extends Controller
                 $q->whereIn('category_id', $queryParams);
             })->with(['category'])->get();
 
-            
-            
+            // Elimino l'elemento vuoto creato dall'ultima virgola non eliminata dall'explode, altrimenti l'array queryParams avrebbe sempre un elemento in più, ed invalidarebbe il filtraggio seguente.
+            $filteredQuery =array_pop($queryParams);
+           
+            // Ciclo tutti i ristoranti filtrati con metodo OR. Per ciascuno di essi, ciclo tutte le category. Verifico tramite in_array, se ogni category id presente in nell'array queryParams é presente nella categoria. Per ogni risposta positiva/true ottenuta, aumento il counter della variabile d'appoggio. Se alla fine del ciclo del singolo ristorante, il counter della variabile d'appoggio, è uguale alla lunghezza dell'array queryParams, allora pusho il ristorante nell'array dei ristoranti filtrati finale.
             foreach($restaurants as $restaurant){
                 $counting = 0;
                 foreach ($restaurant->category as $category){
@@ -72,7 +74,7 @@ class UserController extends Controller
         
         // Aggiungo il link alla cover
         foreach($filteredRestaurants as $singleRestaurant){
-            $singleRestaurant->restaurant_cover = asset('storage/' . $restaurant->restaurant_cover);
+            $singleRestaurant->restaurant_cover = asset('storage/' . $singleRestaurant->restaurant_cover);
          };
 
         $data = [

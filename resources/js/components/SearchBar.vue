@@ -20,7 +20,7 @@
                 >
                     <label :for="category.id">{{ category.name }}</label>
                     <input
-                        @change="filterTest()"
+                        @change="getRestaurants()"
                         type="checkbox"
                         v-model="selectedCategories"
                         :id="category.id"
@@ -73,23 +73,25 @@ export default {
             selectedCategories: [],
         };
     },
+    watch: {
+        url() {
+            this.filterTest();
+        },
+        params: {
+            handler() {
+                this.filterTest();
+            },
+            deep: true,
+        },
+    },
     methods: {
         getCategories() {
             axios.get("/api/categories/").then((response) => {
                 this.categories = response.data.results;
             });
         },
-        getRestaurants() {
-            axios
-                .get("/api/restaurants/")
-                .then((response) => {
-                    this.restaurants = response.data.results;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        filterTest() {
+        async getRestaurants() {
+            this.isLoading = true;
             if (this.selectedCategories.length > 0) {
                 let finalQuery = "";
                 this.selectedCategories.forEach((el) => {
@@ -119,7 +121,6 @@ export default {
 
     mounted() {
         this.getCategories();
-        this.filterTest();
         this.getRestaurants();
     },
 };
