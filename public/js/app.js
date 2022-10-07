@@ -2030,10 +2030,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       categories: [],
       restaurants: [],
-      categoryId: [1, 2, 3, 4, 5, 6, 7],
-      selectedCategories: [],
-      unchecked: true,
-      filteredRestaurant: []
+      selectedCategories: []
     };
   },
   methods: {
@@ -2049,24 +2046,36 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/restaurants/").then(function (response) {
         _this2.restaurants = response.data.results;
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
-    changeRestaurants: function changeRestaurants() {
+    filterTest: function filterTest() {
       var _this3 = this;
 
-      this.filteredRestaurant = this.restaurants.filter(function (el) {
-        return el.category[0].id === _this3.selectedCategories[0];
-      });
-
       if (this.selectedCategories.length > 0) {
-        this.unchecked = false;
+        var finalQuery = "";
+        this.selectedCategories.forEach(function (el) {
+          finalQuery += el + ",";
+        });
+        axios.get("/api/test/?category=".concat(finalQuery)).then(function (response) {
+          _this3.restaurants = response.data.results;
+          console.log(response.data.results);
+        })["catch"](function (error) {
+          console.log(error);
+        });
       } else {
-        this.unchecked = true;
+        axios.get("/api/restaurants/").then(function (response) {
+          _this3.restaurants = response.data.results;
+        })["catch"](function (error) {
+          console.log(error);
+        });
       }
     }
   },
   mounted: function mounted() {
     this.getCategories();
+    this.filterTest();
     this.getRestaurants();
   }
 });
@@ -2681,8 +2690,7 @@ var render = function render() {
       attrs: {
         type: "checkbox",
         id: category.id,
-        name: category.id,
-        checked: ""
+        name: category.id
       },
       domProps: {
         value: category.id,
@@ -2707,40 +2715,15 @@ var render = function render() {
             _vm.selectedCategories = $$c;
           }
         }, function ($event) {
-          return _vm.changeRestaurants();
+          return _vm.filterTest();
         }]
       }
     })]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "cards"
-  }, [_vm.unchecked ? _c("div", {
+  }, [_c("div", {
     staticClass: "restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
   }, _vm._l(_vm.restaurants, function (restaurant) {
-    return _c("div", {
-      key: restaurant.id,
-      staticClass: "restaurant-card col-1 card"
-    }, [_c("img", {
-      staticClass: "cover",
-      attrs: {
-        src: restaurant.restaurant_cover,
-        alt: restaurant.restaurant_name
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "restaurant-info"
-    }, [_c("h5", [_vm._v(_vm._s(restaurant.restaurant_name))]), _vm._v(" "), _c("router-link", {
-      staticClass: "nav-link btn",
-      attrs: {
-        to: {
-          name: "restaurant",
-          params: {
-            slug: restaurant.slug
-          }
-        }
-      }
-    }, [_vm._v("Vedi piatti")])], 1)]);
-  }), 0) : _c("div", {
-    staticClass: "restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
-  }, _vm._l(_vm.filteredRestaurant, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
       staticClass: "restaurant-card col-1 card"
@@ -3115,7 +3098,9 @@ var render = function render() {
     staticClass: "cart w-200"
   }, [_c("div", {
     staticClass: "cart-container d-flex flex-column align-items-center"
-  }, [_c("h2", [_vm._v("Il tuo Carrello")]), _vm._v(" "), _c("div", {
+  }, [_c("h2", {
+    staticClass: "cart-title"
+  }, [_vm._v("Il tuo Carrello")]), _vm._v(" "), _c("div", {
     staticClass: "top-cart w-100"
   }, _vm._l(_vm.cart, function (item, index) {
     return _c("div", {
@@ -3131,8 +3116,8 @@ var render = function render() {
       staticClass: "product-price"
     }, [_vm._v("\n                                    " + _vm._s(item.price) + "€\n                                ")])]), _vm._v(" "), _c("div", {
       staticClass: "product-buttons-row d-flex justify-content-between w-100"
-    }, [_c("button", {
-      staticClass: "minus-button btn-warning rounded-pill p-2",
+    }, [_c("div", {
+      staticClass: "minus-button quantity-btn",
       on: {
         click: function click($event) {
           return _vm.deleteItem(item);
@@ -3145,8 +3130,8 @@ var render = function render() {
           return _vm.removeItemTotally(item);
         }
       }
-    }, [_vm._v("\n                                    remove\n                                ")]), _vm._v(" "), _c("button", {
-      staticClass: "plus-button btn-warning rounded-pill p-2",
+    }, [_vm._v("\n                                    remove\n                                ")]), _vm._v(" "), _c("div", {
+      staticClass: "plus-button quantity-btn",
       on: {
         click: function click($event) {
           return _vm.newItem(item);
@@ -3156,9 +3141,21 @@ var render = function render() {
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "bottom-cart"
   }, [_c("h5", {
-    staticClass: "total-price"
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.cart.length > 0,
+      expression: "cart.length > 0"
+    }],
+    staticClass: "total-price text-center"
   }, [_vm._v("\n                            Totale: " + _vm._s(_vm.totalSum) + "€\n                        ")]), _vm._v(" "), _c("a", {
-    staticClass: "payment-button btn btn-success",
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.cart.length > 0,
+      expression: "cart.length > 0"
+    }],
+    staticClass: "payment-button",
     attrs: {
       tag: "button",
       role: "button",
@@ -3169,8 +3166,14 @@ var render = function render() {
         return _vm.payment();
       }
     }
-  }, [_vm._v("\n                            Pay\n                        ")]), _vm._v(" "), _c("button", {
-    staticClass: "discard-cart-button btn btn-danger",
+  }, [_vm._v("\n                            Pay\n                        ")]), _vm._v(" "), _c("span", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.cart.length > 0,
+      expression: "cart.length > 0"
+    }],
+    staticClass: "discard-cart-button",
     on: {
       click: function click($event) {
         return _vm.discardCart();
@@ -7711,7 +7714,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".menu-section[data-v-6b773735] {\n  height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  border-top: 2px solid black;\n}\n.page_bottom .plate-slider[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns .plate-col[data-v-6b773735] {\n  width: 33.3333333333%;\n  flex-shrink: 0;\n}\n.page_bottom .plates-card[data-v-6b773735] {\n  width: 30%;\n  height: 20vh;\n  border: 1px solid grey;\n}\n.page_bottom .plate-descrption[data-v-6b773735] {\n  width: 70%;\n}\n.page_bottom .plate-img[data-v-6b773735] {\n  max-height: 30vh;\n}", ""]);
+exports.push([module.i, ".menu-section[data-v-6b773735] {\n  height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735] {\n  color: white;\n  border: 2px solid white;\n  border-radius: 50%;\n  background-color: none;\n  font-size: large;\n  font-weight: 800;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735]:hover {\n  background-color: #ffcc00;\n  color: black;\n  cursor: pointer;\n  border: 2px solid black;\n}\n.cart-container .top-cart .minus-button[data-v-6b773735] {\n  padding: 2px 14px;\n}\n.cart-container .top-cart .plus-button[data-v-6b773735] {\n  padding: 3px 12px;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  height: 30vh;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  border-top: 2px solid black;\n}\n.page_bottom .plate-slider[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns .plate-col[data-v-6b773735] {\n  width: 33.3333333333%;\n  flex-shrink: 0;\n}\n.page_bottom .plates-card[data-v-6b773735] {\n  width: 30%;\n  border: 1px solid grey;\n}\n.page_bottom .plate-descrption[data-v-6b773735] {\n  width: 70%;\n}\n.page_bottom .plate-img[data-v-6b773735] {\n  max-height: 10vh;\n}", ""]);
 
 // exports
 
@@ -54974,11 +54977,13 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+window.JQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 var app = new Vue({
-  el: '#root',
+  el: "#root",
   render: function render(h) {
     return h(_views_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },

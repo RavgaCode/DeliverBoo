@@ -4,9 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,16 +27,16 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- window.axios = require('axios');
- window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; 
+window.axios = require("axios");
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.$ = require("jquery");
+window.JQuery = require("jquery");
 
- import App from "./views/App.vue";
- import router from "./router";
-
+import App from "./views/App.vue";
+import router from "./router";
 
 const app = new Vue({
-    el: '#root',
-    render: h => h(App),
+    el: "#root",
+    render: (h) => h(App),
     router,
-    
 });
