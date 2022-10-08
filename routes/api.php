@@ -25,3 +25,7 @@ Route::get('/restaurants', 'Api\UserController@index');
 Route::get('/restaurants/{slug}', 'Api\UserController@show');
 Route::get('/test', 'Api\UserController@test');
 
+
+Route::get('/orders/generate', 'Api\OrderController@generate');
+Route::post('/orders/make/payment', 'Api\OrderController@makePayment');
+

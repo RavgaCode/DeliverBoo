@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 import HomePage from "./pages/HomePage.vue";
 import AboutPage from "./pages/AboutPage.vue";
@@ -13,58 +13,49 @@ import PaymentPage from "./pages/PaymentPage.vue";
 import PaymentSuccessful from "./pages/PaymentSuccessful.vue";
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     routes: [
         {
-            path: '/',
+            path: "/",
             component: HomePage,
-            name: 'home'
-
+            name: "home",
         },
         {
-            path: '/about',
+            path: "/about",
             component: AboutPage,
-            name: 'about'
-
+            name: "about",
         },
         {
-            path: '/plates',
+            path: "/plates",
             component: MenuPage,
-            name: 'plates'
-
+            name: "plates",
         },
         {
-            path: '/restaurants/:slug',
+            path: "/restaurants/:slug",
             component: RestaurantPage,
-            name: 'restaurant'
-
+            name: "restaurant",
         },
         {
-            path: '/contact',
+            path: "/contact",
             component: ContactPage,
-            name: 'contact'
-
+            name: "contact",
         },
         {
-            path: '/payment',
+            path: "/payment",
             component: PaymentPage,
-            name: 'payment'
-
+            name: "payment",
         },
         {
-            path: '/payment-successful',
+            path: "/payment-successful",
             component: PaymentSuccessful,
-            name: 'payment-successful'
-
+            name: "payment-successful",
         },
         {
-            path: '/*',
+            path: "/*",
             component: ErrorNotFound,
-            name: 'error'
-
+            name: "error",
         },
+    ],
+});
 
-    ]
-  })
-
-  export default router;
+export default router;

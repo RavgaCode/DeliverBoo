@@ -42,7 +42,7 @@ class UserController extends Controller
         
         if ($data == []) {
             $restaurants = User::with('category')->get();
-            // Altrimenti uso il metodo explode per creare un array dove ogni singolo elemento è un il numero di category id che è stato passato
+            // Altrimenti uso il metodo explode per creare un array dove ogni singolo elemento è il numero di category id che è stato passato
         }else {
             $queryParams = [];
             if (isset($data['category'])) {
