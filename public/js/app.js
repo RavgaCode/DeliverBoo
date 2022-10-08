@@ -2266,6 +2266,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    submit: function submit() {
+      console.log("form submitted");
+    },
     getOrder: function getOrder() {
       if (typeof Storage !== "undefined") {
         console.log("ordine carico");
@@ -2288,36 +2291,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this.form.amount = _this.totalCost;
       });
     },
-    payment: function payment() {
+    storeOrder: function storeOrder() {
       var _this2 = this;
+
+      axios.post("/api/orders/store/order", {
+        customer_name: this.name,
+        customer_address: this.address,
+        customer_telephone: this.tel,
+        customer_email: this.email,
+        user_id: this.order[0].user_id,
+        cart: this.finalCart,
+        total_price: this.totalCost
+      }).then(function (response) {
+        if (response.data.success) {
+          _this2.success = true;
+          _this2.unsuccess = false; // svuoto i campi
+
+          _this2.name = "";
+          _this2.tel = "";
+          _this2.email = "";
+          _this2.address = "";
+          _this2.errors = {}; //let cart = JSON.stringify(this.emptyCart);
+          //localStorage.setItem("cart", this.finalCart);
+
+          console.log("ordine inviato");
+        } else {
+          _this2.errors = response.data.errors;
+        }
+      });
+    },
+    payment: function payment() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.post("/api/orders/make/payment", _objectSpread({}, _this2.form));
+                _this3.sendingInProgress = false;
+                _context.prev = 1;
+                _context.next = 4;
+                return axios.post("/api/orders/make/payment", _objectSpread({}, _this3.form));
 
-              case 3:
+              case 4:
                 alert("Pagamento riuscito");
-                _context.next = 11;
+                _this3.sendingInProgress = true;
+
+                _this3.storeOrder();
+
+                _context.next = 14;
                 break;
 
-              case 6:
-                _context.prev = 6;
-                _context.t0 = _context["catch"](0);
-                _this2.disableBuyButton = false;
-                _this2.loadingPayment = false;
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](1);
+                _this3.disableBuyButton = false;
+                _this3.loadingPayment = false;
                 console.log("transazione non riuscita");
 
-              case 11:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 6]]);
+        }, _callee, null, [[1, 9]]);
       }))();
     }
   },
@@ -3132,7 +3169,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        return _vm.handleSubmit.apply(null, arguments);
+        return _vm.submit();
       }
     }
   }, [_c("div", {
@@ -3169,7 +3206,8 @@ var render = function render() {
     attrs: {
       id: "customer_name",
       type: "text",
-      placeholder: "Inserisci il tuo nome e cognome"
+      placeholder: "Inserire nome e cognome",
+      required: ""
     },
     domProps: {
       value: _vm.name
@@ -3195,7 +3233,7 @@ var render = function render() {
     attrs: {
       "for": "customer_address"
     }
-  }, [_vm._v("Inserisci il tuo\n                                                        indirizzo*")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Inserire\n                                                        indirizzo*")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3209,7 +3247,8 @@ var render = function render() {
     attrs: {
       id: "customer_address",
       type: "text",
-      placeholder: "es. via Dei Mille, 42"
+      placeholder: "es. via Dei Mille, 42",
+      required: ""
     },
     domProps: {
       value: _vm.address
@@ -3235,7 +3274,7 @@ var render = function render() {
     attrs: {
       "for": "customer_telephone"
     }
-  }, [_vm._v("Inserisci il tuo\n                                                        numero di\n                                                        telefono*")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Inserire numero di\n                                                        telefono*")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3249,7 +3288,8 @@ var render = function render() {
     attrs: {
       id: "customer_telephone",
       type: "text",
-      placeholder: "000-111-00-11"
+      placeholder: "000-111-00-11",
+      required: ""
     },
     domProps: {
       value: _vm.tel
@@ -3275,7 +3315,7 @@ var render = function render() {
     attrs: {
       "for": "customer_email"
     }
-  }, [_vm._v("Inserisci la tua\n                                                        mail*")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Inserire\n                                                        email*")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3289,7 +3329,8 @@ var render = function render() {
     attrs: {
       id: "customer_email",
       type: "text",
-      placeholder: "es. franco@gmail.com"
+      placeholder: "es. alessandro@gmail.com",
+      required: ""
     },
     domProps: {
       value: _vm.email
@@ -3306,6 +3347,8 @@ var render = function render() {
       staticClass: "invalid-feedback"
     }, [_vm._v("\n                                                        " + _vm._s(error) + "\n                                                    ")]);
   })], 2)])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("div", {
     attrs: {
       id: "dropin-container"
     }
@@ -3319,7 +3362,7 @@ var render = function render() {
         return _vm.payment();
       }
     }
-  }, [_vm._v("\n                                            Purchase\n                                        ")])])])])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                Purchase\n                                            ")])])])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "col container"
   }, [_c("div", {
     staticClass: "row"

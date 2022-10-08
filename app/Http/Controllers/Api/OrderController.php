@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
 use App\Http\Requests\OrderRequest;
+use Illuminate\Support\Facades\Validator;
 
 
 class OrderController extends Controller
@@ -73,7 +74,38 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        $data = $request->all();
+    
+        // $validator=Validator::make($data,[
+        //     'customer_name'=>'required',
+        //     'customer_email'=>'required|email',
+        //     'customer_address'=>'required',
+        //     'customer_telephone'=>'required',
+            
+        // ]);
         
+        // if($validator->fails()){
+        //     return response()->json(
+        //         [
+        //         'success'=>false,
+        //         'errors'=>$validator->errors()
+        //         ]
+        //     );
+        // }else{
+            $order = new Order();
+            $order->customer_name = $data['customer_name'];
+            $order->customer_address = $data['customer_address'];
+            $order->customer_telephone = $data['customer_telephone'];
+            $order->customer_email = $data['customer_email'];
+            $order->cart = $data['cart'];
+            $order->total_price = $data['total_price'];
+            $order->user_id = $data['user_id'];
+            $order->save();
+            return response()->json(
+                [
+                'success'=>true
+                ]
+            );
     }
 
     /**

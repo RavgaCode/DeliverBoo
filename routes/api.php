@@ -27,7 +27,8 @@ Route::get('/test', 'Api\UserController@test');
 Route::get('/search/{name}', 'Api\UserController@search');
 
 
-
+// Payments and Orders API
 Route::get('/orders/generate', 'Api\OrderController@generate');
 Route::post('/orders/make/payment', 'Api\OrderController@makePayment');
+Route::post('/orders/store/order', 'Api\OrderController@store');
 

@@ -20,7 +20,7 @@
                 class="row row-cols-1 row-cols-lg-2 d-block d-flex"
             >
                 <div class="col container">
-                    <form method="POST" @submit.prevent="handleSubmit">
+                    <form method="POST" @submit.prevent="submit()">
                         <div class="row">
                             <div class="col-10">
                                 <div class="card mt-3">
@@ -47,7 +47,8 @@
                                                             }"
                                                             id="customer_name"
                                                             type="text"
-                                                            placeholder="Inserisci il tuo nome e cognome"
+                                                            placeholder="Inserire nome e cognome"
+                                                            required
                                                         />
                                                         <p
                                                             v-for="(
@@ -68,7 +69,7 @@
                                                     <div class="form-group">
                                                         <label
                                                             for="customer_address"
-                                                            >Inserisci il tuo
+                                                            >Inserire
                                                             indirizzo*</label
                                                         >
                                                         <input
@@ -81,6 +82,7 @@
                                                             id="customer_address"
                                                             type="text"
                                                             placeholder="es. via Dei Mille, 42"
+                                                            required
                                                         />
                                                         <p
                                                             v-for="(
@@ -101,8 +103,7 @@
                                                     <div class="form-group">
                                                         <label
                                                             for="customer_telephone"
-                                                            >Inserisci il tuo
-                                                            numero di
+                                                            >Inserire numero di
                                                             telefono*</label
                                                         >
                                                         <input
@@ -115,6 +116,7 @@
                                                             id="customer_telephone"
                                                             type="text"
                                                             placeholder="000-111-00-11"
+                                                            required
                                                         />
                                                         <p
                                                             v-for="(
@@ -135,8 +137,8 @@
                                                     <div class="form-group">
                                                         <label
                                                             for="customer_email"
-                                                            >Inserisci la tua
-                                                            mail*</label
+                                                            >Inserire
+                                                            email*</label
                                                         >
                                                         <input
                                                             v-model="email"
@@ -147,7 +149,8 @@
                                                             class="form-control"
                                                             id="customer_email"
                                                             type="text"
-                                                            placeholder="es. franco@gmail.com"
+                                                            placeholder="es. alessandro@gmail.com"
+                                                            required
                                                         />
                                                         <p
                                                             v-for="(
@@ -161,15 +164,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div id="dropin-container"></div>
-                                            <button
-                                                id="submit-button"
-                                                class="button button--small button--green"
-                                                @click="payment()"
-                                            >
-                                                Purchase
-                                            </button>
+                                            <div class="form-group">
+                                                <div
+                                                    id="dropin-container"
+                                                ></div>
+                                                <button
+                                                    id="submit-button"
+                                                    class="button button--small button--green"
+                                                    @click="payment()"
+                                                >
+                                                    Purchase
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- ------ -->
@@ -255,6 +261,9 @@ export default {
         };
     },
     methods: {
+        submit() {
+            console.log("form submitted");
+        },
         getOrder() {
             if (typeof Storage !== "undefined") {
                 console.log("ordine carico");
@@ -276,12 +285,45 @@ export default {
                 this.form.amount = this.totalCost;
             });
         },
+        storeOrder() {
+            axios
+                .post("/api/orders/store/order", {
+                    customer_name: this.name,
+                    customer_address: this.address,
+                    customer_telephone: this.tel,
+                    customer_email: this.email,
+                    user_id: this.order[0].user_id,
+                    cart: this.finalCart,
+                    total_price: this.totalCost,
+                })
+                .then((response) => {
+                    if (response.data.success) {
+                        this.success = true;
+                        this.unsuccess = false;
+                        // svuoto i campi
+                        this.name = "";
+                        this.tel = "";
+                        this.email = "";
+                        this.address = "";
+                        this.errors = {};
+                        //let cart = JSON.stringify(this.emptyCart);
+                        //localStorage.setItem("cart", this.finalCart);
+                        console.log("ordine inviato");
+                    } else {
+                        this.errors = response.data.errors;
+                    }
+                });
+        },
+
         async payment() {
+            this.sendingInProgress = false;
             try {
                 await axios.post("/api/orders/make/payment", {
                     ...this.form,
                 });
                 alert("Pagamento riuscito");
+                this.sendingInProgress = true;
+                this.storeOrder();
             } catch (error) {
                 this.disableBuyButton = false;
                 this.loadingPayment = false;
