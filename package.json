@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "braintree-web": "^3.88.1",
+        "chart.js": "^3.9.1",
         "paypal-checkout": "^4.0.336",
         "qs": "^6.11.0",
         "vue-braintree": "^2.1.0",
