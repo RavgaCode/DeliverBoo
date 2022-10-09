@@ -4,7 +4,7 @@
     <h1>Benvenuto {{$user->name}}</h1>
 
     <h2>Il tuo ristorante: {{$user->restaurant_name}}</h2>
-    
+    <hr>
     <h4>Totale ordini ricevuti: {{$orders_count}}</h4>
     <h4>Fatturato totale: {{$total_revenue}} &euro;</h4>
     <div class="w-50">
