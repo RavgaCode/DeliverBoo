@@ -5,8 +5,9 @@
             v-if="success"
             class="text-center alert alert-success confirmPayment pt-5"
         >
-            Grazie per averci scelto<br />
-            Il tuo ordine é avvenuto con successo<br />
+            Il tuo ordine é avvenuto con successo! <br />
+            Il tuo ordine è già in preparazione!
+            <br />
             Clicca il link per tornare alla<router-link
                 class="ordine mb-1 mx-1"
                 :to="{ name: 'home' }"
@@ -19,6 +20,47 @@
                 v-if="unsuccess"
                 class="row row-cols-1 row-cols-lg-2 d-block d-flex"
             >
+                <!-- Riepilogo ordine -->
+                <div class="col container">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <h4>Riepilogo ordine:</h4>
+                                </div>
+
+                                <div
+                                    class="card-body"
+                                    v-for="(item, index) in order"
+                                    :key="index"
+                                >
+                                    <div>
+                                        <strong
+                                            >Articolo: {{ item.name }}</strong
+                                        >
+                                    </div>
+                                    <div>
+                                        <strong
+                                            >Totale piatti:
+                                            {{ item.quantity }}</strong
+                                        >
+                                    </div>
+                                    <div>
+                                        <strong>Prezzo unitario: </strong
+                                        >{{ item.price }}€
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="total-sum" :v-bind="totalCost">
+                                        Totale: {{ totalCost }}€
+                                    </h5>
+                                </div>
+                                <!-- -------------------- -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAYMENT FORM -->
                 <div class="col container">
                     <form method="POST" @submit.prevent="submit()">
                         <div class="row">
@@ -183,47 +225,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-
-                <!-- Riepilogo ordine -->
-                <div class="col container">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="card mt-3">
-                                <div class="card-header">
-                                    <h4>Riepilogo ordine:</h4>
-                                </div>
-
-                                <div
-                                    class="card-body"
-                                    v-for="(item, index) in order"
-                                    :key="index"
-                                >
-                                    <div>
-                                        <strong
-                                            >Articolo: {{ item.name }}</strong
-                                        >
-                                    </div>
-                                    <div>
-                                        <strong
-                                            >Totale piatti:
-                                            {{ item.quantity }}</strong
-                                        >
-                                    </div>
-                                    <div>
-                                        <strong>Prezzo unitario: </strong
-                                        >{{ item.price }}€
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="total-sum" :v-bind="totalCost">
-                                        Totale: {{ totalCost }}€
-                                    </h5>
-                                </div>
-                                <!-- -------------------- -->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

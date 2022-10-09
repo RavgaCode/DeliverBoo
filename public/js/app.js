@@ -3149,7 +3149,7 @@ var render = function render() {
     attrs: {
       focus: ""
     }
-  }, [_vm._v("\n        Grazie per averci scelto"), _c("br"), _vm._v("\n        Il tuo ordine é avvenuto con successo"), _c("br"), _vm._v("\n        Clicca il link per tornare alla"), _c("router-link", {
+  }, [_vm._v("\n        Il tuo ordine é avvenuto con successo! "), _c("br"), _vm._v("\n        Il tuo ordine è già in preparazione!\n        "), _c("br"), _vm._v("\n        Clicca il link per tornare alla"), _c("router-link", {
     staticClass: "ordine mb-1 mx-1",
     attrs: {
       to: {
@@ -3161,6 +3161,26 @@ var render = function render() {
   }, [_vm.unsuccess ? _c("div", {
     staticClass: "row row-cols-1 row-cols-lg-2 d-block d-flex"
   }, [_c("div", {
+    staticClass: "col container"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-8"
+  }, [_c("div", {
+    staticClass: "card mt-3"
+  }, [_vm._m(0), _vm._v(" "), _vm._l(_vm.order, function (item, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "card-body"
+    }, [_c("div", [_c("strong", [_vm._v("Articolo: " + _vm._s(item.name))])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Totale piatti:\n                                        " + _vm._s(item.quantity))])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Prezzo unitario: ")]), _vm._v(_vm._s(item.price) + "€\n                                ")])]);
+  }), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "total-sum",
+    attrs: {
+      "v-bind": _vm.totalCost
+    }
+  }, [_vm._v("\n                                    Totale: " + _vm._s(_vm.totalCost) + "€\n                                ")])])], 2)])])]), _vm._v(" "), _c("div", {
     staticClass: "col container"
   }, [_c("form", {
     attrs: {
@@ -3178,7 +3198,7 @@ var render = function render() {
     staticClass: "col-10"
   }, [_c("div", {
     staticClass: "card mt-3"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("div", {
     staticClass: "container"
@@ -3362,27 +3382,7 @@ var render = function render() {
         return _vm.payment();
       }
     }
-  }, [_vm._v("\n                                                Purchase\n                                            ")])])])])])])])])]), _vm._v(" "), _c("div", {
-    staticClass: "col container"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-8"
-  }, [_c("div", {
-    staticClass: "card mt-3"
-  }, [_vm._m(1), _vm._v(" "), _vm._l(_vm.order, function (item, index) {
-    return _c("div", {
-      key: index,
-      staticClass: "card-body"
-    }, [_c("div", [_c("strong", [_vm._v("Articolo: " + _vm._s(item.name))])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Totale piatti:\n                                        " + _vm._s(item.quantity))])]), _vm._v(" "), _c("div", [_c("strong", [_vm._v("Prezzo unitario: ")]), _vm._v(_vm._s(item.price) + "€\n                                ")])]);
-  }), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
-  }, [_c("h5", {
-    staticClass: "total-sum",
-    attrs: {
-      "v-bind": _vm.totalCost
-    }
-  }, [_vm._v("\n                                    Totale: " + _vm._s(_vm.totalCost) + "€\n                                ")])])], 2)])])])]) : _vm._e()])]);
+  }, [_vm._v("\n                                                Purchase\n                                            ")])])])])])])])])])]) : _vm._e()])]);
 };
 
 var staticRenderFns = [function () {
@@ -3391,14 +3391,14 @@ var staticRenderFns = [function () {
 
   return _c("div", {
     staticClass: "card-header"
-  }, [_c("h3", [_vm._v("Compila i campi")])]);
+  }, [_c("h4", [_vm._v("Riepilogo ordine:")])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
 
   return _c("div", {
     staticClass: "card-header"
-  }, [_c("h4", [_vm._v("Riepilogo ordine:")])]);
+  }, [_c("h3", [_vm._v("Compila i campi")])]);
 }];
 render._withStripped = true;
 
@@ -3557,16 +3557,19 @@ var render = function render() {
     }
   }, [_vm._v("\n                            Cancel\n                        ")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "right-col"
-  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))])])]), _vm._v(" "), _c("div", {
+  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
+    return _c("div", {
+      key: singlePlate.id,
+      staticClass: "hovered-plate-info"
+    }, [_c("h4", [_vm._v(_vm._s(singlePlate.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(singlePlate.description))])]);
+  })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "page_bottom"
   }, [_c("div", {
-    staticClass: "plate-slider"
-  }, [_c("div", {
-    staticClass: "plate-columns"
+    staticClass: "plate-columns d-flex flex-wrap my-2"
   }, _vm._l(_vm.plates, function (singlePlate) {
     return _c("div", {
       key: singlePlate.id,
-      staticClass: "plate-col"
+      staticClass: "plate-col col-4 my-2"
     }, [singlePlate.visibility === 1 ? _c("div", {
       staticClass: "plate-card"
     }, [_c("img", {
@@ -3575,15 +3578,25 @@ var render = function render() {
         src: singlePlate.cover,
         alt: singlePlate.name
       }
-    }), _vm._v(" "), _c("h5", [_vm._v(_vm._s(singlePlate.name))]), _vm._v(" "), _c("h4", [_vm._v(_vm._s(singlePlate.price))]), _vm._v(" "), _c("button", {
-      staticClass: "btn-primary rounded-circle btn-success",
+    }), _vm._v(" "), _c("div", {
+      staticClass: "info-plate"
+    }, [_c("div", {
+      staticClass: "plate-name-price"
+    }, [_c("span", [_vm._v(_vm._s(singlePlate.name) + " |\n                                " + _vm._s(singlePlate.price) + "€")])]), _vm._v(" "), _c("div", {
+      key: singlePlate.id,
+      staticClass: "info-plate-btn",
       on: {
         click: function click($event) {
           return _vm.newItem(singlePlate);
         }
       }
-    }, [_vm._v("\n                            +\n                        ")])]) : _vm._e()]);
-  }), 0)])])]);
+    }, [_c("i", {
+      staticClass: "fa fa-plus-circle",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])])]) : _vm._e()]);
+  }), 0)])]);
 };
 
 var staticRenderFns = [];
@@ -8109,7 +8122,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".menu-section[data-v-6b773735] {\n  height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735] {\n  color: white;\n  border: 2px solid white;\n  border-radius: 50%;\n  background-color: none;\n  font-size: large;\n  font-weight: 800;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735]:hover {\n  background-color: #ffcc00;\n  color: black;\n  cursor: pointer;\n  border: 2px solid black;\n}\n.cart-container .top-cart .minus-button[data-v-6b773735] {\n  padding: 2px 14px;\n}\n.cart-container .top-cart .plus-button[data-v-6b773735] {\n  padding: 3px 12px;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  height: 30vh;\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  border-top: 2px solid black;\n}\n.page_bottom .plate-slider[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  overflow-x: auto;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns[data-v-6b773735] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n.page_bottom .plate-slider .plate-columns .plate-col[data-v-6b773735] {\n  width: 33.3333333333%;\n  flex-shrink: 0;\n}\n.page_bottom .plates-card[data-v-6b773735] {\n  width: 30%;\n  border: 1px solid grey;\n}\n.page_bottom .plate-descrption[data-v-6b773735] {\n  width: 70%;\n}\n.page_bottom .plate-img[data-v-6b773735] {\n  max-height: 10vh;\n}", ""]);
+exports.push([module.i, ".menu-section[data-v-6b773735] {\n  min-height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735] {\n  color: white;\n  border: 2px solid white;\n  border-radius: 50%;\n  background-color: none;\n  font-size: large;\n  font-weight: 800;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735]:hover {\n  background-color: #ffcc00;\n  color: black;\n  cursor: pointer;\n  border: 2px solid black;\n}\n.cart-container .top-cart .minus-button[data-v-6b773735] {\n  padding: 2px 14px;\n}\n.cart-container .top-cart .plus-button[data-v-6b773735] {\n  padding: 3px 12px;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.hovered-plate-info[data-v-6b773735] {\n  display: none;\n}\n.plate-col:hover ~ .hovered-plate-info[data-v-6b773735] {\n  display: block;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  border-top: 2px solid black;\n}\n.plate-card[data-v-6b773735] {\n  border: 1px solid grey;\n  position: relative;\n  border-radius: 12px;\n}\n.plate-img[data-v-6b773735] {\n  max-width: 100%;\n  border-radius: 12px;\n}\n.info-plate[data-v-6b773735] {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-bottom-left-radius: 12px;\n  border-bottom-right-radius: 12px;\n  display: flex;\n  justify-content: space-between;\n  padding-block: 2rem;\n  padding-inline: 2rem;\n  font-size: large;\n  font-weight: 600;\n}\n.info-plate-btn[data-v-6b773735] {\n  color: white;\n  background-color: none;\n  font-size: x-large;\n  font-weight: 800;\n}\n.info-plate-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n  cursor: pointer;\n}", ""]);
 
 // exports
 

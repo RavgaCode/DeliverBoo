@@ -25,19 +25,16 @@
     
     const orders = {!! json_encode($number_of_orders->toArray()) !!};
     
-        
+        // Riempo gli array delle coordinate da stampare, utilizzando i dati passati
         const totOrdersPerMonth = [];
         const months = [];
         orders.forEach(element => {
-            console.log(element);
             months.push(`${element.month} - ${element.year}`);
             totOrdersPerMonth.push(element.orders);
         });
         
-        console.log(months);
-        console.log(totOrdersPerMonth);
-       
-       
+
+        // Funzione per caricare la tabella al caricamento della pagina
         window.onload = function() {
         var ctx = document.getElementById("canvas").getContext("2d");
         window.myBar = new Chart(ctx, {
@@ -46,7 +43,7 @@
             labels: months,
             datasets: [{
                 label: 'Numero Ordini per Mese',
-                backgroundColor: '#fba54f',
+                backgroundColor: '#6495ED',
                 data: totOrdersPerMonth,
             }]
         } ,

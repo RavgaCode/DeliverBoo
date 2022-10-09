@@ -97,42 +97,57 @@
                     facilis obcaecati culpa ullam, laborum earum.
                 </p>
                 <p>Indirizzo: {{ plates[0].user.restaurant_address }}</p>
+                <hr />
+                <!-- HOVERED PLATE INFO -->
+                <div
+                    class="hovered-plate-info"
+                    v-for="singlePlate in plates"
+                    :key="singlePlate.id"
+                >
+                    <h4>{{ singlePlate.name }}</h4>
+                    <p>{{ singlePlate.description }}</p>
+                </div>
             </div>
         </div>
+
         <!-- -------------------------------------------- -->
         <!-- PAGE BOTTOM-->
         <div class="page_bottom">
-            <!-- Plates -->
-            <div class="plate-slider">
-                <!-- PLATE COLUMNS -->
-                <div class="plate-columns">
-                    <!-- PLATE COL -->
-                    <div
-                        class="plate-col"
-                        v-for="singlePlate in plates"
-                        :key="singlePlate.id"
-                    >
-                        <!-- PLATE CARD -->
-                        <div
-                            class="plate-card"
-                            v-if="singlePlate.visibility === 1"
-                        >
-                            <!-- Cover -->
-                            <img
-                                :src="singlePlate.cover"
-                                class="plate-img"
-                                :alt="singlePlate.name"
-                            />
-                            <!-- PLATE NAME -->
-                            <h5>{{ singlePlate.name }}</h5>
-                            <!-- ADD BUTTON -->
-                            <h4>{{ singlePlate.price }}</h4>
-                            <button
+            <!-- PLATE COLUMNS -->
+            <div class="plate-columns d-flex flex-wrap my-2">
+                <!-- PLATE COL -->
+                <div
+                    class="plate-col col-4 my-2"
+                    v-for="singlePlate in plates"
+                    :key="singlePlate.id"
+                >
+                    <!-- PLATE CARD -->
+                    <div class="plate-card" v-if="singlePlate.visibility === 1">
+                        <!-- Cover -->
+                        <img
+                            :src="singlePlate.cover"
+                            class="plate-img"
+                            :alt="singlePlate.name"
+                        />
+                        <!-- INFO PLATE CONTAINER -->
+                        <div class="info-plate">
+                            <div class="plate-name-price">
+                                <span
+                                    >{{ singlePlate.name }} |
+                                    {{ singlePlate.price }}&euro;</span
+                                >
+                            </div>
+                            <!-- Info-plate-btn -->
+                            <div
                                 @click="newItem(singlePlate)"
-                                class="btn-primary rounded-circle btn-success"
+                                class="info-plate-btn"
+                                :key="singlePlate.id"
                             >
-                                +
-                            </button>
+                                <i
+                                    class="fa fa-plus-circle"
+                                    aria-hidden="true"
+                                ></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +258,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu-section {
-    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
     width: 100%;
     position: relative;
 }
@@ -324,44 +339,53 @@ export default {
         width: 50%;
     }
 }
-
+.hovered-plate-info {
+    display: none;
+}
+.plate-col:hover ~ .hovered-plate-info {
+    display: block;
+}
 .page_bottom {
     width: 100%;
-    height: 30vh;
-    position: fixed;
-    left: 0;
-    bottom: 0;
     border-top: 2px solid black;
+}
 
-    .plate-slider {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        width: 100%;
+.plate-card {
+    border: 1px solid grey;
+    position: relative;
+    border-radius: 12px;
+}
+.plate-img {
+    max-width: 100%;
+    border-radius: 12px;
+}
+.info-plate {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding-block: 2rem;
+    padding-inline: 2rem;
+    font-size: large;
+    font-weight: 600;
+}
+.info-plate-btn {
+    color: white;
+    background-color: none;
 
-        .plate-columns {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
+    font-size: x-large;
+    font-weight: 800;
 
-            .plate-col {
-                width: calc(100% / 3);
-                flex-shrink: 0;
-            }
-        }
-    }
-    .plates-card {
-        width: 30%;
-        border: 1px solid grey;
-    }
+    &:hover {
+        color: #ffcc00;
 
-    .plate-descrption {
-        width: 70%;
-    }
-
-    .plate-img {
-        max-height: 10vh;
+        cursor: pointer;
     }
 }
 </style>

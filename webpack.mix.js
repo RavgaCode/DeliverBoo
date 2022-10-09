@@ -18,5 +18,3 @@ mix.js("resources/js/app.js", "public/js")
         "node_modules/@fortawesome/fontawesome-free/webfonts",
         "public/webfonts"
     );
-
-// mix.copy("node_modules/chart.js/dist/chart.js", "public/chart.js/chart.js");
