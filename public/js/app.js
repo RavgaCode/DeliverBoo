@@ -2477,6 +2477,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RestaurantPage",
   components: {},
@@ -2493,16 +2499,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         id: singlePlate.id,
         name: singlePlate.name,
         price: singlePlate.price,
+        subTotal: singlePlate.price,
         user_id: singlePlate.user_id,
         quantity: 1
-      }; //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
+      }; // Verifico se nel carrello esiste un oggetto appartenente ad un altro ristorante. Nel caso ci fosse, chiedo conferma all'utente se vuole continuare con l'operazione che cancellerebbe il carrello presistente
+
+      if (this.cart.length > 0) {
+        if (item.user_id != this.cart[0].user_id) {
+          if (confirm("Questa azione cancellerebbe il tuo carrello. Sei sicuro di volere procedere?")) {
+            this.discardCart();
+          }
+        }
+      } //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
+
 
       var checkItemId = this.cart.find(function (product) {
         return product.id == item.id;
       }); //controllo se è già presente un item nel carrello con lo stesso id di quello appena creato, in caso affermativo ne aumento la quantità, sennò aggiungo il nuovo item al cart
 
       if (checkItemId) {
-        checkItemId.quantity++;
+        checkItemId.quantity++; //aggiorno il subtotale
+
+        checkItemId.subTotal = parseFloat("".concat(checkItemId.subTotal * 1 + checkItemId.price * 1)).toFixed(2);
       } else {
         this.cart.push(item);
       }
@@ -2516,7 +2534,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       });
 
       if (checkItemId) {
-        checkItemId.quantity--;
+        checkItemId.quantity--; //aggiorno il subtotale
+
+        checkItemId.subTotal = parseFloat("".concat(checkItemId.subTotal * 1 - checkItemId.price * 1)).toFixed(2);
 
         if (checkItemId.quantity == 0) {
           var itemIndex = this.cart.findIndex(function (element) {
@@ -2543,17 +2563,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       this.totalSum = this.cart.reduce(function (previousValor, object) {
         return parseFloat((previousValor + object.price * object.quantity).toFixed(2));
       }, 0);
+      this.payment();
+      console.log(localStorage);
     },
     getPlates: function getPlates() {
       var _this = this;
 
       axios.get("/api/restaurants/" + this.$route.params.slug).then(function (response) {
-        _this.plates = response.data.results; // if (response.data.success) {
-        //     this.plates = response.data.results;
-        // }else{
-        //     this.$router.push({name: 'error'});
-        // };
+        _this.plates = response.data.results.map(function (item) {
+          return _objectSpread(_objectSpread({}, item), {}, {
+            isVisible: false
+          });
+        });
       });
+      this.saveCart();
     },
     payment: function payment() {
       if ((typeof Storage === "undefined" ? "undefined" : _typeof(Storage)) !== undefined) {
@@ -2567,11 +2590,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
         console.log("pagamento eseguito");
       } else {
-        alert("Il browser non supporta web storage"); //mostro all'utente un messaggio di errore
+        alert("Errore con lo web storage"); //mostro all'utente un messaggio di errore
+      }
+    },
+    // saveCart() {
+    //     if (typeof Storage !== undefined) {
+    //         let getCart = localStorage.getItem("cart");
+    //         let cart = JSON.parse(getCart);
+    //         this.cart = cart;
+    //         this.cart = JSON.stringify(this.cart);
+    //         let getTotal = localStorage.getItem("totalSum");
+    //         let total = JSON.parse(getTotal);
+    //         this.totalSum = total;
+    //     }
+    // },
+    getOrder: function getOrder() {
+      if (typeof Storage !== "undefined") {
+        console.log("ordine carico");
+        var getCart = localStorage.getItem("cart");
+        var cart = JSON.parse(getCart);
+        this.order = cart;
+        this.finalCart = JSON.stringify(this.order);
+        var getTotal = localStorage.getItem("totalSum");
+        var total = JSON.parse(getTotal);
+        this.totalCost = total;
       }
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getPlates();
   }
 });
@@ -3791,7 +3837,7 @@ var render = function render() {
       staticClass: "product-name"
     }, [_vm._v("\n                                    " + _vm._s(item.name) + "\n                                ")]), _vm._v(" "), _c("div", {
       staticClass: "product-price"
-    }, [_vm._v("\n                                    " + _vm._s(item.price) + "€\n                                ")])]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                                    " + _vm._s(item.subTotal) + "€\n                                ")])]), _vm._v(" "), _c("div", {
       staticClass: "product-buttons-row d-flex justify-content-between w-100"
     }, [_c("div", {
       staticClass: "minus-button quantity-btn",
@@ -3858,7 +3904,7 @@ var render = function render() {
     }
   }, [_vm._v("\n                            Cancel\n                        ")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "right-col"
-  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
+  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("p", [_vm._v("Orari: 12-15, 18-23:30")]), _vm._v(" "), _c("p", [_vm._v("Giorni: Dal martedì alla domenica. Lunedì chiuso")]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
     return _c("div", {
       key: singlePlate.id,
       staticClass: "hovered-plate-info"
@@ -3896,11 +3942,48 @@ var render = function render() {
       attrs: {
         "aria-hidden": "true"
       }
-    })])])]) : _vm._e()]);
+    })])]), _vm._v(" "), !singlePlate.isVisible ? _c("button", {
+      staticClass: "info-plate-ingredients-btn",
+      on: {
+        click: function click($event) {
+          singlePlate.isVisible = !singlePlate.isVisible;
+        }
+      }
+    }, [_vm._v("\n                        Info\n                        "), _vm._m(0, true)]) : _vm._e(), _vm._v(" "), singlePlate.isVisible ? _c("button", {
+      staticClass: "info-plate-ingredients-btn",
+      on: {
+        click: function click($event) {
+          singlePlate.isVisible = !singlePlate.isVisible;
+        }
+      }
+    }, [_vm._v("\n                        Info\n                        "), _vm._m(1, true)]) : _vm._e(), _vm._v(" "), singlePlate.isVisible ? _c("div", {
+      key: singlePlate.id,
+      staticClass: "info-plate-ingredients"
+    }, [_c("p", [_vm._v("\n                            Ingredienti: "), _c("br"), _vm._v("\n                            " + _vm._s(singlePlate.description) + "\n                        ")])]) : _vm._e()]) : _vm._e()]);
   }), 0)])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("span", [_c("i", {
+    staticClass: "fa fa-plus-circle",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("span", [_c("i", {
+    staticClass: "fa fa-minus-circle",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]);
+}];
 render._withStripped = true;
 
 
@@ -8462,7 +8545,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".menu-section[data-v-6b773735] {\n  min-height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735] {\n  color: white;\n  border: 2px solid white;\n  border-radius: 50%;\n  background-color: none;\n  font-size: large;\n  font-weight: 800;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735]:hover {\n  background-color: #ffcc00;\n  color: black;\n  cursor: pointer;\n  border: 2px solid black;\n}\n.cart-container .top-cart .minus-button[data-v-6b773735] {\n  padding: 2px 14px;\n}\n.cart-container .top-cart .plus-button[data-v-6b773735] {\n  padding: 3px 12px;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.hovered-plate-info[data-v-6b773735] {\n  display: none;\n}\n.plate-col:hover ~ .hovered-plate-info[data-v-6b773735] {\n  display: block;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  border-top: 2px solid black;\n}\n.plate-card[data-v-6b773735] {\n  border: 1px solid grey;\n  position: relative;\n  border-radius: 12px;\n}\n.plate-img[data-v-6b773735] {\n  max-width: 100%;\n  border-radius: 12px;\n}\n.info-plate[data-v-6b773735] {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-bottom-left-radius: 12px;\n  border-bottom-right-radius: 12px;\n  display: flex;\n  justify-content: space-between;\n  padding-block: 2rem;\n  padding-inline: 2rem;\n  font-size: large;\n  font-weight: 600;\n}\n.info-plate-btn[data-v-6b773735] {\n  color: white;\n  background-color: none;\n  font-size: x-large;\n  font-weight: 800;\n}\n.info-plate-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".menu-section[data-v-6b773735] {\n  min-height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735] {\n  color: white;\n  border: 2px solid white;\n  border-radius: 50%;\n  background-color: none;\n  font-size: large;\n  font-weight: 800;\n}\n.cart-container .top-cart .quantity-btn[data-v-6b773735]:hover {\n  background-color: #ffcc00;\n  color: black;\n  cursor: pointer;\n  border: 2px solid black;\n}\n.cart-container .top-cart .minus-button[data-v-6b773735] {\n  padding: 2px 14px;\n}\n.cart-container .top-cart .plus-button[data-v-6b773735] {\n  padding: 3px 12px;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.hovered-plate-info[data-v-6b773735] {\n  display: none;\n}\n.plate-col:hover ~ .hovered-plate-info[data-v-6b773735] {\n  display: block;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  border-top: 2px solid black;\n}\n.plate-card[data-v-6b773735] {\n  border: 1px solid grey;\n  position: relative;\n  border-radius: 12px;\n}\n.plate-img[data-v-6b773735] {\n  max-width: 100%;\n  border-radius: 12px;\n}\n.info-plate[data-v-6b773735] {\n  position: absolute;\n  z-index: 3;\n  bottom: 0;\n  left: 0;\n  max-height: 100%;\n  width: 100%;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-bottom-left-radius: 12px;\n  border-bottom-right-radius: 12px;\n  display: flex;\n  justify-content: space-between;\n  padding-block: 2rem;\n  padding-inline: 2rem;\n  font-size: large;\n  font-weight: 600;\n}\n.info-plate-btn[data-v-6b773735] {\n  color: white;\n  background-color: none;\n  font-size: x-large;\n  font-weight: 800;\n}\n.info-plate-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n  cursor: pointer;\n}\n.info-plate-ingredients[data-v-6b773735] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 2;\n  height: 100%;\n  width: 100%;\n  border-radius: 12px;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.7);\n  padding: 2.5rem 2rem;\n  overflow-y: auto;\n}\n.info-plate-ingredients-btn[data-v-6b773735] {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  z-index: 4;\n  color: white;\n  background: none;\n  border: none;\n}", ""]);
 
 // exports
 
