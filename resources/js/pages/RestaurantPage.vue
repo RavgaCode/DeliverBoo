@@ -29,7 +29,7 @@
                                         {{ item.name }}
                                     </div>
                                     <div class="product-price">
-                                        {{ item.price }}&euro;
+                                        {{ item.subTotal }}&euro;
                                     </div>
                                 </div>
                                 <!-- PRODUCT BUTTONS ROW -->
@@ -97,6 +97,8 @@
                     facilis obcaecati culpa ullam, laborum earum.
                 </p>
                 <p>Indirizzo: {{ plates[0].user.restaurant_address }}</p>
+                <p>Orari: 12-15, 18-23:30</p>
+                <p>Giorni: Dal martedì alla domenica. Lunedì chiuso</p>
                 <hr />
                 <!-- HOVERED PLATE INFO -->
                 <div
@@ -137,7 +139,7 @@
                                     {{ singlePlate.price }}&euro;</span
                                 >
                             </div>
-                            <!-- Info-plate-btn -->
+                            <!-- Info-plate-btn ADD-->
                             <div
                                 @click="newItem(singlePlate)"
                                 class="info-plate-btn"
@@ -148,6 +150,49 @@
                                     aria-hidden="true"
                                 ></i>
                             </div>
+                        </div>
+                        <!-- Ingredient info btn PLUS-->
+                        <button
+                            v-if="!singlePlate.isVisible"
+                            class="info-plate-ingredients-btn"
+                            @click="
+                                singlePlate.isVisible = !singlePlate.isVisible
+                            "
+                        >
+                            Info
+                            <span
+                                ><i
+                                    class="fa fa-plus-circle"
+                                    aria-hidden="true"
+                                ></i
+                            ></span>
+                        </button>
+                        <!-- Ingredient info btn MINUS-->
+                        <button
+                            v-if="singlePlate.isVisible"
+                            class="info-plate-ingredients-btn"
+                            @click="
+                                singlePlate.isVisible = !singlePlate.isVisible
+                            "
+                        >
+                            Info
+                            <span
+                                ><i
+                                    class="fa fa-minus-circle"
+                                    aria-hidden="true"
+                                ></i
+                            ></span>
+                        </button>
+                        <!-- INFO PLATE INGREDIENTS -->
+                        <div
+                            v-if="singlePlate.isVisible"
+                            class="info-plate-ingredients"
+                            :key="singlePlate.id"
+                        >
+                            <p>
+                                Ingredienti: <br />
+                                {{ singlePlate.description }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -175,14 +220,34 @@ export default {
                 id: singlePlate.id,
                 name: singlePlate.name,
                 price: singlePlate.price,
+                subTotal: singlePlate.price,
                 user_id: singlePlate.user_id,
                 quantity: 1,
-            }; //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
+            };
+            // Verifico se nel carrello esiste un oggetto appartenente ad un altro ristorante. Nel caso ci fosse, chiedo conferma all'utente se vuole continuare con l'operazione che cancellerebbe il carrello presistente
+            if (this.cart.length > 0) {
+                if (item.user_id != this.cart[0].user_id) {
+                    if (
+                        confirm(
+                            "Questa azione cancellerebbe il tuo carrello. Sei sicuro di volere procedere?"
+                        )
+                    ) {
+                        this.discardCart();
+                    }
+                }
+            }
+
+            //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
             let checkItemId = this.cart.find(
                 (product) => product.id == item.id
-            ); //controllo se è già presente un item nel carrello con lo stesso id di quello appena creato, in caso affermativo ne aumento la quantità, sennò aggiungo il nuovo item al cart
+            );
+
+            //controllo se è già presente un item nel carrello con lo stesso id di quello appena creato, in caso affermativo ne aumento la quantità, sennò aggiungo il nuovo item al cart
             if (checkItemId) {
-                checkItemId.quantity++;
+                checkItemId.quantity++; //aggiorno il subtotale
+                checkItemId.subTotal = parseFloat(
+                    `${checkItemId.subTotal * 1 + checkItemId.price * 1}`
+                ).toFixed(2);
             } else {
                 this.cart.push(item);
             }
@@ -194,7 +259,10 @@ export default {
                 (product) => product.id == item.id
             );
             if (checkItemId) {
-                checkItemId.quantity--;
+                checkItemId.quantity--; //aggiorno il subtotale
+                checkItemId.subTotal = parseFloat(
+                    `${checkItemId.subTotal * 1 - checkItemId.price * 1}`
+                ).toFixed(2);
 
                 if (checkItemId.quantity == 0) {
                     let itemIndex = this.cart.findIndex(
@@ -223,19 +291,21 @@ export default {
                     (previousValor + object.price * object.quantity).toFixed(2)
                 );
             }, 0);
+            this.payment();
+            console.log(localStorage);
         },
+
         getPlates() {
             axios
                 .get("/api/restaurants/" + this.$route.params.slug)
                 .then((response) => {
-                    this.plates = response.data.results;
-
-                    // if (response.data.success) {
-                    //     this.plates = response.data.results;
-                    // }else{
-                    //     this.$router.push({name: 'error'});
-                    // };
+                    this.plates = response.data.results.map((item) => ({
+                        //uso map per aggiungere la variabile isVisible, che per mi servirà per lo show delle info ingredienti nelle card
+                        ...item,
+                        isVisible: false,
+                    }));
                 });
+            this.saveCart();
         },
         payment() {
             if (typeof Storage !== undefined) {
@@ -246,11 +316,35 @@ export default {
                 localStorage.setItem("totalSum", totalSum); //lo inserisco in una variabile localStorage di nome 'totalSum'
                 console.log("pagamento eseguito");
             } else {
-                alert("Il browser non supporta web storage"); //mostro all'utente un messaggio di errore
+                alert("Errore con lo web storage"); //mostro all'utente un messaggio di errore
+            }
+        },
+        // saveCart() {
+        //     if (typeof Storage !== undefined) {
+        //         let getCart = localStorage.getItem("cart");
+        //         let cart = JSON.parse(getCart);
+        //         this.cart = cart;
+        //         this.cart = JSON.stringify(this.cart);
+        //         let getTotal = localStorage.getItem("totalSum");
+        //         let total = JSON.parse(getTotal);
+        //         this.totalSum = total;
+        //     }
+        // },
+        getOrder() {
+            if (typeof Storage !== "undefined") {
+                console.log("ordine carico");
+
+                let getCart = localStorage.getItem("cart");
+                let cart = JSON.parse(getCart);
+                this.order = cart;
+                this.finalCart = JSON.stringify(this.order);
+                let getTotal = localStorage.getItem("totalSum");
+                let total = JSON.parse(getTotal);
+                this.totalCost = total;
             }
         },
     },
-    mounted() {
+    created() {
         this.getPlates();
     },
 };
@@ -361,8 +455,10 @@ export default {
 }
 .info-plate {
     position: absolute;
+    z-index: 3;
     bottom: 0;
     left: 0;
+    max-height: 100%;
     width: 100%;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
@@ -387,5 +483,27 @@ export default {
 
         cursor: pointer;
     }
+}
+.info-plate-ingredients {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2.5rem 2rem;
+    overflow-y: auto;
+}
+.info-plate-ingredients-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 4;
+    color: white;
+    background: none;
+    border: none;
 }
 </style>
