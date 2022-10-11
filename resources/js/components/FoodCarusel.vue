@@ -1,12 +1,16 @@
 <template>
-    <div class="carusel">
-        <img src="../images/ai_sushi_food_example.jpg" alt="">
-        <img src="../images/alce_nero_food_example.jpg" alt="">
-        <img src="../images/dolce_peccato_food_example.jpg" alt="">
-        <img src="../images/frittfood_food_example.jpg" alt="">
-        <img src="../images/hamerica_food_example.jpg" alt="">
-        <img src="../images/il_vegetariano_food_example.jpg" alt="">
-        <img src="../images/Pinseria_food_example.jpg" alt="">
+    <div class="carusel-section">
+        <h2 >Le ultime novità</h2>   
+        <div class="carusel">
+            
+            <img src="../images/ai_sushi_food_example.jpg" alt="">
+            <img src="../images/alce_nero_food_example.jpg" alt="">
+            <img src="../images/dolce_peccato_food_example.jpg" alt="">
+            <img src="../images/frittfood_food_example.jpg" alt="">
+            <img src="../images/hamerica_food_example.jpg" alt="">
+            <img src="../images/il_vegetariano_food_example.jpg" alt="">
+            <img src="../images/Pinseria_food_example.jpg" alt="">
+        </div>
     </div>
 </template>
 
@@ -17,6 +21,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .carusel-section {
+        text-align: center;
+        padding-top: 30px;
+    }
     .carusel {
         display: flex;
         overflow-x: overlay;
@@ -25,6 +33,10 @@ export default {
         }
     }
 
+    h2 {
+        font-size: 50px;
+        padding-bottom: 20px;
+    }
    
 
     ::-webkit-scrollbar

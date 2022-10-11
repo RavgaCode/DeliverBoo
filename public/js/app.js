@@ -2621,6 +2621,8 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "carusel-section"
+  }, [_c("h2", [_vm._v("Le ultime novità")]), _vm._v(" "), _c("div", {
     staticClass: "carusel"
   }, [_c("img", {
     attrs: {
@@ -2657,7 +2659,7 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ../images/Pinseria_food_example.jpg */ "./resources/js/images/Pinseria_food_example.jpg"),
       alt: ""
     }
-  })]);
+  })])]);
 }];
 render._withStripped = true;
 
@@ -8306,7 +8308,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".carusel[data-v-dd508680] {\n  display: flex;\n  overflow-x: overlay;\n}\n.carusel img[data-v-dd508680] {\n  width: 25%;\n}\n[data-v-dd508680]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-dd508680]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}", ""]);
+exports.push([module.i, ".carusel-section[data-v-dd508680] {\n  text-align: center;\n  padding-top: 30px;\n}\n.carusel[data-v-dd508680] {\n  display: flex;\n  overflow-x: overlay;\n}\n.carusel img[data-v-dd508680] {\n  width: 25%;\n}\nh2[data-v-dd508680] {\n  font-size: 50px;\n  padding-bottom: 20px;\n}\n[data-v-dd508680]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-dd508680]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}", ""]);
 
 // exports
 

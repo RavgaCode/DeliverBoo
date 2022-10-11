@@ -264,6 +264,7 @@ label {
 ::-webkit-scrollbar
 {
     background-color: #f5f5f523;
+    
 }
 
 ::-webkit-scrollbar-thumb
@@ -271,4 +272,6 @@ label {
     background-color: #000000bb;
     border-radius: 20px;
 }
+
+
 </style>
