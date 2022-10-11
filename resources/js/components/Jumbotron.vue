@@ -1,26 +1,29 @@
 <template>
   <div class="jumbo">
         <div class="wrap">
-            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 content">
+            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 d-flex justify-content-center content">
                 <!-- Textual Content -->
-                <div class="col slogan">
+                <div class="col-6 slogan">
                     <h1>I piatti che ami, a domicilio.</h1>
-
-                    <div class="search">
-                        <h4>Cerca il tuo ristorante preferito!</h4>
-                        <input type="text" placeholder="McDonalds..">
-                    </div>
                 </div>
+
+
                 <!-- Image -->
-                <div class="col img d-none d-sm-none d-md-none d-lg-block">
+                <div class="col-6 col-md4 img d-none d-sm-none d-md-none d-lg-block">
                     <img src="../images/food-grass-fed-beef-foodservice-products-grass-run-farms-4.png" alt="jumbo image">
                 </div>
+
+
                 <!-- Arrows -->
          
-                <div class="arrow-down d-sm-none d-none d-md-block d-lg-block">
-                    <div class="left"></div>
-                    <div class="right"></div>
-                </div>
+                <a href="#search">
+
+                    <div class=" col arrow-down d-sm-none d-none d-md-block d-lg-block">
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </div>
+
+                </a>
                 
             </div>
         </div>
@@ -43,6 +46,9 @@ export default {
        .wrap {
             width: 90%;
             margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
             .slogan {
                 /* margin: 100px 0; */
                 color: white;
@@ -55,8 +61,6 @@ export default {
                 }
             }
             .content {
-                padding-top: 30px;
-                display: flex;
                 align-items: center;
             }
         }
