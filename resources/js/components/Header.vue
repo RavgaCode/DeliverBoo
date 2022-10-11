@@ -5,7 +5,7 @@
             <img src="../images/Deliver-removebg-preview.png" alt="logo" />
         </div>
 
-        <!-- menu links -->
+        <!-- menu links
         <div class="menu-links">
             <ul
                 class="list-unstyled d-lg-flex d-md-none d-sm-none d-none links"
@@ -20,7 +20,7 @@
                     }}</router-link>
                 </li>
             </ul>
-        </div>
+        </div> -->
 
         <!-- Buttons -->
         <div class="buttons d-lg-flex d-md-none d-sm-none d-none links">
@@ -48,7 +48,7 @@
                     'd-block': this.isActive === true,
                 }"
             >
-                <li
+                <!-- <li
                     v-for="(link, index) in menuLinks"
                     :key="index"
                     class="nav-item"
@@ -56,7 +56,7 @@
                     <router-link class="nav-link" :to="link.routeName">{{
                         link.labelName
                     }}</router-link>
-                </li>
+                </li> -->
                 <li>
                     <a href="#" @click="login()" class="btn login">Login</a>
                 </li>

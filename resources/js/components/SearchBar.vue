@@ -1,40 +1,48 @@
 <template>
-    <section class="search-bar">
+    <section class="search-bar" id="search">
         <div class="container">
-            <!-- Text Searchbar -->
-            <div class="text-searchbar-container">
-                <label for="text-searchbar"></label>
-                <input
-                    type="text"
-                    id="text-searchbar"
-                    name="text-searchbar"
-                    v-model="searchValue"
-                    @keyup="search()"
-                    placeholder="Cerca il tuo ristorante preferito"
-                />
-            </div>
-            <!-- Category Filters -->
-            <div class="filters-container d-flex">
-                <div
-                    class="filter-box"
-                    v-for="category in categories"
-                    :key="category.id"
-                >
-                    <label :for="category.id">{{ category.name }}</label>
-                    <input
-                        @change="getRestaurants()"
-                        type="checkbox"
-                        v-model="selectedCategories"
-                        :id="category.id"
-                        :name="category.id"
-                        :value="category.id"
-                    />
+            <h2>I tuoi ristoranti preferiti</h2>
+            <div class="search-section">
+                <!-- Text Searchbar -->
+                <div class="text-searchbar-container">
+                     <div class="input-group">
+                        
+                        <input type="search" id="text-searchbar" name="text-searchbar" class="form-control" @keyup="search()" v-model="searchValue"  placeholder="Cerca il tuo ristorante preferito"/>
+                        <label class="form-label" for="text-searchbar"></label>
+                    
+                        <button type="button" class="btn-search btn-dark" @click="search()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Category Filters -->
+                <div class="filters-container d-flex">
+                    <div
+                        class="filter-box"
+                        v-for="category in categories"
+                        :key="category.id"
+                    >   
+                        <input
+                            @change="getRestaurants()"
+                            type="checkbox"
+                            v-model="selectedCategories"
+                            :id="category.id"
+                            :name="category.id"
+                            :value="category.id"
+                            class = "filter"
+
+                        />
+                        <label :for="category.id">{{ category.name }}</label>
+                        
+                    </div>
                 </div>
             </div>
-            <div class="cards">
+        </div>
+
+        <div class="cards container">
                 <!-- Restaurants Card Wrapper -->
                 <div
-                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 row-cols-sm-1 g-2"
+                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 g-2"
                 >
                     <!-- card -->
                     <div
@@ -61,7 +69,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 </template>
 
@@ -73,7 +80,8 @@ export default {
             categories: [],
             restaurants: [],
             selectedCategories: [],
-            searchValue: ''
+            searchValue: '',
+            // isActive: false,
         };
     },
     watch: {
@@ -119,6 +127,8 @@ export default {
                         console.log(error);
                     });
             }
+
+            
         },
 
         search() {
@@ -133,7 +143,16 @@ export default {
                         this.restaurants = response.data.results;
                     }
                 })
-        }
+        },
+
+        // active(i) {
+        //     // if(i === 1) {
+        //     //     this.isActive = true
+        //     // }
+
+        //     selectedCategories
+            
+        // }
     },
 
     mounted() {
@@ -147,10 +166,34 @@ export default {
 .search-bar {
     padding-top: 40px;
     background-color: rgb(255, 204, 0);
-    height: 800px;
+    height: 900px;
     margin-bottom: 20px;
-    overflow-y: auto;
+  
+ 
 
+    .text-searchbar-container {
+        width: 30%;
+    }
+
+    .btn-search {
+        padding: 0 30px;
+        background-color: rgb(0, 0, 0);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border: none;
+        box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;;
+    }
+
+    .filter-box {
+        padding: 10px;
+        label {
+            margin-right: 10px;
+        }
+    }
+
+    .filter {
+            display: none;
+    }
     .card {
         background-color: transparent;
         border: none;
@@ -195,5 +238,37 @@ export default {
         margin-top: 20px;
         margin-right: 15px;
     }
+    
+}
+
+label {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.filter:checked + label {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+
+.search-section {
+    box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);    
+}
+
+.cards {
+    height: 80%;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar
+{
+    background-color: #f5f5f523;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #000000bb;
+    border-radius: 20px;
 }
 </style>
