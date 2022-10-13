@@ -27,7 +27,12 @@
                                             @click="deleteItem(item)"
                                             class="minus-button quantity-btn"
                                         >
-                                            -
+                                            <a href="#"
+                                                ><i
+                                                    class="fa fa-minus-circle"
+                                                    aria-hidden="true"
+                                                ></i
+                                            ></a>
                                         </div>
 
                                         <div class="quantity">
@@ -37,12 +42,16 @@
                                             @click="newItem(item)"
                                             class="plus-button quantity-btn"
                                         >
-                                            +
+                                            <a href="#"
+                                                ><i
+                                                    class="fa fa-plus-circle"
+                                                    aria-hidden="true"
+                                                ></i
+                                            ></a>
                                         </div>
                                     </div>
                                     <div class="product-name">
-                                        {{ item.name }} ({{ item.price }}
-                                        &euro;)
+                                        {{ item.name }}
                                     </div>
                                     <div class="product-price">
                                         {{ item.subTotal }}&euro;
@@ -52,23 +61,15 @@
                                 <div
                                     class="product-buttons-row d-flex justify-content-between w-100"
                                 >
-                                    <div
-                                        @click="deleteItem(item)"
-                                        class="minus-button quantity-btn"
-                                    >
-                                        -
-                                    </div>
                                     <button
                                         @click="removeItemTotally(item)"
                                         class="remove-button btn-primary btn-danger rounded-pill"
                                     >
                                         remove
                                     </button>
-                                    <div
-                                        @click="newItem(item)"
-                                        class="plus-button quantity-btn"
-                                    >
-                                        +
+                                    <div>
+                                        ({{ item.price }}
+                                        &euro;)
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +227,6 @@ export default {
         return {
             plates: [],
             cart: [],
-            savedCart: null,
             totalSum: null,
         };
     },
@@ -335,28 +335,28 @@ export default {
                 console.log("pagamento eseguito");
             }
         },
-        savedCart() {
-            if (localStorage.getItem("cart")) {
-                try {
-                    //Trasformalo in stringa
-                    this.cart = JSON.parse(localStorage.getItem("cart"));
-                    this.totalSum = JSON.parse(
-                        localStorage.getItem("totalSum")
-                    );
-                } catch (e) {
-                    //Altrimenti rimuovi cart da localStorage
-                    localStorage.removeItem("cart");
-                    localStorage.removeItem("totalSum");
-                }
-            }
-        },
+        // savedCart() {
+        //     if (localStorage.getItem("cart")) {
+        //         try {
+        //             //Trasformalo in stringa
+        //             this.cart = JSON.parse(localStorage.getItem("cart"));
+        //             this.totalSum = JSON.parse(
+        //                 localStorage.getItem("totalSum")
+        //             );
+        //         } catch (e) {
+        //             //Altrimenti rimuovi cart da localStorage
+        //             localStorage.removeItem("cart");
+        //             localStorage.removeItem("totalSum");
+        //         }
+        //     }
+        // },
         // async mounted() {
         //     await this.savedCart();
         // },
-        created() {
-            this.getPlates();
-            this.savedCart();
-        },
+    },
+    created() {
+        this.getPlates();
+        // this.savedCart();
     },
 };
 </script>
