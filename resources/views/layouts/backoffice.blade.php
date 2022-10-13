@@ -27,8 +27,11 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md flex-md-nowrap p-3 fixed-top">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="/#">Deliveboo</a>
+        <nav class="navbar navbar-expand-md flex-md-nowrap p-1 fixed-top">
+            <div class="logo">
+                <img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo">
+            </div>
+           
             <ul class="navbar-nav px-3 ml-auto">
                 <li class="nav-item">
                     <a class="nav-link logout" href="{{ route('logout') }}"
@@ -44,7 +47,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row mt-5">
-                <nav class="col-md-2 d-none d-md-block bg-dark sidebar py-4 position-fixed">
+                <nav class="col-md-2 d-none d-md-block sidebar py-4 position-fixed">
                     <div class="sidebar-sticky left-navbar-admin">
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item-admin">
@@ -113,7 +116,7 @@
                     </div>
                 </nav>
     
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4 mt-5">
                     @yield('content')
                 </main>
             </div>
