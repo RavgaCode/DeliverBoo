@@ -121,7 +121,7 @@ nav {
     }
     .logo {
         img {
-            width: 35%;
+            width: 95px;
         }
     }
     a {

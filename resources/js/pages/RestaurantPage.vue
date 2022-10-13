@@ -23,28 +23,35 @@
                                     class="product-row d-flex justify-content-between"
                                 >
                                     <div class="product-quantity d-flex">
-                                        <div
-                                            @click="deleteItem(item)"
-                                            class="minus-button quantity-btn"
-                                        >
-                                            -
+                                        <div @click="deleteItem(item)">
+                                            <a
+                                                href="#"
+                                                class="quantity-cart-btn"
+                                                ><i
+                                                    class="fa fa-minus-circle"
+                                                    aria-hidden="true"
+                                                ></i
+                                            ></a>
                                         </div>
 
                                         <div class="quantity">
                                             X{{ item.quantity }}
                                         </div>
-                                        <div
-                                            @click="newItem(item)"
-                                            class="plus-button quantity-btn"
-                                        >
-                                            +
+                                        <div @click="newItem(item)">
+                                            <a
+                                                href="#"
+                                                class="quantity-cart-btn"
+                                                ><i
+                                                    class="fa fa-plus-circle"
+                                                    aria-hidden="true"
+                                                ></i
+                                            ></a>
                                         </div>
                                     </div>
                                     <div class="product-name">
-                                        {{ item.name }} ({{ item.price }}
-                                        &euro;)
+                                        {{ item.name }}
                                     </div>
-                                    <div class="product-price">
+                                    <div class="product-cart-subtotal">
                                         {{ item.subTotal }}&euro;
                                     </div>
                                 </div>
@@ -52,23 +59,22 @@
                                 <div
                                     class="product-buttons-row d-flex justify-content-between w-100"
                                 >
-                                    <div
-                                        @click="deleteItem(item)"
-                                        class="minus-button quantity-btn"
-                                    >
-                                        -
-                                    </div>
-                                    <button
+                                    <a
+                                        href="#"
                                         @click="removeItemTotally(item)"
-                                        class="remove-button btn-primary btn-danger rounded-pill"
+                                        class="remove-button"
                                     >
-                                        remove
-                                    </button>
+                                        <i
+                                            class="fa fa-trash"
+                                            aria-hidden="true"
+                                        ></i>
+                                    </a>
                                     <div
-                                        @click="newItem(item)"
-                                        class="plus-button quantity-btn"
+                                        v-if="item.quantity > 1"
+                                        class="product-cart-price"
                                     >
-                                        +
+                                        ({{ item.price }}
+                                        &euro;)
                                     </div>
                                 </div>
                             </div>
@@ -81,6 +87,13 @@
                             >
                                 Totale: {{ totalSum }}&euro;
                             </h5>
+                            <span
+                                @click="discardCart()"
+                                class="discard-cart-button"
+                                v-show="cart.length > 0"
+                            >
+                                Cancel
+                            </span>
                             <a
                                 tag="button"
                                 @click="payment()"
@@ -91,13 +104,6 @@
                             >
                                 Pay
                             </a>
-                            <span
-                                @click="discardCart()"
-                                class="discard-cart-button"
-                                v-show="cart.length > 0"
-                            >
-                                Cancel
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -155,10 +161,10 @@
                                     {{ singlePlate.price }}&euro;</span
                                 >
                             </div>
-                            <!-- Info-plate-btn ADD-->
+                            <!-- ADD-plate-btn-->
                             <div
                                 @click="newItem(singlePlate)"
-                                class="info-plate-btn"
+                                class="add-plate-btn"
                                 :key="singlePlate.id"
                             >
                                 <i
@@ -226,7 +232,7 @@ export default {
         return {
             plates: [],
             cart: [],
-            savedCart: null,
+            savCart: null,
             totalSum: null,
         };
     },
@@ -250,6 +256,8 @@ export default {
                         )
                     ) {
                         this.discardCart();
+                    } else {
+                        return;
                     }
                 }
             }
@@ -316,6 +324,7 @@ export default {
             axios
                 .get("/api/restaurants/" + this.$route.params.slug)
                 .then((response) => {
+                    console.log(response.data.results);
                     this.plates = response.data.results.map((item) => ({
                         //uso map per aggiungere la variabile isVisible, che per mi servirà per lo show delle info ingredienti nelle card
                         ...item,
@@ -353,10 +362,10 @@ export default {
         // async mounted() {
         //     await this.savedCart();
         // },
-        created() {
-            this.getPlates();
-            this.savedCart();
-        },
+    },
+
+    created() {
+        this.getPlates(), this.savedCart();
     },
 };
 </script>
@@ -370,12 +379,13 @@ export default {
 .cart-container {
     width: 400px;
     color: white;
-    border: 2px solid white;
     border-radius: 15px;
-    background-image: url("http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg");
-    box-shadow: 3px 3px 3px 5px black;
+    background-image: url("../images/back.png");
+    background-size: cover;
+    border: 2px solid black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     .cart-title {
-        font-style: italic;
         padding-block: 1rem;
     }
 
@@ -387,28 +397,23 @@ export default {
         .product-row {
             width: 100%;
         }
-        // .quantity-btn {
-        //     color: white;
-        //     border: 2px solid white;
-        //     border-radius: 50%;
-        //     background-color: none;
+        .quantity {
+            padding-inline: 0.5rem;
+        }
+        .quantity-cart-btn {
+            color: white;
+            font-size: larger;
 
-        //     font-size: large;
-        //     font-weight: 800;
-
-        //     &:hover {
-        //         background-color: #ffcc00;
-        //         color: black;
-        //         cursor: pointer;
-        //         border: 2px solid black;
-        //     }
-        // }
-        // .minus-button {
-        //     padding: 2px 14px;
-        // }
-        // .plus-button {
-        //     padding: 3px 12px;
-        // }
+            &:hover {
+                color: #ffcc00;
+            }
+        }
+        .remove-button {
+            color: #cc5500;
+        }
+        .product-cart-price {
+            font-size: smaller;
+        }
     }
     .bottom-cart {
         padding-block: 0.3rem;
@@ -482,7 +487,7 @@ export default {
     font-size: large;
     font-weight: 600;
 }
-.info-plate-btn {
+.add-plate-btn {
     color: white;
     background-color: none;
 
@@ -516,5 +521,9 @@ export default {
     color: white;
     background: none;
     border: none;
+
+    &:hover {
+        color: #ffcc00;
+    }
 }
 </style>
