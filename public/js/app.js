@@ -2398,8 +2398,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   created: function created() {
-    this.getOrder();
-    this.getToken();
+    this.getOrder(), this.getToken();
   }
 });
 
@@ -2487,6 +2486,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (item.user_id != this.cart[0].user_id) {
           if (confirm("Questa azione cancellerebbe il tuo carrello. Sei sicuro di volere procedere?")) {
             this.discardCart();
+          } else {
+            return;
           }
         }
       } //creo un oggetto con i valori presi dal piatto e stabilisco una quantità iniziale di 1
@@ -3765,7 +3766,7 @@ var render = function render() {
 
   return _c("section", {
     staticClass: "menu-section"
-  }, [_c("p", [_vm._v("prova")]), _vm._v(" "), _c("div", {
+  }, [_c("div", {
     staticClass: "page-top"
   }, [_c("div", {
     staticClass: "left-col"
@@ -3786,7 +3787,6 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "product-quantity d-flex"
     }, [_c("div", {
-      staticClass: "minus-button quantity-btn",
       on: {
         click: function click($event) {
           return _vm.deleteItem(item);
@@ -3795,7 +3795,6 @@ var render = function render() {
     }, [_vm._m(0, true)]), _vm._v(" "), _c("div", {
       staticClass: "quantity"
     }, [_vm._v("\n                                        X" + _vm._s(item.quantity) + "\n                                    ")]), _vm._v(" "), _c("div", {
-      staticClass: "plus-button quantity-btn",
       on: {
         click: function click($event) {
           return _vm.newItem(item);
@@ -3804,17 +3803,27 @@ var render = function render() {
     }, [_vm._m(1, true)])]), _vm._v(" "), _c("div", {
       staticClass: "product-name"
     }, [_vm._v("\n                                    " + _vm._s(item.name) + "\n                                ")]), _vm._v(" "), _c("div", {
-      staticClass: "product-price"
+      staticClass: "product-cart-subtotal"
     }, [_vm._v("\n                                    " + _vm._s(item.subTotal) + "€\n                                ")])]), _vm._v(" "), _c("div", {
       staticClass: "product-buttons-row d-flex justify-content-between w-100"
-    }, [_c("button", {
-      staticClass: "remove-button btn-primary btn-danger rounded-pill",
+    }, [_c("a", {
+      staticClass: "remove-button",
+      attrs: {
+        href: "#"
+      },
       on: {
         click: function click($event) {
           return _vm.removeItemTotally(item);
         }
       }
-    }, [_vm._v("\n                                    remove\n                                ")]), _vm._v(" "), _c("div", [_vm._v("\n                                    (" + _vm._s(item.price) + "\n                                    €)\n                                ")])])]);
+    }, [_c("i", {
+      staticClass: "fa fa-trash",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })]), _vm._v(" "), item.quantity > 1 ? _c("div", {
+      staticClass: "product-cart-price"
+    }, [_vm._v("\n                                    (" + _vm._s(item.price) + "\n                                    €)\n                                ")]) : _vm._e()])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "bottom-cart"
   }, [_c("h5", {
@@ -3825,7 +3834,20 @@ var render = function render() {
       expression: "cart.length > 0"
     }],
     staticClass: "total-price text-center"
-  }, [_vm._v("\n                            Totale: " + _vm._s(_vm.totalSum) + "€\n                        ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                            Totale: " + _vm._s(_vm.totalSum) + "€\n                        ")]), _vm._v(" "), _c("span", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.cart.length > 0,
+      expression: "cart.length > 0"
+    }],
+    staticClass: "discard-cart-button",
+    on: {
+      click: function click($event) {
+        return _vm.discardCart();
+      }
+    }
+  }, [_vm._v("\n                            Cancel\n                        ")]), _vm._v(" "), _c("a", {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -3843,20 +3865,7 @@ var render = function render() {
         return _vm.payment();
       }
     }
-  }, [_vm._v("\n                            Pay\n                        ")]), _vm._v(" "), _c("span", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: _vm.cart.length > 0,
-      expression: "cart.length > 0"
-    }],
-    staticClass: "discard-cart-button",
-    on: {
-      click: function click($event) {
-        return _vm.discardCart();
-      }
-    }
-  }, [_vm._v("\n                            Cancel\n                        ")])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                            Pay\n                        ")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "right-col"
   }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("p", [_vm._v("Orari: 12-15, 18-23:30")]), _vm._v(" "), _c("p", [_vm._v("Giorni: Dal martedì alla domenica. Lunedì chiuso")]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
     return _c("div", {
@@ -3885,7 +3894,7 @@ var render = function render() {
       staticClass: "plate-name-price"
     }, [_c("span", [_vm._v(_vm._s(singlePlate.name) + " |\n                                " + _vm._s(singlePlate.price) + "€")])]), _vm._v(" "), _c("div", {
       key: singlePlate.id,
-      staticClass: "info-plate-btn",
+      staticClass: "add-plate-btn",
       on: {
         click: function click($event) {
           return _vm.newItem(singlePlate);
@@ -3922,6 +3931,7 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("a", {
+    staticClass: "quantity-cart-btn",
     attrs: {
       href: "#"
     }
@@ -3936,6 +3946,7 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("a", {
+    staticClass: "quantity-cart-btn",
     attrs: {
       href: "#"
     }
@@ -8541,12 +8552,13 @@ exports.push([module.i, "ul[data-v-24498307] {\n  list-style-type: none;\n  marg
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, ".menu-section[data-v-6b773735] {\n  min-height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border: 2px solid white;\n  border-radius: 15px;\n  background-image: url(\"http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg\");\n  box-shadow: 3px 3px 3px 5px black;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  font-style: italic;\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.hovered-plate-info[data-v-6b773735] {\n  display: none;\n}\n.plate-col:hover ~ .hovered-plate-info[data-v-6b773735] {\n  display: block;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  border-top: 2px solid black;\n}\n.plate-card[data-v-6b773735] {\n  border: 1px solid grey;\n  position: relative;\n  border-radius: 12px;\n}\n.plate-img[data-v-6b773735] {\n  max-width: 100%;\n  border-radius: 12px;\n}\n.info-plate[data-v-6b773735] {\n  position: absolute;\n  z-index: 3;\n  bottom: 0;\n  left: 0;\n  max-height: 100%;\n  width: 100%;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-bottom-left-radius: 12px;\n  border-bottom-right-radius: 12px;\n  display: flex;\n  justify-content: space-between;\n  padding-block: 2rem;\n  padding-inline: 2rem;\n  font-size: large;\n  font-weight: 600;\n}\n.info-plate-btn[data-v-6b773735] {\n  color: white;\n  background-color: none;\n  font-size: x-large;\n  font-weight: 800;\n}\n.info-plate-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n  cursor: pointer;\n}\n.info-plate-ingredients[data-v-6b773735] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 2;\n  height: 100%;\n  width: 100%;\n  border-radius: 12px;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.7);\n  padding: 2.5rem 2rem;\n  overflow-y: auto;\n}\n.info-plate-ingredients-btn[data-v-6b773735] {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  z-index: 4;\n  color: white;\n  background: none;\n  border: none;\n}", ""]);
+exports.push([module.i, ".menu-section[data-v-6b773735] {\n  min-height: calc(100vh - 80px);\n  width: 100%;\n  position: relative;\n}\n.cart-container[data-v-6b773735] {\n  width: 400px;\n  color: white;\n  border-radius: 15px;\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  border: 2px solid black;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;\n}\n.cart-container .cart-title[data-v-6b773735] {\n  padding-block: 1rem;\n}\n.cart-container .top-cart[data-v-6b773735] {\n  height: 35vh;\n  overflow-y: auto;\n  padding-inline: 10px;\n}\n.cart-container .top-cart .product-row[data-v-6b773735] {\n  width: 100%;\n}\n.cart-container .top-cart .quantity[data-v-6b773735] {\n  padding-inline: 0.5rem;\n}\n.cart-container .top-cart .quantity-cart-btn[data-v-6b773735] {\n  color: white;\n  font-size: larger;\n}\n.cart-container .top-cart .quantity-cart-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n}\n.cart-container .top-cart .remove-button[data-v-6b773735] {\n  color: #cc5500;\n}\n.cart-container .top-cart .product-cart-price[data-v-6b773735] {\n  font-size: smaller;\n}\n.cart-container .bottom-cart[data-v-6b773735] {\n  padding-block: 0.3rem;\n  height: 10vh;\n}\n.cart-container .bottom-cart .payment-button[data-v-6b773735] {\n  display: inline-block;\n  text-decoration: none;\n  background-color: #ffcc00;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.cart-container .bottom-cart .discard-cart-button[data-v-6b773735] {\n  display: inline-block;\n  cursor: pointer;\n  background-color: #cc5500;\n  color: black;\n  padding: 7px 18px;\n  border-radius: 5px;\n}\n.page-top[data-v-6b773735] {\n  display: flex;\n  padding: 2rem;\n}\n.page-top .left-col[data-v-6b773735] {\n  width: 50%;\n}\n.page-top .right-col[data-v-6b773735] {\n  width: 50%;\n}\n.hovered-plate-info[data-v-6b773735] {\n  display: none;\n}\n.plate-col:hover ~ .hovered-plate-info[data-v-6b773735] {\n  display: block;\n}\n.page_bottom[data-v-6b773735] {\n  width: 100%;\n  border-top: 2px solid black;\n}\n.plate-card[data-v-6b773735] {\n  border: 1px solid grey;\n  position: relative;\n  border-radius: 12px;\n}\n.plate-img[data-v-6b773735] {\n  max-width: 100%;\n  border-radius: 12px;\n}\n.info-plate[data-v-6b773735] {\n  position: absolute;\n  z-index: 3;\n  bottom: 0;\n  left: 0;\n  max-height: 100%;\n  width: 100%;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.5);\n  border-bottom-left-radius: 12px;\n  border-bottom-right-radius: 12px;\n  display: flex;\n  justify-content: space-between;\n  padding-block: 2rem;\n  padding-inline: 2rem;\n  font-size: large;\n  font-weight: 600;\n}\n.add-plate-btn[data-v-6b773735] {\n  color: white;\n  background-color: none;\n  font-size: x-large;\n  font-weight: 800;\n}\n.add-plate-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n  cursor: pointer;\n}\n.info-plate-ingredients[data-v-6b773735] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 2;\n  height: 100%;\n  width: 100%;\n  border-radius: 12px;\n  color: white;\n  background-color: rgba(0, 0, 0, 0.7);\n  padding: 2.5rem 2rem;\n  overflow-y: auto;\n}\n.info-plate-ingredients-btn[data-v-6b773735] {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  z-index: 4;\n  color: white;\n  background: none;\n  border: none;\n}\n.info-plate-ingredients-btn[data-v-6b773735]:hover {\n  color: #ffcc00;\n}", ""]);
 
 // exports
 
@@ -57573,8 +57585,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

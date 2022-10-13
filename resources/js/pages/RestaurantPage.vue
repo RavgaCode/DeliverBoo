@@ -1,6 +1,5 @@
 <template>
     <section class="menu-section">
-        <p>prova</p>
         <!-- Page-top -->
         <div class="page-top">
             <!-- ----------------------------------------------------- -->
@@ -24,11 +23,10 @@
                                     class="product-row d-flex justify-content-between"
                                 >
                                     <div class="product-quantity d-flex">
-                                        <div
-                                            @click="deleteItem(item)"
-                                            class="minus-button quantity-btn"
-                                        >
-                                            <a href="#"
+                                        <div @click="deleteItem(item)">
+                                            <a
+                                                href="#"
+                                                class="quantity-cart-btn"
                                                 ><i
                                                     class="fa fa-minus-circle"
                                                     aria-hidden="true"
@@ -39,11 +37,10 @@
                                         <div class="quantity">
                                             X{{ item.quantity }}
                                         </div>
-                                        <div
-                                            @click="newItem(item)"
-                                            class="plus-button quantity-btn"
-                                        >
-                                            <a href="#"
+                                        <div @click="newItem(item)">
+                                            <a
+                                                href="#"
+                                                class="quantity-cart-btn"
                                                 ><i
                                                     class="fa fa-plus-circle"
                                                     aria-hidden="true"
@@ -54,7 +51,7 @@
                                     <div class="product-name">
                                         {{ item.name }}
                                     </div>
-                                    <div class="product-price">
+                                    <div class="product-cart-subtotal">
                                         {{ item.subTotal }}&euro;
                                     </div>
                                 </div>
@@ -62,13 +59,20 @@
                                 <div
                                     class="product-buttons-row d-flex justify-content-between w-100"
                                 >
-                                    <button
+                                    <a
+                                        href="#"
                                         @click="removeItemTotally(item)"
-                                        class="remove-button btn-primary btn-danger rounded-pill"
+                                        class="remove-button"
                                     >
-                                        remove
-                                    </button>
-                                    <div>
+                                        <i
+                                            class="fa fa-trash"
+                                            aria-hidden="true"
+                                        ></i>
+                                    </a>
+                                    <div
+                                        v-if="item.quantity > 1"
+                                        class="product-cart-price"
+                                    >
                                         ({{ item.price }}
                                         &euro;)
                                     </div>
@@ -83,6 +87,13 @@
                             >
                                 Totale: {{ totalSum }}&euro;
                             </h5>
+                            <span
+                                @click="discardCart()"
+                                class="discard-cart-button"
+                                v-show="cart.length > 0"
+                            >
+                                Cancel
+                            </span>
                             <a
                                 tag="button"
                                 @click="payment()"
@@ -93,13 +104,6 @@
                             >
                                 Pay
                             </a>
-                            <span
-                                @click="discardCart()"
-                                class="discard-cart-button"
-                                v-show="cart.length > 0"
-                            >
-                                Cancel
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -157,10 +161,10 @@
                                     {{ singlePlate.price }}&euro;</span
                                 >
                             </div>
-                            <!-- Info-plate-btn ADD-->
+                            <!-- ADD-plate-btn-->
                             <div
                                 @click="newItem(singlePlate)"
-                                class="info-plate-btn"
+                                class="add-plate-btn"
                                 :key="singlePlate.id"
                             >
                                 <i
@@ -252,6 +256,8 @@ export default {
                         )
                     ) {
                         this.discardCart();
+                    } else {
+                        return;
                     }
                 }
             }
@@ -359,8 +365,7 @@ export default {
     },
 
     created() {
-        this.getPlates(), 
-        this.savedCart()
+        this.getPlates(), this.savedCart();
     },
 };
 </script>
@@ -374,12 +379,13 @@ export default {
 .cart-container {
     width: 400px;
     color: white;
-    border: 2px solid white;
     border-radius: 15px;
-    background-image: url("http://www.zingerbugimages.com/backgrounds/black_abstract_stone_pattern_tileable.jpg");
-    box-shadow: 3px 3px 3px 5px black;
+    background-image: url("../images/back.png");
+    background-size: cover;
+    border: 2px solid black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     .cart-title {
-        font-style: italic;
         padding-block: 1rem;
     }
 
@@ -391,28 +397,23 @@ export default {
         .product-row {
             width: 100%;
         }
-        // .quantity-btn {
-        //     color: white;
-        //     border: 2px solid white;
-        //     border-radius: 50%;
-        //     background-color: none;
+        .quantity {
+            padding-inline: 0.5rem;
+        }
+        .quantity-cart-btn {
+            color: white;
+            font-size: larger;
 
-        //     font-size: large;
-        //     font-weight: 800;
-
-        //     &:hover {
-        //         background-color: #ffcc00;
-        //         color: black;
-        //         cursor: pointer;
-        //         border: 2px solid black;
-        //     }
-        // }
-        // .minus-button {
-        //     padding: 2px 14px;
-        // }
-        // .plus-button {
-        //     padding: 3px 12px;
-        // }
+            &:hover {
+                color: #ffcc00;
+            }
+        }
+        .remove-button {
+            color: #cc5500;
+        }
+        .product-cart-price {
+            font-size: smaller;
+        }
     }
     .bottom-cart {
         padding-block: 0.3rem;
@@ -486,7 +487,7 @@ export default {
     font-size: large;
     font-weight: 600;
 }
-.info-plate-btn {
+.add-plate-btn {
     color: white;
     background-color: none;
 
@@ -520,5 +521,9 @@ export default {
     color: white;
     background: none;
     border: none;
+
+    &:hover {
+        color: #ffcc00;
+    }
 }
 </style>
