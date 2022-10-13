@@ -2,7 +2,9 @@
     <nav class="d-flex">
         <!-- logo -->
         <div class="logo">
-            <img src="../images/Deliver-removebg-preview.png" alt="logo" />
+            <a href="/#"
+                ><img src="../images/Deliver-removebg-preview.png" alt="logo"
+            /></a>
         </div>
 
         <!-- Buttons -->

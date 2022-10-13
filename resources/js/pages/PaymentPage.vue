@@ -302,11 +302,11 @@ export default {
                         this.success = true;
                         this.unsuccess = false;
                         // svuoto i campi
-                        this.name = "";
-                        this.tel = "";
-                        this.email = "";
-                        this.address = "";
-                        this.errors = {};
+                        // this.name = "";
+                        // this.tel = "";
+                        // this.email = "";
+                        // this.address = "";
+                        // this.errors = {};
                         //let cart = JSON.stringify(this.emptyCart);
                         //localStorage.setItem("cart", this.finalCart);
                         console.log("ordine inviato");
@@ -316,15 +316,16 @@ export default {
                 });
         },
 
-        async payment() {
+        payment() {
             this.sendingInProgress = false;
             try {
-                await axios.post("/api/orders/make/payment", {
+                axios.post("/api/orders/make/payment", {
                     ...this.form,
                 });
-                alert("Pagamento riuscito");
                 this.sendingInProgress = true;
+                alert("test alert del cazzo");
                 this.storeOrder();
+                console.log("transazione avvenuta");
             } catch (error) {
                 this.disableBuyButton = false;
                 this.loadingPayment = false;
