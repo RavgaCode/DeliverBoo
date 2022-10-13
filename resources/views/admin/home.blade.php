@@ -32,8 +32,9 @@
             months.push(`${element.month} - ${element.year}`);
             totOrdersPerMonth.push(element.orders);
         });
-        
-
+        months.push('11 - 2022', '12 - 2022');
+        console.log(months);
+        console.log(totOrdersPerMonth);
         // Funzione per caricare la tabella al caricamento della pagina
         window.onload = function() {
         var ctx = document.getElementById("canvas").getContext("2d");
@@ -54,6 +55,17 @@
                         borderColor: '#c1c1c1',
                         borderSkipped: 'bottom'
                     }
+                },
+                scales: {
+                    xAxes: [{
+                    categoryPercentage: 1,
+                    barPercentage: 0.75
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                    }]
                 },
                 responsive: true,
                 title: {

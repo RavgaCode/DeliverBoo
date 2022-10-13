@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         // Leggo l'id dell'utente attualmente loggato e prendo solamente i plates corrispondenti al suo id
         $current_user_id = Auth::user()->getId();
-        $orders = Order::where('user_id', '=', $current_user_id)->get()->sortDesc();
+        $orders = Order::where('user_id', '=', $current_user_id)->orderBy('created_at', 'DESC')->get();
         
         $data = [
             'orders' => $orders,

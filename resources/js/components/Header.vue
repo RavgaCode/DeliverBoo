@@ -2,24 +2,9 @@
     <nav class="d-flex">
         <!-- logo -->
         <div class="logo">
-            <img src="../images/Deliver-removebg-preview.png" alt="logo" />
-        </div>
-
-        <!-- menu links -->
-        <div class="menu-links">
-            <ul
-                class="list-unstyled d-lg-flex d-md-none d-sm-none d-none links"
-            >
-                <li
-                    v-for="(link, index) in menuLinks"
-                    :key="index"
-                    class="nav-item"
-                >
-                    <router-link class="nav-link" :to="link.routeName">{{
-                        link.labelName
-                    }}</router-link>
-                </li>
-            </ul>
+            <a href="/#"
+                ><img src="../images/Deliver-removebg-preview.png" alt="logo"
+            /></a>
         </div>
 
         <!-- Buttons -->
@@ -48,7 +33,7 @@
                     'd-block': this.isActive === true,
                 }"
             >
-                <li
+                <!-- <li
                     v-for="(link, index) in menuLinks"
                     :key="index"
                     class="nav-item"
@@ -56,7 +41,7 @@
                     <router-link class="nav-link" :to="link.routeName">{{
                         link.labelName
                     }}</router-link>
-                </li>
+                </li> -->
                 <li>
                     <a href="#" @click="login()" class="btn login">Login</a>
                 </li>
