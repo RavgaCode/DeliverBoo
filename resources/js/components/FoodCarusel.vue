@@ -34,7 +34,7 @@ export default {
     }
 
     h2 {
-        font-size: 50px;
+
         padding-bottom: 20px;
     }
    
@@ -49,6 +49,13 @@ export default {
         background-color: #000000bb;
         border-radius: 20px;
     }
-
+    @media screen and (max-width: 700px) {
+        .carusel {
+            img {
+                width: 50%;
+            }
+        }
+        
+    }
 </style>
 

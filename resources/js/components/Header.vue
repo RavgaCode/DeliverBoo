@@ -5,23 +5,6 @@
             <img src="../images/Deliver-removebg-preview.png" alt="logo" />
         </div>
 
-        <!-- menu links
-        <div class="menu-links">
-            <ul
-                class="list-unstyled d-lg-flex d-md-none d-sm-none d-none links"
-            >
-                <li
-                    v-for="(link, index) in menuLinks"
-                    :key="index"
-                    class="nav-item"
-                >
-                    <router-link class="nav-link" :to="link.routeName">{{
-                        link.labelName
-                    }}</router-link>
-                </li>
-            </ul>
-        </div> -->
-
         <!-- Buttons -->
         <div class="buttons d-lg-flex d-md-none d-sm-none d-none links">
             <a href="#" @click="login()" class="btn login">Login</a>

@@ -4,8 +4,8 @@
             <h2>I tuoi ristoranti preferiti</h2>
             <div class="search-section">
                 <!-- Text Searchbar -->
-                <div class="text-searchbar-container">
-                     <div class="input-group">
+                <div class="text-searchbar-container row">
+                     <div class="input-group col-12 col-lg-4">
                         
                         <input type="search" id="text-searchbar" name="text-searchbar" class="form-control" @keyup="search()" v-model="searchValue"  placeholder="Cerca il tuo ristorante preferito"/>
                         <label class="form-label" for="text-searchbar"></label>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <!-- Category Filters -->
-                <div class="filters-container d-flex">
+                <div class="filters-container d-flex justify-content-start flex-wrap">
                     <div
                         class="filter-box"
                         v-for="category in categories"
@@ -39,14 +39,15 @@
             </div>
         </div>
 
+        <!-- Cards -->
         <div class="cards container">
                 <!-- Restaurants Card Wrapper -->
                 <div
-                    class="restaurant-wrapper row row-cols-1 row-cols-lg-4 g-2"
+                    class="restaurant-wrapper row justify-content-center justify-content-lg-start g-2"
                 >
                     <!-- card -->
                     <div
-                        class="restaurant-card col-1 card"
+                        class="restaurant-card col-12 col-sm-12 col-md-6 col-lg-3 card"
                         v-for="restaurant in restaurants"
                         :key="restaurant.id"
                     >
@@ -168,12 +169,7 @@ export default {
     background-color: rgb(255, 204, 0);
     height: 900px;
     margin-bottom: 20px;
-  
- 
 
-    .text-searchbar-container {
-        width: 30%;
-    }
 
     .btn-search {
         padding: 0 30px;
@@ -185,7 +181,7 @@ export default {
     }
 
     .filter-box {
-        padding: 10px;
+        padding: 0 5px;
         label {
             margin-right: 10px;
         }
@@ -242,7 +238,7 @@ export default {
 }
 
 label {
-    padding: 10px 0;
+    padding: 5px 0;
     cursor: pointer;
 }
 
@@ -253,6 +249,7 @@ label {
 
 
 .search-section {
+    margin: 5px;
     box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);    
 }
 
@@ -273,5 +270,8 @@ label {
     border-radius: 20px;
 }
 
+.input-group {
+    margin: 20px 0;
+}
 
 </style>

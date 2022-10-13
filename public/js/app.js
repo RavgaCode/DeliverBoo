@@ -1988,7 +1988,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'InfoSection'
+  name: 'InfoSection',
+  methods: {
+    login: function login() {
+      window.location.href = "http://127.0.0.1:8000/login";
+    },
+    register: function register() {
+      window.location.href = "http://127.0.0.1:8000/register";
+    }
+  }
 });
 
 /***/ }),
@@ -2978,60 +2986,36 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
     staticClass: "info"
   }, [_c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "row row-cols-1 row-cols-md-3 row-cols-lg-3 g-2 g-lg-3 d-flex justify-content-center"
-  }, [_c("div", {
-    staticClass: "col"
-  }, [_c("img", {
-    staticClass: "info-img",
-    attrs: {
-      src: __webpack_require__(/*! ../images/PngItem_2701331.png */ "./resources/js/images/PngItem_2701331.png"),
-      alt: "deliver"
-    }
-  }), _vm._v(" "), _c("h3", [_vm._v("Lavora con noi")]), _vm._v(" "), _c("p", [_vm._v("Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque velit cum, exercitationem amet nesciunt ipsam voluptates laborum culpa similique sequi veritatis magnam? Repellendus perspiciatis similique eveniet quia sapiente magni nostrum!")]), _vm._v(" "), _c("a", {
-    staticClass: "btn info-btn",
+    staticClass: "wrap"
+  }, [_c("h2", [_vm._v("Lavora con noi")]), _vm._v(" "), _c("p", [_vm._v("Diventa partner di Deliveroo e raggiungi sempre più clienti. Ci occupiamo noi della consegna, così che la tua unica preoccupazione sia continuare a preparare il miglior cibo.")]), _vm._v(" "), _c("div", {
+    staticClass: "buttons"
+  }, [_c("a", {
+    staticClass: "btn login",
     attrs: {
       href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.login();
+      }
     }
-  }, [_vm._v("Info")])]), _vm._v(" "), _c("div", {
-    staticClass: "col"
-  }, [_c("img", {
-    staticClass: "info-img",
-    attrs: {
-      src: __webpack_require__(/*! ../images/PngItem_2701331.png */ "./resources/js/images/PngItem_2701331.png"),
-      alt: "deliver"
-    }
-  }), _vm._v(" "), _c("h3", [_vm._v("Lavora con noi")]), _vm._v(" "), _c("p", [_vm._v("Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque velit cum, exercitationem amet nesciunt ipsam voluptates laborum culpa similique sequi veritatis magnam? Repellendus perspiciatis similique eveniet quia sapiente magni nostrum!")]), _vm._v(" "), _c("a", {
-    staticClass: "btn info-btn",
+  }, [_vm._v("Login")]), _vm._v(" "), _c("a", {
+    staticClass: "btn signup",
     attrs: {
       href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.register();
+      }
     }
-  }, [_vm._v("Info")])]), _vm._v(" "), _c("div", {
-    staticClass: "col"
-  }, [_c("img", {
-    staticClass: "info-img",
-    attrs: {
-      src: __webpack_require__(/*! ../images/PngItem_2701331.png */ "./resources/js/images/PngItem_2701331.png"),
-      alt: "deliver"
-    }
-  }), _vm._v(" "), _c("h3", [_vm._v("Lavora con noi")]), _vm._v(" "), _c("p", [_vm._v("Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque velit cum, exercitationem amet nesciunt ipsam voluptates laborum culpa similique sequi veritatis magnam? Repellendus perspiciatis similique eveniet quia sapiente magni nostrum!")]), _vm._v(" "), _c("a", {
-    staticClass: "btn info-btn",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Info")])])])])]);
-}];
+  }, [_vm._v("Registrati")])])])]);
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -3064,10 +3048,10 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "wrap"
   }, [_c("div", {
-    staticClass: "row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 d-flex justify-content-center content"
+    staticClass: "row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 d-flex justify-content-center align-items-start align-items-lg-center content"
   }, [_c("div", {
-    staticClass: "col-6 slogan"
-  }, [_c("h1", [_vm._v("I piatti che ami, a domicilio.")])]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-12 col-md-12 col-xs-12 slogan"
+  }, [_c("h3", [_vm._v("I tuoi ristoranti preferiti")]), _vm._v(" "), _c("h1", [_vm._v("I piatti che ami, a domicilio.")])]), _vm._v(" "), _c("div", {
     staticClass: "col-6 col-md4 img d-none d-sm-none d-md-none d-lg-block"
   }, [_c("img", {
     attrs: {
@@ -3079,7 +3063,7 @@ var staticRenderFns = [function () {
       href: "#search"
     }
   }, [_c("div", {
-    staticClass: "col arrow-down d-sm-none d-none d-md-block d-lg-block"
+    staticClass: "col arrow-down d-md-block d-lg-block"
   }, [_c("div", {
     staticClass: "left"
   }), _vm._v(" "), _c("div", {
@@ -3199,9 +3183,9 @@ var render = function render() {
   }, [_c("h2", [_vm._v("I tuoi ristoranti preferiti")]), _vm._v(" "), _c("div", {
     staticClass: "search-section"
   }, [_c("div", {
-    staticClass: "text-searchbar-container"
+    staticClass: "text-searchbar-container row"
   }, [_c("div", {
-    staticClass: "input-group"
+    staticClass: "input-group col-12 col-lg-4"
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -3246,7 +3230,7 @@ var render = function render() {
   }, [_c("i", {
     staticClass: "fas fa-search"
   })])])]), _vm._v(" "), _c("div", {
-    staticClass: "filters-container d-flex"
+    staticClass: "filters-container d-flex justify-content-start flex-wrap"
   }, _vm._l(_vm.categories, function (category) {
     return _c("div", {
       key: category.id,
@@ -3298,11 +3282,11 @@ var render = function render() {
   }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "cards container"
   }, [_c("div", {
-    staticClass: "restaurant-wrapper row row-cols-1 row-cols-lg-4 g-2"
+    staticClass: "restaurant-wrapper row justify-content-center justify-content-lg-start g-2"
   }, _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
-      staticClass: "restaurant-card col-1 card"
+      staticClass: "restaurant-card col-12 col-sm-12 col-md-6 col-lg-3 card"
     }, [_c("img", {
       staticClass: "cover",
       attrs: {
@@ -8391,7 +8375,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".carusel-section[data-v-dd508680] {\n  text-align: center;\n  padding-top: 30px;\n}\n.carusel[data-v-dd508680] {\n  display: flex;\n  overflow-x: overlay;\n}\n.carusel img[data-v-dd508680] {\n  width: 25%;\n}\nh2[data-v-dd508680] {\n  font-size: 50px;\n  padding-bottom: 20px;\n}\n[data-v-dd508680]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-dd508680]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}", ""]);
+exports.push([module.i, ".carusel-section[data-v-dd508680] {\n  text-align: center;\n  padding-top: 30px;\n}\n.carusel[data-v-dd508680] {\n  display: flex;\n  overflow-x: overlay;\n}\n.carusel img[data-v-dd508680] {\n  width: 25%;\n}\nh2[data-v-dd508680] {\n  padding-bottom: 20px;\n}\n[data-v-dd508680]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-dd508680]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}\n@media screen and (max-width: 700px) {\n.carusel img[data-v-dd508680] {\n    width: 50%;\n}\n}", ""]);
 
 // exports
 
@@ -8429,7 +8413,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".info[data-v-9262ac88] {\n  background-color: black;\n  padding: 100px 0;\n  color: white;\n}\n.info .col[data-v-9262ac88] {\n  text-align: center;\n}\n.info .col .info-img[data-v-9262ac88] {\n  width: 30%;\n}\n.info .col h3[data-v-9262ac88] {\n  margin: 35px 0;\n  text-transform: uppercase;\n  color: rgb(255, 204, 0);\n}\n.info .col .info-btn[data-v-9262ac88] {\n  border-radius: 20px;\n  color: white;\n  background-color: rgb(226, 181, 0);\n  padding: 5px 25px;\n}", ""]);
+exports.push([module.i, ".info[data-v-9262ac88] {\n  background-color: black;\n  color: white;\n  text-align: center;\n  height: 300px;\n}\n.info .wrap[data-v-9262ac88] {\n  width: 90%;\n  margin: 0 auto;\n  padding: 20px 0;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n.info .wrap .buttons a[data-v-9262ac88] {\n  margin: 0 10px;\n  letter-spacing: 3px;\n}\n.info .wrap .buttons .login[data-v-9262ac88] {\n  border: 1.5px solid rgb(255, 204, 0);\n  border-radius: 20px;\n  color: white;\n}\n.info .wrap .buttons .signup[data-v-9262ac88] {\n  border-radius: 20px;\n  background-color: rgb(226, 181, 0);\n}", ""]);
 
 // exports
 
@@ -8449,7 +8433,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".jumbo[data-v-0b8439d1] {\n  width: 100%;\n  height: 100vh;\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.jumbo .wrap[data-v-0b8439d1] {\n  width: 90%;\n  margin: 0 auto;\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.jumbo .wrap .slogan[data-v-0b8439d1] {\n  /* margin: 100px 0; */\n  color: white;\n}\n.jumbo .wrap .slogan h1[data-v-0b8439d1] {\n  font-size: 65px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 5px;\n  margin-bottom: 50px;\n}\n.jumbo .wrap .content[data-v-0b8439d1] {\n  align-items: center;\n}\n.arrow-down[data-v-0b8439d1] {\n  width: 60px;\n  height: 40px;\n  margin: 0 0 0 -30px;\n  position: absolute;\n  left: 25%;\n  bottom: 0px;\n  top: 93%;\n  -webkit-animation: arrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.arrow-down[data-v-0b8439d1]:hover {\n  -webkit-animation-play-state: paused;\n}\n.left[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(240deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: leftArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.right[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(-60deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: rightArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n@-webkit-keyframes arrow-0b8439d1 {\n0% {\n    bottom: 0px;\n}\n100% {\n    bottom: 40px;\n}\n}\n@-webkit-keyframes leftArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(225deg);\n}\n}\n@-webkit-keyframes rightArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(-45deg);\n}\n}", ""]);
+exports.push([module.i, ".jumbo[data-v-0b8439d1] {\n  width: 100%;\n  height: 100vh;\n  background-color: black;\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  background-repeat: no-repeat;\n}\n.jumbo .wrap[data-v-0b8439d1] {\n  width: 90%;\n  margin: 0 auto;\n  height: 100%;\n  display: flex;\n}\n.jumbo .wrap .slogan[data-v-0b8439d1] {\n  /* margin: 100px 0; */\n  color: white;\n}\n.jumbo .wrap .slogan h1[data-v-0b8439d1] {\n  font-size: 65px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 5px;\n  margin-bottom: 50px;\n}\n.jumbo .wrap .slogan h3[data-v-0b8439d1] {\n  margin-top: 150px;\n}\nimg[data-v-0b8439d1] {\n  width: 90%;\n}\n.arrow-down[data-v-0b8439d1] {\n  width: 60px;\n  height: 40px;\n  margin: 0 0 0 -30px;\n  position: absolute;\n  left: 25%;\n  bottom: 0px;\n  top: 93%;\n  -webkit-animation: arrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.arrow-down[data-v-0b8439d1]:hover {\n  -webkit-animation-play-state: paused;\n}\n.left[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(240deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: leftArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n.right[data-v-0b8439d1] {\n  position: absolute;\n  height: 10px;\n  width: 40px;\n  background: rgb(255, 204, 0);\n  -webkit-transform: rotate(-60deg);\n  top: 10px;\n  left: 10px;\n  -webkit-border-radius: 4px;\n  -webkit-transform-origin: 5px 50%;\n  -webkit-animation: rightArrow-0b8439d1 0.5s 1s infinite ease-out alternate;\n}\n@-webkit-keyframes arrow-0b8439d1 {\n0% {\n    bottom: 0px;\n}\n100% {\n    bottom: 40px;\n}\n}\n@-webkit-keyframes leftArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(225deg);\n}\n}\n@-webkit-keyframes rightArrow-0b8439d1 {\n100% {\n    -webkit-transform: rotate(-45deg);\n}\n}\n@media screen and (max-width: 350px) {\n.slogan h1[data-v-0b8439d1] {\n    font-size: 40px;\n    font-weight: 600;\n    text-transform: uppercase;\n    letter-spacing: 5px;\n    margin-bottom: 50px;\n}\n}", ""]);
 
 // exports
 
@@ -8488,7 +8472,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  padding-top: 40px;\n  background-color: rgb(255, 204, 0);\n  height: 900px;\n  margin-bottom: 20px;\n}\n.search-bar .text-searchbar-container[data-v-6849e9f0] {\n  width: 30%;\n}\n.search-bar .btn-search[data-v-6849e9f0] {\n  padding: 0 30px;\n  background-color: rgb(0, 0, 0);\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px;\n  border: none;\n  box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;\n}\n.search-bar .filter-box[data-v-6849e9f0] {\n  padding: 10px;\n}\n.search-bar .filter-box label[data-v-6849e9f0] {\n  margin-right: 10px;\n}\n.search-bar .filter[data-v-6849e9f0] {\n  display: none;\n}\n.search-bar .card[data-v-6849e9f0] {\n  background-color: transparent;\n  border: none;\n  padding: 20px;\n  width: 80%;\n  position: relative;\n}\n.search-bar .card h5[data-v-6849e9f0] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: white;\n  font-weight: 600;\n}\n.search-bar .cover[data-v-6849e9f0] {\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  margin-bottom: 20px;\n  -webkit-filter: brightness(40%);\n}\n.search-bar img[data-v-6849e9f0] {\n  transition: transform 1.5s, filter 1s ease-in;\n}\n.search-bar img[data-v-6849e9f0]:hover {\n  transform: scale(1.1);\n}\n.search-bar .btn[data-v-6849e9f0] {\n  background-color: black;\n  color: white;\n  border-bottom-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.filter-box input[data-v-6849e9f0] {\n  margin-top: 20px;\n  margin-right: 15px;\n}\nlabel[data-v-6849e9f0] {\n  padding: 10px 0;\n  cursor: pointer;\n}\n.filter:checked + label[data-v-6849e9f0] {\n  color: white;\n  border-bottom: 2px solid white;\n}\n.search-section[data-v-6849e9f0] {\n  box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);\n}\n.cards[data-v-6849e9f0] {\n  height: 80%;\n  overflow-y: auto;\n}\n[data-v-6849e9f0]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-6849e9f0]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  padding-top: 40px;\n  background-color: rgb(255, 204, 0);\n  height: 900px;\n  margin-bottom: 20px;\n}\n.search-bar .btn-search[data-v-6849e9f0] {\n  padding: 0 30px;\n  background-color: rgb(0, 0, 0);\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px;\n  border: none;\n  box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;\n}\n.search-bar .filter-box[data-v-6849e9f0] {\n  padding: 0 5px;\n}\n.search-bar .filter-box label[data-v-6849e9f0] {\n  margin-right: 10px;\n}\n.search-bar .filter[data-v-6849e9f0] {\n  display: none;\n}\n.search-bar .card[data-v-6849e9f0] {\n  background-color: transparent;\n  border: none;\n  padding: 20px;\n  width: 80%;\n  position: relative;\n}\n.search-bar .card h5[data-v-6849e9f0] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: white;\n  font-weight: 600;\n}\n.search-bar .cover[data-v-6849e9f0] {\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  margin-bottom: 20px;\n  -webkit-filter: brightness(40%);\n}\n.search-bar img[data-v-6849e9f0] {\n  transition: transform 1.5s, filter 1s ease-in;\n}\n.search-bar img[data-v-6849e9f0]:hover {\n  transform: scale(1.1);\n}\n.search-bar .btn[data-v-6849e9f0] {\n  background-color: black;\n  color: white;\n  border-bottom-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.filter-box input[data-v-6849e9f0] {\n  margin-top: 20px;\n  margin-right: 15px;\n}\nlabel[data-v-6849e9f0] {\n  padding: 5px 0;\n  cursor: pointer;\n}\n.filter:checked + label[data-v-6849e9f0] {\n  color: white;\n  border-bottom: 2px solid white;\n}\n.search-section[data-v-6849e9f0] {\n  margin: 5px;\n  box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);\n}\n.cards[data-v-6849e9f0] {\n  height: 80%;\n  overflow-y: auto;\n}\n[data-v-6849e9f0]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-6849e9f0]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}\n.input-group[data-v-6849e9f0] {\n  margin: 20px 0;\n}", ""]);
 
 // exports
 
@@ -56704,17 +56688,6 @@ module.exports = "/images/Deliver-removebg-preview.png?836f39b4b997b6916f0c15d49
 /***/ (function(module, exports) {
 
 module.exports = "/images/Pinseria_food_example.jpg?ab651d922b0e7f0f0ab670ac9986c784";
-
-/***/ }),
-
-/***/ "./resources/js/images/PngItem_2701331.png":
-/*!*************************************************!*\
-  !*** ./resources/js/images/PngItem_2701331.png ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/PngItem_2701331.png?13024d6627fcf9125e2cbeec7f8fb7a7";
 
 /***/ }),
 
