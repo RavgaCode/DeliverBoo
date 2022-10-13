@@ -2571,22 +2571,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
         console.log("pagamento eseguito");
       }
-    } // savedCart() {
-    //     if (localStorage.getItem("cart")) {
-    //         try {
-    //             //Trasformalo in stringa
-    //             this.cart = JSON.parse(localStorage.getItem("cart"));
-    //             this.totalSum = JSON.parse(
-    //                 localStorage.getItem("totalSum")
-    //             );
-    //         } catch (e) {
-    //             //Altrimenti rimuovi cart da localStorage
-    //             localStorage.removeItem("cart");
-    //             localStorage.removeItem("totalSum");
-    //         }
-    //     }
-    // },
-    // async mounted() {
+    },
+    savedCart: function savedCart() {
+      if (localStorage.getItem("cart")) {
+        try {
+          //Trasformalo in stringa
+          this.cart = JSON.parse(localStorage.getItem("cart"));
+          this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
+        } catch (e) {
+          //Altrimenti rimuovi cart da localStorage
+          localStorage.removeItem("cart");
+          localStorage.removeItem("totalSum");
+        }
+      }
+    } // async mounted() {
     //     await this.savedCart();
     // },
 
@@ -3767,7 +3765,7 @@ var render = function render() {
 
   return _c("section", {
     staticClass: "menu-section"
-  }, [_c("div", {
+  }, [_c("p", [_vm._v("prova")]), _vm._v(" "), _c("div", {
     staticClass: "page-top"
   }, [_c("div", {
     staticClass: "left-col"
@@ -57575,8 +57573,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

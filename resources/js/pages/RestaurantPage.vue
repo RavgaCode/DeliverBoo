@@ -338,28 +338,29 @@ export default {
                 console.log("pagamento eseguito");
             }
         },
-        // savedCart() {
-        //     if (localStorage.getItem("cart")) {
-        //         try {
-        //             //Trasformalo in stringa
-        //             this.cart = JSON.parse(localStorage.getItem("cart"));
-        //             this.totalSum = JSON.parse(
-        //                 localStorage.getItem("totalSum")
-        //             );
-        //         } catch (e) {
-        //             //Altrimenti rimuovi cart da localStorage
-        //             localStorage.removeItem("cart");
-        //             localStorage.removeItem("totalSum");
-        //         }
-        //     }
-        // },
+        savedCart() {
+            if (localStorage.getItem("cart")) {
+                try {
+                    //Trasformalo in stringa
+                    this.cart = JSON.parse(localStorage.getItem("cart"));
+                    this.totalSum = JSON.parse(
+                        localStorage.getItem("totalSum")
+                    );
+                } catch (e) {
+                    //Altrimenti rimuovi cart da localStorage
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("totalSum");
+                }
+            }
+        },
         // async mounted() {
         //     await this.savedCart();
         // },
     },
 
     created() {
-        this.getPlates(), this.savedCart();
+        this.getPlates(), 
+        this.savedCart()
     },
 };
 </script>
