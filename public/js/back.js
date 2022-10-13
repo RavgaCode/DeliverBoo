@@ -49670,7 +49670,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\back.js */"./resources/js/back.js");
+module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\back.js */"./resources/js/back.js");
 
 
 /***/ })

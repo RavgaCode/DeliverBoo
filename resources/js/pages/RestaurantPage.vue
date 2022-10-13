@@ -22,11 +22,27 @@
                                 <div
                                     class="product-row d-flex justify-content-between"
                                 >
-                                    <div class="product-quantity">
-                                        X{{ item.quantity }}
+                                    <div class="product-quantity d-flex">
+                                        <div
+                                            @click="deleteItem(item)"
+                                            class="minus-button quantity-btn"
+                                        >
+                                            -
+                                        </div>
+
+                                        <div class="quantity">
+                                            X{{ item.quantity }}
+                                        </div>
+                                        <div
+                                            @click="newItem(item)"
+                                            class="plus-button quantity-btn"
+                                        >
+                                            +
+                                        </div>
                                     </div>
                                     <div class="product-name">
-                                        {{ item.name }}
+                                        {{ item.name }} ({{ item.price }}
+                                        &euro;)
                                     </div>
                                     <div class="product-price">
                                         {{ item.subTotal }}&euro;
@@ -210,6 +226,7 @@ export default {
         return {
             plates: [],
             cart: [],
+            savedCart: null,
             totalSum: null,
         };
     },
@@ -305,47 +322,41 @@ export default {
                         isVisible: false,
                     }));
                 });
-            this.saveCart();
         },
         payment() {
             if (typeof Storage !== undefined) {
                 let cart = JSON.stringify(this.cart); //rendo JSON il contenuto del cart
                 localStorage.setItem("cart", cart); //lo inserisco in una variabile localStorage di nome 'cart'
+                this.cart = JSON.parse(localStorage.getItem("cart"));
 
                 let totalSum = JSON.stringify(this.totalSum); //rendo JSON il totale
                 localStorage.setItem("totalSum", totalSum); //lo inserisco in una variabile localStorage di nome 'totalSum'
+                this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
                 console.log("pagamento eseguito");
-            } else {
-                alert("Errore con lo web storage"); //mostro all'utente un messaggio di errore
             }
         },
-        // saveCart() {
-        //     if (typeof Storage !== undefined) {
-        //         let getCart = localStorage.getItem("cart");
-        //         let cart = JSON.parse(getCart);
-        //         this.cart = cart;
-        //         this.cart = JSON.stringify(this.cart);
-        //         let getTotal = localStorage.getItem("totalSum");
-        //         let total = JSON.parse(getTotal);
-        //         this.totalSum = total;
-        //     }
+        savedCart() {
+            if (localStorage.getItem("cart")) {
+                try {
+                    //Trasformalo in stringa
+                    this.cart = JSON.parse(localStorage.getItem("cart"));
+                    this.totalSum = JSON.parse(
+                        localStorage.getItem("totalSum")
+                    );
+                } catch (e) {
+                    //Altrimenti rimuovi cart da localStorage
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("totalSum");
+                }
+            }
+        },
+        // async mounted() {
+        //     await this.savedCart();
         // },
-        getOrder() {
-            if (typeof Storage !== "undefined") {
-                console.log("ordine carico");
-
-                let getCart = localStorage.getItem("cart");
-                let cart = JSON.parse(getCart);
-                this.order = cart;
-                this.finalCart = JSON.stringify(this.order);
-                let getTotal = localStorage.getItem("totalSum");
-                let total = JSON.parse(getTotal);
-                this.totalCost = total;
-            }
+        created() {
+            this.getPlates();
+            this.savedCart();
         },
-    },
-    created() {
-        this.getPlates();
     },
 };
 </script>
@@ -376,28 +387,28 @@ export default {
         .product-row {
             width: 100%;
         }
-        .quantity-btn {
-            color: white;
-            border: 2px solid white;
-            border-radius: 50%;
-            background-color: none;
+        // .quantity-btn {
+        //     color: white;
+        //     border: 2px solid white;
+        //     border-radius: 50%;
+        //     background-color: none;
 
-            font-size: large;
-            font-weight: 800;
+        //     font-size: large;
+        //     font-weight: 800;
 
-            &:hover {
-                background-color: #ffcc00;
-                color: black;
-                cursor: pointer;
-                border: 2px solid black;
-            }
-        }
-        .minus-button {
-            padding: 2px 14px;
-        }
-        .plus-button {
-            padding: 3px 12px;
-        }
+        //     &:hover {
+        //         background-color: #ffcc00;
+        //         color: black;
+        //         cursor: pointer;
+        //         border: 2px solid black;
+        //     }
+        // }
+        // .minus-button {
+        //     padding: 2px 14px;
+        // }
+        // .plus-button {
+        //     padding: 3px 12px;
+        // }
     }
     .bottom-cart {
         padding-block: 0.3rem;
