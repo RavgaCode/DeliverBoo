@@ -340,8 +340,7 @@ export default {
         });
     },
     created() {
-        this.getOrder();
-        this.getToken();
+        this.getOrder(), this.getToken();
     },
 };
 </script>
