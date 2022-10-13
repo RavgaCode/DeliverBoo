@@ -2468,7 +2468,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       plates: [],
       cart: [],
-      savedCart: null,
+      savCart: null,
       totalSum: null
     };
   },
@@ -2549,6 +2549,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       axios.get("/api/restaurants/" + this.$route.params.slug).then(function (response) {
+        console.log(response.data.results);
         _this.plates = response.data.results.map(function (item) {
           return _objectSpread(_objectSpread({}, item), {}, {
             isVisible: false
@@ -2570,20 +2571,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
         console.log("pagamento eseguito");
       }
-    } // savedCart() {
-    //     if (typeof Storage !== undefined) {
-    //         this.savedCart = JSON.parse(localStorage.getItem("cart"));
-    //         this.cart = JSON.stringify(this.savedCart);
-    //         this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
-    //     }
+    },
+    savedCart: function savedCart() {
+      if (localStorage.getItem("cart")) {
+        try {
+          //Trasformalo in stringa
+          this.cart = JSON.parse(localStorage.getItem("cart"));
+          this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
+        } catch (e) {
+          //Altrimenti rimuovi cart da localStorage
+          localStorage.removeItem("cart");
+          localStorage.removeItem("totalSum");
+        }
+      }
+    } // async mounted() {
+    //     await this.savedCart();
     // },
 
   },
-  // async mounted() {
-  //     await this.savedCart();
-  // },
   created: function created() {
-    this.getPlates();
+    this.getPlates(), this.savedCart();
   }
 });
 
@@ -57549,8 +57556,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

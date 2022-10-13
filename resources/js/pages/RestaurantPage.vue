@@ -226,7 +226,7 @@ export default {
         return {
             plates: [],
             cart: [],
-            savedCart: null,
+            savCart: null,
             totalSum: null,
         };
     },
@@ -313,9 +313,9 @@ export default {
         },
 
         getPlates() {
-            axios
-                .get("/api/restaurants/" + this.$route.params.slug)
+            axios.get("/api/restaurants/" + this.$route.params.slug)
                 .then((response) => {
+                    console.log(response.data.results)
                     this.plates = response.data.results.map((item) => ({
                         //uso map per aggiungere la variabile isVisible, che per mi servirà per lo show delle info ingredienti nelle card
                         ...item,
@@ -353,10 +353,14 @@ export default {
         // async mounted() {
         //     await this.savedCart();
         // },
-        created() {
-            this.getPlates();
-            this.savedCart();
-        },
+        
+    },
+
+    created() {
+        
+        this.getPlates(),
+        this.savedCart()
+        
     },
 };
 </script>
