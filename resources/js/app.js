@@ -31,6 +31,9 @@ window.axios = require("axios");
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 window.$ = require("jquery");
 window.JQuery = require("jquery");
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
 
 import App from "./views/App.vue";
 import router from "./router";

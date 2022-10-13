@@ -2468,6 +2468,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       plates: [],
       cart: [],
+      savCart: null,
       totalSum: null
     };
   },
@@ -2548,6 +2549,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       axios.get("/api/restaurants/" + this.$route.params.slug).then(function (response) {
+        console.log(response.data.results);
         _this.plates = response.data.results.map(function (item) {
           return _objectSpread(_objectSpread({}, item), {}, {
             isVisible: false
@@ -2590,7 +2592,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
-    this.getPlates(); // this.savedCart();
+    this.getPlates(), this.savedCart();
   }
 });
 
@@ -55932,6 +55934,9 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window.JQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+$(document).ready(function () {
+  $(this).scrollTop(0);
+});
 
 
 var app = new Vue({
