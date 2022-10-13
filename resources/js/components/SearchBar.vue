@@ -5,23 +5,36 @@
             <div class="search-section">
                 <!-- Text Searchbar -->
                 <div class="text-searchbar-container row">
-                     <div class="input-group col-12 col-lg-4">
-                        
-                        <input type="search" id="text-searchbar" name="text-searchbar" class="form-control" @keyup="search()" v-model="searchValue"  placeholder="Cerca il tuo ristorante preferito"/>
+                    <div class="input-group col-12 col-lg-4">
+                        <input
+                            type="search"
+                            id="text-searchbar"
+                            name="text-searchbar"
+                            class="form-control"
+                            @keyup="search()"
+                            v-model="searchValue"
+                            placeholder="Cerca il tuo ristorante preferito"
+                        />
                         <label class="form-label" for="text-searchbar"></label>
-                    
-                        <button type="button" class="btn-search btn-dark" @click="search()">
+
+                        <button
+                            type="button"
+                            class="btn-search btn-dark"
+                            @click="search()"
+                        >
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 <!-- Category Filters -->
-                <div class="filters-container d-flex justify-content-start flex-wrap">
+                <div
+                    class="filters-container d-flex justify-content-start flex-wrap"
+                >
                     <div
                         class="filter-box"
                         v-for="category in categories"
                         :key="category.id"
-                    >   
+                    >
                         <input
                             @change="getRestaurants()"
                             type="checkbox"
@@ -29,11 +42,9 @@
                             :id="category.id"
                             :name="category.id"
                             :value="category.id"
-                            class = "filter"
-
+                            class="filter"
                         />
                         <label :for="category.id">{{ category.name }}</label>
-                        
                     </div>
                 </div>
             </div>
@@ -41,35 +52,57 @@
 
         <!-- Cards -->
         <div class="cards container">
-                <!-- Restaurants Card Wrapper -->
-                <div
-                    class="restaurant-wrapper row justify-content-center justify-content-lg-start g-2"
-                >
-                    <!-- card -->
-                    <div
-                        class="restaurant-card col-12 col-sm-12 col-md-6 col-lg-3 card"
-                        v-for="restaurant in restaurants"
-                        :key="restaurant.id"
+            <!-- Restaurants Card Wrapper -->
+            <div
+                class="restaurant-wrapper row justify-content-center justify-content-lg-start g-2"
+            >
+                <!-- Loading message -->
+                <div v-if="isLoading" class="loading-message">
+                    <h2>Loading.....</h2>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/xjovhxra.json"
+                        trigger="loop"
+                        colors="primary:#121331,secondary:#e8e230"
+                        style="width: 250px; height: 250px"
                     >
-                        <img
-                            class="cover"
-                            :src="restaurant.restaurant_cover"
-                            :alt="restaurant.restaurant_name"
-                        />
-                        <div class="restaurant-info">
-                            <h5>{{ restaurant.restaurant_name }}</h5>
-                            <router-link
-                                class="nav-link btn"
-                                :to="{
-                                    name: 'restaurant',
-                                    params: { slug: restaurant.slug },
-                                }"
-                                >Vedi piatti</router-link
-                            >
-                        </div>
+                    </lord-icon>
+                </div>
+                <!-- No restaurants found message -->
+                <div
+                    v-else-if="restaurants.length == 0 && isLoading === false"
+                    class="no-restraurants-found-message"
+                >
+                    <h2>
+                        Ci spiace, ma non abbiamo trovato nessun ristorante per
+                        tutte le categorie ricercate
+                    </h2>
+                </div>
+                <!-- card -->
+                <div
+                    v-else
+                    class="restaurant-card col-12 col-sm-12 col-md-6 col-lg-3 card"
+                    v-for="restaurant in restaurants"
+                    :key="restaurant.id"
+                >
+                    <img
+                        class="cover"
+                        :src="restaurant.restaurant_cover"
+                        :alt="restaurant.restaurant_name"
+                    />
+                    <div class="restaurant-info">
+                        <h5>{{ restaurant.restaurant_name }}</h5>
+                        <router-link
+                            class="nav-link btn"
+                            :to="{
+                                name: 'restaurant',
+                                params: { slug: restaurant.slug },
+                            }"
+                            >Vedi piatti</router-link
+                        >
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </template>
 
@@ -81,8 +114,8 @@ export default {
             categories: [],
             restaurants: [],
             selectedCategories: [],
-            searchValue: '',
-            // isActive: false,
+            searchValue: "",
+            isLoading: false,
         };
     },
     watch: {
@@ -114,6 +147,7 @@ export default {
                     .then((response) => {
                         this.restaurants = response.data.results;
                         console.log(response.data.results);
+                        this.isLoading = false;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -123,37 +157,28 @@ export default {
                     .get("/api/restaurants/")
                     .then((response) => {
                         this.restaurants = response.data.results;
+                        this.isLoading = false;
                     })
                     .catch((error) => {
                         console.log(error);
                     });
             }
-
-            
         },
 
         search() {
-            
             axios.get(`/api/restaurants/`).then((response) => {
-                    // this.restaurants = response.data.results;
-                    if(this.searchValue) {
-                        this.restaurants = response.data.results.filter(user => {
-                            return user.restaurant_name.toLowerCase().includes(this.searchValue.toLowerCase())
-                        })
-                    } else {
-                        this.restaurants = response.data.results;
-                    }
-                })
+                // this.restaurants = response.data.results;
+                if (this.searchValue) {
+                    this.restaurants = response.data.results.filter((user) => {
+                        return user.restaurant_name
+                            .toLowerCase()
+                            .includes(this.searchValue.toLowerCase());
+                    });
+                } else {
+                    this.restaurants = response.data.results;
+                }
+            });
         },
-
-        // active(i) {
-        //     // if(i === 1) {
-        //     //     this.isActive = true
-        //     // }
-
-        //     selectedCategories
-            
-        // }
     },
 
     mounted() {
@@ -170,14 +195,13 @@ export default {
     height: 900px;
     margin-bottom: 20px;
 
-
     .btn-search {
         padding: 0 30px;
         background-color: rgb(0, 0, 0);
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         border: none;
-        box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;;
+        box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;
     }
 
     .filter-box {
@@ -188,7 +212,19 @@ export default {
     }
 
     .filter {
-            display: none;
+        display: none;
+    }
+    .loading-message {
+        margin: auto;
+        margin-top: 7rem;
+    }
+    .no-restraurants-found-message {
+        padding: 3rem;
+        margin-top: 3rem;
+        background-color: green;
+        color: white;
+        border-radius: 15px;
+        text-align: center;
     }
     .card {
         background-color: transparent;
@@ -234,7 +270,6 @@ export default {
         margin-top: 20px;
         margin-right: 15px;
     }
-    
 }
 
 label {
@@ -247,10 +282,9 @@ label {
     border-bottom: 2px solid white;
 }
 
-
 .search-section {
     margin: 5px;
-    box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);    
+    box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);
 }
 
 .cards {
@@ -258,14 +292,11 @@ label {
     overflow-y: auto;
 }
 
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
     background-color: #f5f5f523;
-    
 }
 
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
     background-color: #000000bb;
     border-radius: 20px;
 }
@@ -273,5 +304,4 @@ label {
 .input-group {
     margin: 20px 0;
 }
-
 </style>
