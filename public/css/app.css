@@ -21467,6 +21467,10 @@ readers do not read off random characters that represent icons */
   background-color: black;
 }
 
+.navbar-admin {
+  padding: 20px 0;
+}
+
 .nav-item a {
   margin: 0 10px;
   letter-spacing: 3px;
@@ -21483,11 +21487,18 @@ readers do not read off random characters that represent icons */
   background-color: rgb(226, 181, 0);
 }
 
-.logo {
+.nav-item .logout {
+  background-color: rgb(226, 181, 0);
+  color: white;
+  border-radius: 20px;
+}
+
+.back-logo {
   width: 35%;
 }
 
 .spacing-form {
+  min-height: 100vh;
   background-color: #ffcc00;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -21495,5 +21506,9 @@ readers do not read off random characters that represent icons */
 
 .navbar-light .navbar-toggler {
   background-color: #ffcc00;
+}
+
+.left-navbar-admin {
+  min-height: 100vh;
 }
 

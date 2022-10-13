@@ -22,7 +22,11 @@
     background-color: black;
 }
 
-.nav-item {
+.navbar-admin{
+    padding: 20px 0;
+}
+
+.nav-item{
     a {
         margin: 0 10px;
         letter-spacing: 3px;
@@ -32,19 +36,28 @@
         border: 1.5px solid rgb(255, 204, 0);
         border-radius: 20px;
         color: white;
+        
     }
 
     .signup {
         border-radius: 20px;
         background-color: rgb(226, 181, 0);
     }
+
+    .logout{
+        background-color: rgb(226, 181, 0);
+        color: white;
+        border-radius: 20px;
+
+    }
 }
 
-.logo{
+.back-logo{
     width: 35%;
 }
 
 .spacing-form{
+    min-height: 100vh;
     background-color: #ffcc00;
     padding-top: 2rem;
     padding-bottom: 2rem;    
@@ -53,4 +66,8 @@
 
 .navbar-light .navbar-toggler{
     background-color: #ffcc00;
+}
+
+.left-navbar-admin{
+    min-height: 100vh;
 }

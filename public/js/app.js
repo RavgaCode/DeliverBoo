@@ -2570,20 +2570,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
         console.log("pagamento eseguito");
       }
-    } // savedCart() {
-    //     if (typeof Storage !== undefined) {
-    //         this.savedCart = JSON.parse(localStorage.getItem("cart"));
-    //         this.cart = JSON.stringify(this.savedCart);
-    //         this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
-    //     }
+    },
+    savedCart: function savedCart() {
+      if (localStorage.getItem("cart")) {
+        try {
+          //Trasformalo in stringa
+          this.cart = JSON.parse(localStorage.getItem("cart"));
+          this.totalSum = JSON.parse(localStorage.getItem("totalSum"));
+        } catch (e) {
+          //Altrimenti rimuovi cart da localStorage
+          localStorage.removeItem("cart");
+          localStorage.removeItem("totalSum");
+        }
+      }
+    },
+    // async mounted() {
+    //     await this.savedCart();
     // },
-
-  },
-  // async mounted() {
-  //     await this.savedCart();
-  // },
-  created: function created() {
-    this.getPlates();
+    created: function created() {
+      this.getPlates();
+      this.savedCart();
+    }
   }
 });
 

@@ -20,15 +20,18 @@
 
     {{-- Chart.js cdns --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script> --}}
+
+    {{-- Script --}}
+    <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script>
 </head>
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-md-nowrap p-0">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/#">HomePage</a>
+        <nav class="navbar navbar-expand-md flex-md-nowrap p-3 fixed-top">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="/#">Deliveboo</a>
             <ul class="navbar-nav px-3 ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}"
+                    <a class="nav-link logout" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         Logout
@@ -40,37 +43,68 @@
             </ul>
         </nav>
         <div class="container-fluid">
-            <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar py-4">
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
+            <div class="row mt-5">
+                <nav class="col-md-2 d-none d-md-block bg-dark sidebar py-4 position-fixed">
+                    <div class="sidebar-sticky left-navbar-admin">
+                        <ul class="nav flex-column mb-auto">
+                            <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.home') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                    Dashboard
+                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                     --}}
+                                     <lord-icon
+                                         src="https://cdn.lordicon.com/tbfrtmlu.json"
+                                         trigger="loop"
+                                         delay="2000"
+                                         style="width:50px;height:50px">
+                                     </lord-icon>
+                                    Profilo e statistica
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.plates.index') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    {{-- <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script> --}}
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/vwlhfdnm.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        style="width:50px;height:50px">
+                                    </lord-icon>
                                     Menù
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.plates.create') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                    Aggiungi un nuovo piatto
+                                    {{-- <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script> --}}
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/zgogqkqu.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        style="width:50px;height:50px">
+                                    </lord-icon>
+                                    Aggiungi piatto
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.users.edit') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    {{-- <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script> --}}
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/ljvjsnvh.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        style="width:50px;height:50px">
+                                    </lord-icon>
                                     Modifica dati utente
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.orders.index') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    {{-- <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script> --}}
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/wvqpnihn.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        style="width:50px;height:50px">
+                                    </lord-icon>
                                     I tuoi Ordini
                                 </a>
                             </li>
