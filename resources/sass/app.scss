@@ -12,3 +12,45 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
+
+// body{
+//     background-color: #ffcc00;
+
+// }
+
+.navbar{
+    background-color: black;
+}
+
+.nav-item {
+    a {
+        margin: 0 10px;
+        letter-spacing: 3px;
+    }
+
+    .login {
+        border: 1.5px solid rgb(255, 204, 0);
+        border-radius: 20px;
+        color: white;
+    }
+
+    .signup {
+        border-radius: 20px;
+        background-color: rgb(226, 181, 0);
+    }
+}
+
+.logo{
+    width: 35%;
+}
+
+.spacing-form{
+    background-color: #ffcc00;
+    padding-top: 2rem;
+    padding-bottom: 2rem;    
+    
+}
+
+.navbar-light .navbar-toggler{
+    background-color: #ffcc00;
+}
