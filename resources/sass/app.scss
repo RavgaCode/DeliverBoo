@@ -82,13 +82,7 @@ a {
 }
 
 .sidebar {
-<<<<<<< HEAD
-    background-color: #000000f0;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-=======
     background-color: #000000f0
->>>>>>> c04b14fc9940bb19266167584c8a330dcf993b97
 }
 
 .left-navbar-admin{
@@ -98,29 +92,6 @@ a {
     
 }
 
-<<<<<<< HEAD
-.dropdown-menu-guest{
-    background-color: black;
-    position: absolute;
-    top: 60px;
-    left: -2px;
-    right: -1px;
-    display: block;
-
-    li{
-        color: white;
-    }
-}
-
-@media (min-width: 992px){
-    .navbar-expand-md .navbar-toggler {
-        display: none; 
-   }
-
-}
-
-
-=======
 .bottom-nav {
     width: 100%;
     position: relative;
@@ -141,4 +112,3 @@ a {
     width: 100%;
     z-index: 10;
 }
->>>>>>> c04b14fc9940bb19266167584c8a330dcf993b97
