@@ -2764,7 +2764,7 @@ var staticRenderFns = [function () {
   }, [_c("h4", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("DeliverBoo")]), _vm._v(" "), _c("p", [_vm._v("\n                        Lorem ipsum dolor sit amet consectetur adipisicing\n                        elit. Pariatur qui tempore error. Quidem quibusdam\n                        facere quo at, harum beatae molestiae porro, ullam\n                        earum architecto nostrum minima repudiandae\n                        laudantium odio necessitatibus.\n                    ")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
+    staticClass: "col-md-2 col--2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("Products")]), _vm._v(" "), _c("p", [_c("a", {
@@ -2788,7 +2788,7 @@ var staticRenderFns = [function () {
       href: "#!"
     }
   }, [_vm._v("Lorem")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
+    staticClass: "col-md-3 col-xs-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("\n                        Useful links\n                    ")]), _vm._v(" "), _c("p", [_c("a", {
@@ -2812,7 +2812,7 @@ var staticRenderFns = [function () {
       href: "#!"
     }
   }, [_vm._v("Lorem")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
+    staticClass: "col-md-4 col-xs-2 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("Contact")]), _vm._v(" "), _c("p", [_c("i", {
@@ -8398,12 +8398,13 @@ exports.push([module.i, ".carusel-section[data-v-dd508680] {\n  text-align: cent
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(/*! ../../../node_modules/css-loader/lib/url/escape.js */ "./node_modules/css-loader/lib/url/escape.js");
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
 
 
 // module
-exports.push([module.i, ".footer[data-v-61a7c374] {\n  background-color: black;\n}\na[data-v-61a7c374]:hover {\n  color: rgb(226, 181, 0) !important;\n}", ""]);
+exports.push([module.i, ".footer[data-v-61a7c374] {\n  background-image: url(" + escape(__webpack_require__(/*! ../images/back.png */ "./resources/js/images/back.png")) + ");\n  background-size: cover;\n  background-repeat: no-repeat;\n}\na[data-v-61a7c374]:hover {\n  color: rgb(226, 181, 0) !important;\n}", ""]);
 
 // exports
 
@@ -57574,7 +57575,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: expected \";\".\n   ╷\n76 │     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;\r\n   │               ^\n   ╵\n  C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\resources\\sass\\app.scss 76:15  root stylesheet\n    at C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass-loader\\dist\\index.js:73:7\n    at Function.call$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:101257:16)\n    at render_closure1.call$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:86329:12)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28383:12)\n    at Object._asyncRethrow (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3713:17)\n    at C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:20081:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3738:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28402:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28396:25)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:30053:18)\n    at _FutureListener.handleError$1 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28582:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28889:49)\n    at Object._Future__propagateToListeners (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3911:77)\n    at _Future._completeError$2 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28735:9)\n    at _Future__asyncCompleteError_closure.call$0 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28819:18)\n    at Object._microtaskLoop (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3967:24)\n    at StaticClosure._startMicrotaskLoop (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:3973:11)\n    at _AsyncRun__scheduleImmediateJsOverride_internalCallback.call$0 (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:28303:21)\n    at invokeClosure (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:1448:26)\n    at Immediate.<anonymous> (C:\\Users\\Asus\\Desktop\\Progetto Finale\\DeliverBoo\\node_modules\\sass\\sass.dart.js:1469:18)\n    at processImmediate (node:internal/timers:466:21)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

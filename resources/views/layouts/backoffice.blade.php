@@ -55,11 +55,12 @@
                                     {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                      --}}
                                      <lord-icon
-                                         src="https://cdn.lordicon.com/tbfrtmlu.json"
-                                         trigger="loop"
-                                         delay="2000"
-                                         style="width:50px;height:50px">
-                                     </lord-icon>
+                                        src="https://cdn.lordicon.com/tbfrtmlu.json"
+                                        trigger="loop"
+                                        delay="2000"
+                                        colors="primary:#f4f19c,secondary:#e8e230"
+                                        style="width:50px;height:50px">
+                                    </lord-icon>
                                     Profilo e statistica
                                 </a>
                             </li>
@@ -70,6 +71,7 @@
                                         src="https://cdn.lordicon.com/vwlhfdnm.json"
                                         trigger="loop"
                                         delay="2000"
+                                        colors="primary:#f4f19c,secondary:#e8e230"
                                         style="width:50px;height:50px">
                                     </lord-icon>
                                     Menù
@@ -82,6 +84,7 @@
                                         src="https://cdn.lordicon.com/zgogqkqu.json"
                                         trigger="loop"
                                         delay="2000"
+                                        colors="primary:#f4f19c,secondary:#e8e230"
                                         style="width:50px;height:50px">
                                     </lord-icon>
                                     Aggiungi piatto
@@ -94,6 +97,7 @@
                                         src="https://cdn.lordicon.com/ljvjsnvh.json"
                                         trigger="loop"
                                         delay="2000"
+                                        colors="primary:#f4f19c,secondary:#e8e230"
                                         style="width:50px;height:50px">
                                     </lord-icon>
                                     Modifica dati utente
@@ -106,6 +110,7 @@
                                         src="https://cdn.lordicon.com/wvqpnihn.json"
                                         trigger="loop"
                                         delay="2000"
+                                        colors="primary:#f4f19c,secondary:#e8e230"
                                         style="width:50px;height:50px">
                                     </lord-icon>
                                     I tuoi Ordini
@@ -116,11 +121,18 @@
                     </div>
                 </nav>
     
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4 mt-5">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4 mt-5 main">
                     @yield('content')
                 </main>
+
+               
             </div>
         </div>
+
+        <section class="d-lg-none d-md-none d-sm-block bottom-nav">
+            @include('components.bottom')
+       </section>
+
 
         <div class="safe d-none" id="modal">
             <div class="modal-dialog">
