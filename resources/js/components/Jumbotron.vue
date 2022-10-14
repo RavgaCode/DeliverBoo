@@ -1,7 +1,7 @@
 <template>
   <div class="jumbo">
         <div class="wrap">
-            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 d-flex justify-content-center align-items-start align-items-lg-center content">
+            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-1 g-2 g-lg-3 d-flex justify-content-center align-items-center align-items-lg-center content">
                 <!-- Textual Content -->
                 
                 <div class="col-sm-12 col-md-12 col-xs-12 slogan">
@@ -140,14 +140,22 @@ export default {
     }
     }
 
-@media screen and (max-width: 350px) {
-    .slogan {
-        h1 {
-            font-size: 40px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 50px;
+@media screen and (max-width: 450px) {
+    .jumbo {
+        .wrap {
+            .slogan {
+                h1 {
+                    font-size: 40px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 5px;
+                    margin-bottom: 50px;
+                }
+
+                h3 {
+                    font-size: 15px;
+                }
+            }
         }
     }
 }
