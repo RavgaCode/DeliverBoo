@@ -22,7 +22,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    main {
-        background-color: rgb(255, 204, 0);
-    }
+main {
+    background-color: rgb(255, 204, 0);
+    scroll-behavior: smooth;
+}
 </style>

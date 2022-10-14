@@ -13,10 +13,18 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
-// body{
-//     background-color: #ffcc00;
+a {
+    color: white;
+}
 
-// }
+.container-fluid {
+    height: 95vh;
+}
+
+.main {
+    padding-bottom: 50px;
+}
+
 
 .navbar{
     background-color: black;
@@ -30,6 +38,7 @@
 }
 
 .nav-item{
+  
     a {
         margin: 0 10px;
         letter-spacing: 3px;
@@ -51,6 +60,7 @@
         background-color: rgb(226, 181, 0);
         color: white;
         border-radius: 20px;
+        padding: 10px;
 
     }
 }
@@ -72,9 +82,13 @@
 }
 
 .sidebar {
+<<<<<<< HEAD
     background-color: #000000f0;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
+=======
+    background-color: #000000f0
+>>>>>>> c04b14fc9940bb19266167584c8a330dcf993b97
 }
 
 .left-navbar-admin{
@@ -84,6 +98,7 @@
     
 }
 
+<<<<<<< HEAD
 .dropdown-menu-guest{
     background-color: black;
     position: absolute;
@@ -105,3 +120,25 @@
 }
 
 
+=======
+.bottom-nav {
+    width: 100%;
+    position: relative;
+   
+}
+
+
+.b-nav { 
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+    list-style-type: none;
+    padding: 5px;
+    background-color: black;
+    width: 100%;
+    z-index: 10;
+}
+>>>>>>> c04b14fc9940bb19266167584c8a330dcf993b97

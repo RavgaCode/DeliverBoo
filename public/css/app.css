@@ -21463,6 +21463,22 @@ readers do not read off random characters that represent icons */
   content: "\F3F6";
 }
 
+a {
+  color: white;
+}
+
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  height: 95vh;
+}
+
+.main {
+  padding-bottom: 50px;
+}
+
 .navbar {
   background-color: black;
   padding: 0;
@@ -21493,6 +21509,7 @@ readers do not read off random characters that represent icons */
   background-color: rgb(226, 181, 0);
   color: white;
   border-radius: 20px;
+  padding: 10px;
 }
 
 .back-logo {
@@ -21520,6 +21537,7 @@ readers do not read off random characters that represent icons */
   margin-top: 30px;
 }
 
+<<<<<<< HEAD
 .dropdown-menu-guest {
   background-color: black;
   position: absolute;
@@ -21537,5 +21555,24 @@ readers do not read off random characters that represent icons */
   .navbar-expand-md .navbar-toggler {
     display: none;
   }
+=======
+.bottom-nav {
+  width: 100%;
+  position: relative;
+}
+
+.b-nav {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 5px;
+  background-color: black;
+  width: 100%;
+  z-index: 10;
+>>>>>>> c04b14fc9940bb19266167584c8a330dcf993b97
 }
 

@@ -1,12 +1,14 @@
 <template>
     <section class="menu-section">
         <!-- Page-top -->
-        <div class="page-top">
+        <div class="page-top row">
             <!-- ----------------------------------------------------- -->
             <!-- Left-col - CART -->
 
-            <div class="left-col">
-                <div class="cart w-200">
+            <div class="left-col col-12 col-lg-6 order-2 order-lg-1">
+                <div
+                    class="cart d-flex justify-content-center justify-content-lg-start"
+                >
                     <div
                         class="cart-container d-flex flex-column align-items-center"
                     >
@@ -109,7 +111,7 @@
                 </div>
             </div>
             <!-- Right-col -->
-            <div class="right-col">
+            <div class="right-col col-12 col-lg-6 order-1 order-lg-2">
                 <h2>{{ plates[0].user.restaurant_name }}</h2>
 
                 <p>
@@ -141,7 +143,7 @@
             <div class="plate-columns d-flex flex-wrap my-2">
                 <!-- PLATE COL -->
                 <div
-                    class="plate-col col-4 my-2"
+                    class="plate-col col-12 col-md-6 col-lg-4 my-2"
                     v-for="singlePlate in plates"
                     :key="singlePlate.id"
                 >
@@ -383,8 +385,7 @@ export default {
     background-image: url("../images/back.png");
     background-size: cover;
     border: 2px solid black;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    // box-shadow: rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     .cart-title {
         padding-block: 1rem;
     }
@@ -440,6 +441,7 @@ export default {
 .page-top {
     display: flex;
     padding: 2rem;
+    box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);
 
     .left-col {
         width: 50%;
@@ -457,7 +459,6 @@ export default {
 }
 .page_bottom {
     width: 100%;
-    border-top: 2px solid black;
 }
 
 .plate-card {
@@ -524,6 +525,17 @@ export default {
 
     &:hover {
         color: #ffcc00;
+    }
+}
+@media screen and (max-width: 991px) {
+    .cart-container {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .cart-container {
+        width: 70%;
+        max-width: 410px;
     }
 }
 </style>

@@ -323,9 +323,9 @@ export default {
                     ...this.form,
                 });
                 this.sendingInProgress = true;
-                alert("test alert del cazzo");
                 this.storeOrder();
                 console.log("transazione avvenuta");
+                router.go("payment-successful");
             } catch (error) {
                 this.disableBuyButton = false;
                 this.loadingPayment = false;
