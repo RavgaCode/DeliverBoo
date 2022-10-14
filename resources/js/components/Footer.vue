@@ -48,11 +48,9 @@
                         <!-- Content -->
                         <h4 class="text-uppercase fw-bold mb-4">DeliverBoo</h4>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Pariatur qui tempore error. Quidem quibusdam
-                            facere quo at, harum beatae molestiae porro, ullam
-                            earum architecto nostrum minima repudiandae
-                            laudantium odio necessitatibus.
+                            Ordina cibo a domicilio da ristoranti e pizzerie
+                            vicino a te. Scegli il tuo menù preferito ed
+                            approfitta ogni giorno di nuovi sconti e offerte.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -87,16 +85,16 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">About</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Contact us</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Restaurants</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Work with us</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -108,12 +106,12 @@
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
                         <p>
-                            <i class="fas fa-home me-3 text-secondary"></i> New
-                            York, NY 10012, US
+                            <i class="fas fa-home me-3 text-secondary"></i>
+                            Milano, Corso Italia, 42, 20123
                         </p>
                         <p>
                             <i class="fas fa-envelope me-3 text-secondary"></i>
-                            info@example.com
+                            deliverboo@email.com
                         </p>
                         <p>
                             <i class="fas fa-phone me-3 text-secondary"></i> +

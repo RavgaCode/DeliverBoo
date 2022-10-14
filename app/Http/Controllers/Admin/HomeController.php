@@ -30,7 +30,7 @@ class HomeController extends Controller
         ->groupby('year','month')
         ->get();
 
-
+        
         $data = [
             'user'=> $user,
             'orders_count'=> $orders_count,
