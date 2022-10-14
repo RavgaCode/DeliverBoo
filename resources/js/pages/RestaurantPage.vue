@@ -10,7 +10,7 @@
                     class="cart d-flex justify-content-center justify-content-lg-start"
                 >
                     <div
-                        class="cart-container w-100 lg-w-50 d-flex flex-column align-items-center"
+                        class="cart-container d-flex flex-column align-items-center"
                     >
                         <h2 class="cart-title">Il tuo Carrello</h2>
                         <!-- TOP CART -->
@@ -385,8 +385,7 @@ export default {
     background-image: url("../images/back.png");
     background-size: cover;
     border: 2px solid black;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    // box-shadow: rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     .cart-title {
         padding-block: 1rem;
     }
@@ -526,6 +525,17 @@ export default {
 
     &:hover {
         color: #ffcc00;
+    }
+}
+@media screen and (max-width: 991px) {
+    .cart-container {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 992px) {
+    .cart-container {
+        width: 70%;
+        max-width: 410px;
     }
 }
 </style>
