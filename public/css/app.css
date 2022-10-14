@@ -21466,6 +21466,7 @@ readers do not read off random characters that represent icons */
 .navbar {
   background-color: black;
   padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .navbar-admin {
@@ -21511,10 +21512,30 @@ readers do not read off random characters that represent icons */
 
 .sidebar {
   background-color: rgba(0, 0, 0, 0.9411764706);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .left-navbar-admin {
   min-height: 100vh;
   margin-top: 30px;
+}
+
+.dropdown-menu-guest {
+  background-color: black;
+  position: absolute;
+  top: 60px;
+  left: -2px;
+  right: -1px;
+  display: block;
+}
+
+.dropdown-menu-guest li {
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-md .navbar-toggler {
+    display: none;
+  }
 }
 

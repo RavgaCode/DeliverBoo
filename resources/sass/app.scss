@@ -72,7 +72,7 @@
 }
 
 .sidebar {
-    background-color: #000000f0
+    background-color: #000000f0;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
 }
@@ -83,3 +83,25 @@
     
     
 }
+
+.dropdown-menu-guest{
+    background-color: black;
+    position: absolute;
+    top: 60px;
+    left: -2px;
+    right: -1px;
+    display: block;
+
+    li{
+        color: white;
+    }
+}
+
+@media (min-width: 992px){
+    .navbar-expand-md .navbar-toggler {
+        display: none; 
+   }
+
+}
+
+

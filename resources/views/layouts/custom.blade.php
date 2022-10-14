@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
     <script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.js"></script>
 
     <!-- Fonts -->
