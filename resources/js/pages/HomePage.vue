@@ -25,7 +25,12 @@ export default {
         InfoSection,
         Map,
         FoodCarusel,
-        Footer
+        Footer,
     },
 };
 </script>
+<style lang="scss" scoped>
+main {
+    scroll-behavior: smooth;
+}
+</style>
