@@ -7,7 +7,7 @@
     <hr>
     <h4>Totale ordini ricevuti: {{$orders_count}}</h4>
     <h4>Fatturato totale: {{$total_revenue}} &euro;</h4>
-    <div class="w-50">
+    <div class="w-90">
         <canvas id="canvas"></canvas>
     </div>
    

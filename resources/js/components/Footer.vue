@@ -57,7 +57,7 @@
 
                     <!-- Grid column -->
                     <div
-                        class="col-md-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
+                        class="col-md-2 col--2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Products</h6>
@@ -78,7 +78,7 @@
 
                     <!-- Grid column -->
                     <div
-                        class="col-md-3 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
+                        class="col-md-3 col-xs-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
@@ -101,7 +101,7 @@
 
                     <!-- Grid column -->
                     <div
-                        class="col-md-4 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
+                        class="col-md-4 col-xs-2 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
@@ -138,7 +138,10 @@ export default {};
 
 <style lang="scss" scoped>
 .footer {
-    background-color: black;
+
+    background-image:  url('../images/back.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 a:hover {
     color: rgb(226, 181, 0) !important;
