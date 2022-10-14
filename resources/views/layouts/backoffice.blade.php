@@ -121,7 +121,7 @@
                     </div>
                 </nav>
     
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4 mt-5 main">
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5 main">
                     @yield('content')
                 </main>
 

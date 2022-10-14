@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-1 row-cols-xs-1 row-cols-md-2 pb-10">
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-1 row-cols-xs-1 row-cols-md-1 pb-10">
         @foreach ($plates as $plate)
         {{-- Single Card --}}
             <div class="col">
