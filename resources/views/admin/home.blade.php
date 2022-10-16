@@ -4,6 +4,15 @@
     <h1>Benvenuto {{$user->name}}</h1>
 
     <h2>Il tuo ristorante: {{$user->restaurant_name}}</h2>
+    <div>
+        <strong>Email:</strong> {{$user->email }}
+    </div>
+    <div class="pt-2">
+        <strong>P.IVA:</strong> {{ $user->restaurant_vat }}
+    </div>
+    <div class="pt-2">
+        <strong>Indirizzo:</strong> {{ $user->restaurant_address }}
+    </div>
     <hr>
     <h4>Totale ordini ricevuti: {{$orders_count}}</h4>
     <h4>Fatturato totale: {{$total_revenue}} &euro;</h4>
