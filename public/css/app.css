@@ -21476,6 +21476,7 @@ a {
 }
 
 .main {
+  margin-top: 70px;
   padding-bottom: 120px;
 }
 
@@ -21513,7 +21514,7 @@ a {
 }
 
 .back-logo {
-  width: 95px;
+  width: 85px;
 }
 
 .spacing-form {
