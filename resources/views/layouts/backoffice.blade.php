@@ -34,7 +34,7 @@
            
             <ul class="navbar-nav px-3 ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link logout" href="{{ route('logout') }}"
+                    <a class="nav-link logout" href="{{ route('logout') }}" action="{{ route('guest.home') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         Logout
