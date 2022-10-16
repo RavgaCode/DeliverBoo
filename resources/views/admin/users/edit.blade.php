@@ -42,6 +42,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="restaurant_description" class="form-label">Descrizione ristorante</label>
+            <textarea class="form-control" id="restaurant_description" name="restaurant_description" rows="5" >{{old('restaurant_description', $user->restaurant_description)}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="restaurant_days" class="form-label">Giorni d'apertura</label>
+            <input type="text" class="form-control" id="restaurant_days" name="restaurant_days" value="{{ old('restaurant_days', $user->restaurant_days) }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="restaurant_hours" class="form-label">Orari d'apertura</label>
+            <input type="text" class="form-control" id="restaurant_hours" name="restaurant_hours" value="{{ old('restaurant_hours', $user->restaurant_hours) }}">
+        </div>
+
+        <div class="mb-3">
             <label for="restaurant_cover" class="form-label">Anteprima immagine esistente *</label>
             <input class="form-control" type="file" id="restaurant_cover" name="restaurant_cover">
 

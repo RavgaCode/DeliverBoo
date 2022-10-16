@@ -9,7 +9,7 @@
             Il tuo ordine è già in preparazione!
             <br />
             Clicca il link per tornare alla<router-link
-                class="ordine mb-1 mx-1"
+                class="home-link mb-1 mx-1"
                 :to="{ name: 'home' }"
                 >Home</router-link
             >
@@ -302,13 +302,13 @@ export default {
                         this.success = true;
                         this.unsuccess = false;
                         // svuoto i campi
-                        // this.name = "";
-                        // this.tel = "";
-                        // this.email = "";
-                        // this.address = "";
-                        // this.errors = {};
-                        //let cart = JSON.stringify(this.emptyCart);
-                        //localStorage.setItem("cart", this.finalCart);
+                        this.name = "";
+                        this.tel = "";
+                        this.email = "";
+                        this.address = "";
+                        this.errors = {};
+                        let cart = JSON.stringify(this.emptyCart);
+                        localStorage.setItem("cart", cart);
                         console.log("ordine inviato");
                     } else {
                         this.errors = response.data.errors;
@@ -352,7 +352,7 @@ export default {
     opacity: 0.9;
 }
 .order-box {
-    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
 }
 .total-sum {
     background-color: #ffcc00;
@@ -426,5 +426,8 @@ export default {
 .button--green:hover {
     background-color: #8bdda8;
     color: white;
+}
+.home-link {
+    color: #cc5500;
 }
 </style>

@@ -24,9 +24,9 @@ class PlateController extends Controller
 
         $request_info = $request->all();
         $show_deleted_message = isset($request_info['deleted']) ? $request_info['deleted'] : null;
-        // Leggo l'id dell'utente attualmente loggato e prendo solamente i plates corrispondenti al suo id
+        // Leggo l'id dell'utente attualmente loggato e prendo solamente i plates corrispondenti al suo id e li gruppo in ordine alfabetico
         $current_user_id = Auth::user()->getId();
-        $plate = Plate::where('user_id', '=', $current_user_id)->get();
+        $plate = Plate::where('user_id', '=', $current_user_id)->orderBy('name','ASC')->get();
         
         $data = [
             'plates' => $plate,

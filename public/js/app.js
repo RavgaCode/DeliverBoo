@@ -2357,14 +2357,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (response.data.success) {
           _this2.success = true;
           _this2.unsuccess = false; // svuoto i campi
-          // this.name = "";
-          // this.tel = "";
-          // this.email = "";
-          // this.address = "";
-          // this.errors = {};
-          //let cart = JSON.stringify(this.emptyCart);
-          //localStorage.setItem("cart", this.finalCart);
 
+          _this2.name = "";
+          _this2.tel = "";
+          _this2.email = "";
+          _this2.address = "";
+          _this2.errors = {};
+          var cart = JSON.stringify(_this2.emptyCart);
+          localStorage.setItem("cart", cart);
           console.log("ordine inviato");
         } else {
           _this2.errors = response.data.errors;
@@ -2753,7 +2753,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Lavora con noi")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Termini e condizioni")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
@@ -2767,31 +2767,31 @@ var staticRenderFns = [function () {
     staticClass: "col-md-3 col-xs-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("\n                        Useful links\n                    ")]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Chi siamo")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("About")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Informazioni su Deliverboo")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Contact us")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Lavora con noi")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Restaurants")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Ristoranti")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Work with us")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Ultime novità")])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-4 col-xs-2 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("Contact")]), _vm._v(" "), _c("p", [_c("i", {
+  }, [_vm._v("Contatti")]), _vm._v(" "), _c("p", [_c("i", {
     staticClass: "fas fa-home me-3 text-secondary"
   }), _vm._v("\n                        Milano, Corso Italia, 42, 20123\n                    ")]), _vm._v(" "), _c("p", [_c("i", {
     staticClass: "fas fa-envelope me-3 text-secondary"
@@ -3440,7 +3440,7 @@ var render = function render() {
       focus: ""
     }
   }, [_vm._v("\n        Il tuo ordine é avvenuto con successo! "), _c("br"), _vm._v("\n        Il tuo ordine è già in preparazione!\n        "), _c("br"), _vm._v("\n        Clicca il link per tornare alla"), _c("router-link", {
-    staticClass: "ordine mb-1 mx-1",
+    staticClass: "home-link mb-1 mx-1",
     attrs: {
       to: {
         name: "home"
@@ -3850,7 +3850,7 @@ var render = function render() {
     }
   }, [_vm._v("\n                            Pay\n                        ")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "right-col col-12 col-lg-6 order-1 order-lg-2"
-  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                Neque ut quibusdam rem. Eligendi delectus in nulla molestias\n                eius cumque consectetur libero, velit, eos architecto\n                facilis obcaecati culpa ullam, laborum earum.\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("p", [_vm._v("Orari: 12-15, 18-23:30")]), _vm._v(" "), _c("p", [_vm._v("Giorni: Dal martedì alla domenica. Lunedì chiuso")]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
+  }, [_c("h2", [_vm._v(_vm._s(_vm.plates[0].user.restaurant_name))]), _vm._v(" "), _c("p", [_vm._v("\n                " + _vm._s(_vm.plates[0].user.restaurant_description) + "\n            ")]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: " + _vm._s(_vm.plates[0].user.restaurant_address))]), _vm._v(" "), _c("p", [_vm._v("Orari: " + _vm._s(_vm.plates[0].user.restaurant_hours))]), _vm._v(" "), _c("p", [_vm._v("Giorni: " + _vm._s(_vm.plates[0].user.restaurant_days))]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.plates, function (singlePlate) {
     return _c("div", {
       key: singlePlate.id,
       staticClass: "hovered-plate-info"
@@ -8522,7 +8522,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.order-box[data-v-3dc58788] {\n  height: calc(100vh - 80px);\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  width: 70%;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}", ""]);
+exports.push([module.i, ".confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.order-box[data-v-3dc58788] {\n  min-height: calc(100vh - 80px);\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  width: 70%;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}\n.home-link[data-v-3dc58788] {\n  color: #cc5500;\n}", ""]);
 
 // exports
 
@@ -57636,13 +57636,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> f8d4e21f95f073b8470ac1b5c2fb980e73cade72
 
 
 /***/ })
