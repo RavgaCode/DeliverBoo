@@ -28,9 +28,9 @@
     <div id="app">
 
         <nav class="navbar navbar-expand-md flex-md-nowrap p-1 fixed-top">
-            <div class="logo">
-                <img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo" >
-            </div>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img class="back-logo" src="{{asset('/images/Deliver-removebg-preview.png')}}" alt="logo">
+            </a>
            
             <ul class="navbar-nav px-3 ml-auto">
                 <li class="nav-item">
@@ -52,8 +52,6 @@
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item-admin">
                                 <a class="nav-link active" href="{{ route('admin.home') }}">
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                     --}}
                                      <lord-icon
                                         src="https://cdn.lordicon.com/tbfrtmlu.json"
                                         trigger="loop"
