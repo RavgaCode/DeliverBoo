@@ -60,18 +60,24 @@
                         class="col-md-2 col--2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Servizio Clienti
+                        </h6>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset"
+                                >Domande frequenti</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Lavora con noi</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset"
+                                >Informativa sulla privacy</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Partner center</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -138,8 +144,7 @@ export default {};
 
 <style lang="scss" scoped>
 .footer {
-
-    background-image:  url('../images/back.png');
+    background-image: url("../images/back.png");
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -2743,27 +2743,27 @@ var staticRenderFns = [function () {
     staticClass: "col-md-2 col--2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("Products")]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("\n                        Servizio Clienti\n                    ")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Lorem")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Domande frequenti")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Lorem")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Lavora con noi")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Lorem")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Informativa sulla privacy")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Lorem")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Partner center")])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3 col-xs-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
@@ -57636,8 +57636,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

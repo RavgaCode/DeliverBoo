@@ -25,7 +25,6 @@
             <span>Indirizzo Cliente: {{$order->customer_address}}</span>
             <span>Email Cliente: {{$order->customer_email}}</span>
             <span>Telefono Cliente: {{$order->customer_telephone}}</span>
-            <span>{{$order->cart}}</span>
           </div>
         </div>
     </div>
