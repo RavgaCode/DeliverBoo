@@ -2367,7 +2367,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           localStorage.setItem("cart", cart);
           console.log("ordine inviato");
         } else {
-          _this2.errors = response.data.errors;
+          // this.errors = response.data.errors;
+          _this2.success = true;
+          _this2.unsuccess = false; // svuoto i campi
+
+          _this2.name = "";
+          _this2.tel = "";
+          _this2.email = "";
+          _this2.address = "";
+          _this2.errors = {};
+
+          var _cart = JSON.stringify(_this2.emptyCart);
+
+          localStorage.setItem("cart", _cart);
+          console.log("ordine inviato");
         }
       });
     },
@@ -2379,10 +2392,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.sendingInProgress = true;
         this.storeOrder();
         console.log("transazione avvenuta");
-        router.go("payment-successful");
       } catch (error) {
-        this.disableBuyButton = false;
-        this.loadingPayment = false;
+        this.sendingInProgress = true;
+        this.storeOrder();
         console.log("transazione non riuscita");
       }
     }
@@ -8523,7 +8535,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  display: inline-block;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}\n.home-link[data-v-3dc58788] {\n  color: #cc5500;\n}", ""]);
+exports.push([module.i, ".order-box[data-v-3dc58788] {\n  min-height: calc(100vh - 80px);\n}\n.confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  display: inline-block;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}\n.home-link[data-v-3dc58788] {\n  color: #cc5500;\n}", ""]);
 
 // exports
 
@@ -57637,8 +57649,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Boolean_projects\htdocs\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

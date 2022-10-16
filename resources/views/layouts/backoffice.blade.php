@@ -29,7 +29,8 @@
 
         <nav class="navbar navbar-expand-md flex-md-nowrap p-1 fixed-top">
             <div class="logo">
-                <img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo" >
+                <a href="/#"><img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo" ></a>
+                
             </div>
            
             <ul class="navbar-nav px-3 ml-auto">

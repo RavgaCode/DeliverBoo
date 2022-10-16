@@ -230,8 +230,7 @@
             </div>
         </div>
 
-        <!-- modal confirm --> 
-        
+        <!-- modal confirm -->
     </div>
 </template>
 
@@ -315,7 +314,18 @@ export default {
                         localStorage.setItem("cart", cart);
                         console.log("ordine inviato");
                     } else {
-                        this.errors = response.data.errors;
+                        // this.errors = response.data.errors;
+                        this.success = true;
+                        this.unsuccess = false;
+                        // svuoto i campi
+                        this.name = "";
+                        this.tel = "";
+                        this.email = "";
+                        this.address = "";
+                        this.errors = {};
+                        let cart = JSON.stringify(this.emptyCart);
+                        localStorage.setItem("cart", cart);
+                        console.log("ordine inviato");
                     }
                 });
         },
@@ -329,10 +339,9 @@ export default {
                 this.sendingInProgress = true;
                 this.storeOrder();
                 console.log("transazione avvenuta");
-                router.go("payment-successful");
             } catch (error) {
-                this.disableBuyButton = false;
-                this.loadingPayment = false;
+                this.sendingInProgress = true;
+                this.storeOrder();
                 console.log("transazione non riuscita");
             }
         },
@@ -350,6 +359,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.order-box {
+    min-height: calc(100vh - 80px);
+}
 .confirmPayment {
     transform: translateY(120%);
     height: 150px;
