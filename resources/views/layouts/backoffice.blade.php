@@ -29,12 +29,12 @@
 
         <nav class="navbar navbar-expand-md flex-md-nowrap p-1 fixed-top">
             <div class="logo">
-                <img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo">
+                <img class="back-logo" src="../../images/Deliver-removebg-preview.png" alt="logo" >
             </div>
            
             <ul class="navbar-nav px-3 ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link logout" href="{{ route('logout') }}" action="{{ route('guest.home') }}"
+                    <a class="nav-link logout" href="{{ route('logout') }}" 
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         Logout

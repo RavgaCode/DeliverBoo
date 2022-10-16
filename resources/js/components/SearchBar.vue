@@ -72,10 +72,10 @@
                     v-else-if="restaurants.length == 0 && isLoading === false"
                     class="no-restraurants-found-message"
                 >
-                    <h2>
+                    <h4>
                         Ci spiace, ma non abbiamo trovato nessun ristorante per
-                        tutte le categorie ricercate
-                    </h2>
+                        tutte le categorie ricercate..
+                    </h4>
                 </div>
                 <!-- card -->
                 <div
@@ -221,10 +221,10 @@ export default {
     .no-restraurants-found-message {
         padding: 3rem;
         margin-top: 3rem;
-        background-color: green;
-        color: white;
+        color: rgb(148, 148, 148);
         border-radius: 15px;
         text-align: center;
+        font-style: italic;
     }
     .card {
         background-color: transparent;

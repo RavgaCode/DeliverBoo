@@ -23,7 +23,7 @@
                 <!-- Riepilogo ordine -->
                 <div class="col container">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12 col-lg-10">
                             <div class="card mt-3">
                                 <div class="card-header">
                                     <h4>Riepilogo ordine:</h4>
@@ -64,7 +64,7 @@
                 <div class="col container">
                     <form method="POST" @submit.prevent="submit()">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-12 col-lg-10">
                                 <div class="card mt-3">
                                     <div class="card-header">
                                         <h3>Compila i campi</h3>
@@ -156,8 +156,9 @@
                                                             }"
                                                             class="form-control"
                                                             id="customer_telephone"
-                                                            type="text"
-                                                            placeholder="000-111-00-11"
+                                                            type="tel"
+                                                            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                                                            placeholder="123-456-7890"
                                                             required
                                                         />
                                                         <p
@@ -173,7 +174,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Inserisci il tuo contatto telefonico -->
+                                            <!-- Inserisci la tua email -->
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
@@ -190,7 +191,7 @@
                                                             }"
                                                             class="form-control"
                                                             id="customer_email"
-                                                            type="text"
+                                                            type="email"
                                                             placeholder="es. alessandro@gmail.com"
                                                             required
                                                         />
@@ -228,6 +229,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal confirm --> 
+        
     </div>
 </template>
 
@@ -351,15 +355,13 @@ export default {
     height: 150px;
     opacity: 0.9;
 }
-.order-box {
-    height: calc(100vh - 80px);
-}
+
 .total-sum {
     background-color: #ffcc00;
     color: black;
     padding: 10px 32px;
     border-radius: 20px;
-    width: 70%;
+    display: inline-block;
 }
 .card {
     position: relative;

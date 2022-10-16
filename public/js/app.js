@@ -3242,7 +3242,7 @@ var render = function render() {
     }
   })], 1) : _vm.restaurants.length == 0 && _vm.isLoading === false ? _c("div", {
     staticClass: "no-restraurants-found-message"
-  }, [_c("h2", [_vm._v("\n                    Ci spiace, ma non abbiamo trovato nessun ristorante per\n                    tutte le categorie ricercate\n                ")])]) : _vm._l(_vm.restaurants, function (restaurant) {
+  }, [_c("h4", [_vm._v("\n                    Ci spiace, ma non abbiamo trovato nessun ristorante per\n                    tutte le categorie ricercate..\n                ")])]) : _vm._l(_vm.restaurants, function (restaurant) {
     return _c("div", {
       key: restaurant.id,
       staticClass: "restaurant-card col-12 col-sm-12 col-md-6 col-lg-3 card"
@@ -3455,7 +3455,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-8"
+    staticClass: "col-12 col-lg-10"
   }, [_c("div", {
     staticClass: "card mt-3"
   }, [_vm._m(0), _vm._v(" "), _vm._l(_vm.order, function (item, index) {
@@ -3485,7 +3485,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-10"
+    staticClass: "col-12 col-lg-10"
   }, [_c("div", {
     staticClass: "card mt-3"
   }, [_vm._m(1), _vm._v(" "), _c("div", {
@@ -3597,8 +3597,9 @@ var render = function render() {
     },
     attrs: {
       id: "customer_telephone",
-      type: "text",
-      placeholder: "000-111-00-11",
+      type: "tel",
+      pattern: "[0-9]{3}[0-9]{3}[0-9]{4}",
+      placeholder: "123-456-7890",
       required: ""
     },
     domProps: {
@@ -3638,7 +3639,7 @@ var render = function render() {
     },
     attrs: {
       id: "customer_email",
-      type: "text",
+      type: "email",
       placeholder: "es. alessandro@gmail.com",
       required: ""
     },
@@ -8484,7 +8485,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  padding-top: 40px;\n  background-color: rgb(255, 204, 0);\n  height: 900px;\n  margin-bottom: 20px;\n}\n.search-bar .btn-search[data-v-6849e9f0] {\n  padding: 0 30px;\n  background-color: rgb(0, 0, 0);\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px;\n  border: none;\n  box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;\n}\n.search-bar .filter-box[data-v-6849e9f0] {\n  padding: 0 5px;\n}\n.search-bar .filter-box label[data-v-6849e9f0] {\n  margin-right: 10px;\n}\n.search-bar .filter[data-v-6849e9f0] {\n  display: none;\n}\n.search-bar .loading-message[data-v-6849e9f0] {\n  margin: auto;\n  margin-top: 7rem;\n}\n.search-bar .no-restraurants-found-message[data-v-6849e9f0] {\n  padding: 3rem;\n  margin-top: 3rem;\n  background-color: green;\n  color: white;\n  border-radius: 15px;\n  text-align: center;\n}\n.search-bar .card[data-v-6849e9f0] {\n  background-color: transparent;\n  border: none;\n  padding: 20px;\n  width: 80%;\n  position: relative;\n}\n.search-bar .card h5[data-v-6849e9f0] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: white;\n  font-weight: 600;\n}\n.search-bar .cover[data-v-6849e9f0] {\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  margin-bottom: 20px;\n  -webkit-filter: brightness(40%);\n}\n.search-bar img[data-v-6849e9f0] {\n  transition: transform 1.5s, filter 1s ease-in;\n}\n.search-bar img[data-v-6849e9f0]:hover {\n  transform: scale(1.1);\n}\n.search-bar .btn[data-v-6849e9f0] {\n  background-color: black;\n  color: white;\n  border-bottom-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.filter-box input[data-v-6849e9f0] {\n  margin-top: 20px;\n  margin-right: 15px;\n}\nlabel[data-v-6849e9f0] {\n  padding: 5px 0;\n  cursor: pointer;\n}\n.filter:checked + label[data-v-6849e9f0] {\n  color: white;\n  border-bottom: 2px solid white;\n}\n.search-section[data-v-6849e9f0] {\n  margin: 5px;\n  box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);\n}\n.cards[data-v-6849e9f0] {\n  height: 80%;\n  overflow-y: auto;\n}\n[data-v-6849e9f0]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-6849e9f0]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}\n.input-group[data-v-6849e9f0] {\n  margin: 20px 0;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  padding-top: 40px;\n  background-color: rgb(255, 204, 0);\n  height: 900px;\n  margin-bottom: 20px;\n}\n.search-bar .btn-search[data-v-6849e9f0] {\n  padding: 0 30px;\n  background-color: rgb(0, 0, 0);\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px;\n  border: none;\n  box-shadow: rgba(105, 84, 0, 0.15) 1.95px 1.95px 2.6px;\n}\n.search-bar .filter-box[data-v-6849e9f0] {\n  padding: 0 5px;\n}\n.search-bar .filter-box label[data-v-6849e9f0] {\n  margin-right: 10px;\n}\n.search-bar .filter[data-v-6849e9f0] {\n  display: none;\n}\n.search-bar .loading-message[data-v-6849e9f0] {\n  margin: auto;\n  margin-top: 7rem;\n}\n.search-bar .no-restraurants-found-message[data-v-6849e9f0] {\n  padding: 3rem;\n  margin-top: 3rem;\n  color: rgb(148, 148, 148);\n  border-radius: 15px;\n  text-align: center;\n  font-style: italic;\n}\n.search-bar .card[data-v-6849e9f0] {\n  background-color: transparent;\n  border: none;\n  padding: 20px;\n  width: 80%;\n  position: relative;\n}\n.search-bar .card h5[data-v-6849e9f0] {\n  position: absolute;\n  top: 40%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  color: white;\n  font-weight: 600;\n}\n.search-bar .cover[data-v-6849e9f0] {\n  width: 100%;\n  height: 100%;\n  border-radius: 20px;\n  margin-bottom: 20px;\n  -webkit-filter: brightness(40%);\n}\n.search-bar img[data-v-6849e9f0] {\n  transition: transform 1.5s, filter 1s ease-in;\n}\n.search-bar img[data-v-6849e9f0]:hover {\n  transform: scale(1.1);\n}\n.search-bar .btn[data-v-6849e9f0] {\n  background-color: black;\n  color: white;\n  border-bottom-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n.filter-box input[data-v-6849e9f0] {\n  margin-top: 20px;\n  margin-right: 15px;\n}\nlabel[data-v-6849e9f0] {\n  padding: 5px 0;\n  cursor: pointer;\n}\n.filter:checked + label[data-v-6849e9f0] {\n  color: white;\n  border-bottom: 2px solid white;\n}\n.search-section[data-v-6849e9f0] {\n  margin: 5px;\n  box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.76);\n}\n.cards[data-v-6849e9f0] {\n  height: 80%;\n  overflow-y: auto;\n}\n[data-v-6849e9f0]::-webkit-scrollbar {\n  background-color: rgba(245, 245, 245, 0.137254902);\n}\n[data-v-6849e9f0]::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.7333333333);\n  border-radius: 20px;\n}\n.input-group[data-v-6849e9f0] {\n  margin: 20px 0;\n}", ""]);
 
 // exports
 
@@ -8522,7 +8523,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.order-box[data-v-3dc58788] {\n  height: calc(100vh - 80px);\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  width: 70%;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}", ""]);
+exports.push([module.i, ".confirmPayment[data-v-3dc58788] {\n  transform: translateY(120%);\n  height: 150px;\n  opacity: 0.9;\n}\n.total-sum[data-v-3dc58788] {\n  background-color: #ffcc00;\n  color: black;\n  padding: 10px 32px;\n  border-radius: 20px;\n  display: inline-block;\n}\n.card[data-v-3dc58788] {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 1.5rem;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #5a3421;\n  background-clip: border-box;\n  border: none;\n  border-radius: 0.25rem;\n  color: white;\n}\n.card-header[data-v-3dc58788]:first-child {\n  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;\n}\n.card-header[data-v-3dc58788] {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: #cc5500;\n  border-bottom: 1px solid white;\n}\n.card-body[data-v-3dc58788] {\n  flex: 1 1 auto;\n  padding: 1.25rem;\n}\n.form-control[data-v-3dc58788]:focus {\n  color: #5c6873;\n  background-color: white;\n  border-color: white;\n  outline: 0;\n  box-shadow: 0 0 0 #f44336;\n}\n.button[data-v-3dc58788] {\n  cursor: pointer;\n  font-weight: 500;\n  left: 3px;\n  line-height: inherit;\n  position: relative;\n  text-decoration: none;\n  text-align: center;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 3px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  display: inline-block;\n}\n.button--small[data-v-3dc58788] {\n  padding: 10px 20px;\n  font-size: 0.875rem;\n}\n.button--green[data-v-3dc58788] {\n  outline: none;\n  background-color: #64d18a;\n  border-color: #64d18a;\n  color: white;\n  transition: all 200ms ease;\n}\n.button--green[data-v-3dc58788]:hover {\n  background-color: #8bdda8;\n  color: white;\n}", ""]);
 
 // exports
 
@@ -57636,8 +57637,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Boolean\Esercizi\laravel-projects\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\Progetto Finale\DeliverBoo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
