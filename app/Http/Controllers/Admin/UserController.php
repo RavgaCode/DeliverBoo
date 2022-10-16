@@ -61,6 +61,6 @@ class UserController extends Controller
 
         $user_to_update->update($form_data);
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.users.edit');
     }
 }

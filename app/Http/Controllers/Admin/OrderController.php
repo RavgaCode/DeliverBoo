@@ -20,11 +20,22 @@ class OrderController extends Controller
         $current_user_id = Auth::user()->getId();
         $orders = Order::where('user_id', '=', $current_user_id)->orderBy('created_at', 'DESC')->get();
        
-        
+        // $subset = $users->map(function ($user) {
+        //     return collect($user->toArray())
+        //         ->only(['id', 'name', 'email'])
+        //         ->all();
+        // });
+       
+        $list_of_items = $orders->map(function($order){
+            return collect($order->toArray())
+            ->only(['cart'])
+            ->all();
+        });
         $data = [
             'orders' => $orders,
+            'list_of_items'=>$list_of_items,
         ];
-      
+    
         return view('admin.orders.index', $data);
     }
 

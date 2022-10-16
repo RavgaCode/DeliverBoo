@@ -26,6 +26,9 @@ class User extends Authenticatable
         'restaurant_cover',
         'slug',
         'category_id',
+        'restaurant_description',
+        'restaurant_days',
+        'restaurant_hours',
     ];
 
     /**

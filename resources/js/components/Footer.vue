@@ -60,18 +60,26 @@
                         class="col-md-2 col--2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Servizio Clienti
+                        </h6>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset"
+                                >Domande frequenti</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset"
+                                >Termini e condizioni</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset"
+                                >Informativa sulla privacy</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Lorem</a>
+                            <a href="#!" class="text-reset">Partner center</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -81,20 +89,20 @@
                         class="col-md-3 col-xs-2 col-lg-2 col-xl-2 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
+                        <h6 class="text-uppercase fw-bold mb-4">Chi siamo</h6>
                         <p>
-                            <a href="#!" class="text-reset">About</a>
+                            <a href="#!" class="text-reset"
+                                >Informazioni su Deliverboo</a
+                            >
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Contact us</a>
+                            <a href="#!" class="text-reset">Lavora con noi</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Restaurants</a>
+                            <a href="#!" class="text-reset">Ristoranti</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Work with us</a>
+                            <a href="#!" class="text-reset">Ultime novità</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -104,7 +112,7 @@
                         class="col-md-4 col-xs-2 col-lg-3 col-xl-3 mb-md-0 mb-4 d-flex flex-column align-items-start align-items-md-center"
                     >
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <h6 class="text-uppercase fw-bold mb-4">Contatti</h6>
                         <p>
                             <i class="fas fa-home me-3 text-secondary"></i>
                             Milano, Corso Italia, 42, 20123
@@ -138,8 +146,7 @@ export default {};
 
 <style lang="scss" scoped>
 .footer {
-
-    background-image:  url('../images/back.png');
+    background-image: url("../images/back.png");
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -115,14 +115,11 @@
                 <h2>{{ plates[0].user.restaurant_name }}</h2>
 
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Neque ut quibusdam rem. Eligendi delectus in nulla molestias
-                    eius cumque consectetur libero, velit, eos architecto
-                    facilis obcaecati culpa ullam, laborum earum.
+                    {{ plates[0].user.restaurant_description }}
                 </p>
                 <p>Indirizzo: {{ plates[0].user.restaurant_address }}</p>
-                <p>Orari: 12-15, 18-23:30</p>
-                <p>Giorni: Dal martedì alla domenica. Lunedì chiuso</p>
+                <p>Orari: {{ plates[0].user.restaurant_hours }}</p>
+                <p>Giorni: {{ plates[0].user.restaurant_days }}</p>
                 <hr />
                 <!-- HOVERED PLATE INFO -->
                 <div
